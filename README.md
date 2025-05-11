@@ -1,8 +1,8 @@
-# Nombre de su proyecto
+# Proyecta
 
-Una descripcion corta de su proyecto
+Proyecta es una plataforma digital dedicada a promocionar y visibilizar emprendimientos locales de la provincia de Misiones, Argentina. Su objetivo es brindar mayor visibilidad a emprendedores y facilitar a los posibles clientes el acceso a una amplia variedad de productos y servicios locales.
 
-
+<!-->
 ## Instalación
 
 Cloná el repositorio y ejecutá los siguientes comandos:
@@ -15,7 +15,7 @@ npm run dev
 
 ```
 
-## Estructura del proyecto
+ Estructura del proyecto 
 
 ```
 
@@ -31,20 +31,21 @@ npm run dev
 
 ```
 
+
 ## Tecnologías utilizadas
 
 *Client:* React
-
+<-->
 
 ## Equipo
 
 •⁠  ⁠[@rev](https://www.github.com/RevJuanma)
-•⁠
-•⁠
-•⁠
+•⁠  [@jo0nnie](https://github.com/jo0nnie)
+•⁠  [@GAUTOlauraa](https://github.com/GAUTOlauraa)
+•⁠  [@FraGal05](https://github.com/FraGal05)
 
 
 ## Enlaces
 
-•⁠  ⁠[Documentación](https://link-de-documentacion)
-•⁠  ⁠[Trello](https://trello.com/link-de-tablero)
+•⁠  ⁠[Documentación](https://tinyurl.com/documentacion-proyecta)
+•⁠  ⁠[Trello](https://trello.com/b/pZIhLSOu/triple-g)
