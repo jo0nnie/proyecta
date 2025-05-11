@@ -28,14 +28,14 @@ npm run dev
 │   ├── hooks/            # Hooks personalizados
 │   └── App.jsx           # Componente raíz
 └──README.md
-
 ```
+<-->
 
 
 ## Tecnologías utilizadas
 
 *Client:* React
-<-->
+
 
 ## Equipo
 
