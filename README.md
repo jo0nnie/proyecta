@@ -43,6 +43,7 @@ npm run dev
 •⁠  [@jo0nnie](https://github.com/jo0nnie)
 •⁠  [@GAUTOlauraa](https://github.com/GAUTOlauraa)
 •⁠  [@FraGal05](https://github.com/FraGal05)
+•  [@guilleviera96](https://github.com/guilleviera96)
 
 
 ## Enlaces
