@@ -1,12 +1,9 @@
-import { useState } from 'react'
-import viteLogo from '/vite.svg'
 import './App.css'
-import ReactImg from './components/ReactImg'
-
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
+    <div className="App">
+      <Contador />
+    </div>
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
