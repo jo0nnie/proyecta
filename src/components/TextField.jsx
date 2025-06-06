@@ -14,7 +14,7 @@ export default function TextField({ label, type, name, placeholder }) {
         <div className="flex flex-col gap-2">
             <label
                 htmlFor={name}
-                className="text-primary-500 text-sm font-medium"
+                className="text-primary-500 text-size-base font-medium"
             >
                 {label}
             </label>

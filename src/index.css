@@ -26,13 +26,13 @@ utilizar temas personalizados. */
   --font-family-inter: 'Inter', sans-serif;
 
 /* espaciados */
-  --spacing-0: 0px;
-  --spacing-espaciado-sm: 8px;
-  --spacing-espaciado-md: 16px;
-  --spacing-espaciado-lg: 32px;
+  --spacing-0: 0rem;
+  --spacing-espaciado-sm: 0.5rem;
+  --spacing-espaciado-md: 1rem;
+  --spacing-espaciado-lg: 2rem;
 
 /* tamaño de fuente */
-  --font-size-sm: 12px;
-  --font-size-base: 16px;
-  --font-size-xl: 24px;
+  --text-size-sm: 0.75rem;
+  --text-size-base: 1rem;
+  --text-size-xl: 1.5rem;
 }
