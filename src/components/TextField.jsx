@@ -14,12 +14,12 @@ export default function TextField({ label, type, name, placeholder }) {
         <div className="flex flex-col gap-2">
             <label
                 htmlFor={name}
-                className="text-[#2C4692] text-sm font-medium"
+                className="text-primary-500 text-size-base font-medium"
             >
                 {label}
             </label>
             <input type={type} name={name} placeholder={placeholder}
-                className="border-2 border-[#2C4692] rounded-[10px] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#2C4692]"
+                className="border-2 border-primary-500 rounded-[10px] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#2C4692]"
             />
         </div>
     );
