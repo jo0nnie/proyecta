@@ -1,7 +1,6 @@
 import Container from './Container';
 import TextField from './TextField';
 import Button from './Button';
-import NavBar from './NavBar';
 /**
  * Componente TestForm (lo cree para testear los componentes del ticket y mostrar algo al recargar la página, si quieren pueden borrarlo)
  * @returns 
@@ -28,7 +27,6 @@ export default function TestForm({title}) {
   return (
     //aca utilizo el component Container, TextField y Button.
     <Container>
-      <div><NavBar/></div>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
         <h3 className="text-[#2C4692] text-2xl font-medium">{title}</h3>
         <TextField
