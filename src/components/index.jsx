@@ -4,5 +4,6 @@ import Container from "./Container";
 import Button from "./Button";
 import TextField from "./TextField";
 import TestForm from "./TestForm";
+import CardEmprendimiento from "./CardEmprendimiento";
 
-export { Container, Button, TextField, TestForm };
+export { Container, Button, TextField, TestForm, CardEmprendimiento};
