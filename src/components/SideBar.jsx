@@ -1,6 +1,4 @@
-import React from "react";
-
-const Sidebar = ({ isOpen, onClose }) => {
+export default function SideBar({ isOpen, onClose }){
   return (
     <>
       {/* Sidebar */}
@@ -63,4 +61,3 @@ const Sidebar = ({ isOpen, onClose }) => {
   );
 };
 
-export default Sidebar;
