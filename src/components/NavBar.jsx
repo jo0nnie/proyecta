@@ -30,8 +30,8 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <a href="#" className="text-white hover:text-[#E9E2EF]">Iniciar Sesión</a>
-          <a href="#" className="text-white hover:text-[#E9E2EF]">Registrarse</a>
+          <a href="/auth/login" className="text-white hover:text-[#E9E2EF]">Iniciar Sesión</a>
+          <a href="/auth/register" className="text-white hover:text-[#E9E2EF]">Registrarse</a>
         </div>
       </nav>
 

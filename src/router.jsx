@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import { LoginScreen, RegisterScreen, AppScreen } from "./pages";
 import AuthLayout from "./components/layouts/AuthLayout";
+import Home from "./pages/Home/Home";
 
 export const router = createBrowserRouter([
   {
@@ -11,5 +12,5 @@ export const router = createBrowserRouter([
       { path: "register", element: <RegisterScreen /> },
     ],
   },
-  { path: "/", children: [{ index: true, element: <AppScreen /> }] },
+  { path: "/", children: [{ index: true, element: <Home /> }] },
 ]);
