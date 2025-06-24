@@ -1,7 +1,6 @@
 import Container from './Container';
 import TextField from './TextField';
 import Button from './Button';
-
 /**
  * Componente TestForm (lo cree para testear los componentes del ticket y mostrar algo al recargar la página, si quieren pueden borrarlo)
  * @returns 
@@ -10,7 +9,7 @@ import Button from './Button';
  */
 
 
-export default function TestForm() {
+export default function TestForm({title}) {
   // esta const es para manejar el evento del formulario
   const handleSubmit = (evento) => {
     //previene la recarga de la pagina (lo que usualmente hace un form html)
@@ -29,6 +28,7 @@ export default function TestForm() {
     //aca utilizo el component Container, TextField y Button.
     <Container>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
+        <h3 className="text-[#2C4692] text-2xl font-medium">{title}</h3>
         <TextField
           label="Your email"
           type="email"
