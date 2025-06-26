@@ -1,3 +1,6 @@
+import { config } from "./config";
+import { SideBarItem } from "./SideBarItem";
+
 export default function SideBar({ isOpen, onClose }){
   return (
     <>
@@ -19,32 +22,9 @@ export default function SideBar({ isOpen, onClose }){
 
         {/* Menú */}
         <ul className="p-4 space-y-2 flex-1">
-          <li>
-            <a href="#" className="flex items-center gap-3 px-4 py-2 rounded hover:bg-[#3c56a5] transition-colors">
-              {/* Ícono acá */}
-              <span>Inicio</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center gap-3 px-4 py-2 rounded hover:bg-[#3c56a5] transition-colors">
-              <span>Categorías</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center gap-3 px-4 py-2 rounded hover:bg-[#3c56a5] transition-colors">
-              <span>Emprendimientos</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center gap-3 px-4 py-2 rounded bg-[#3c56a5] text-white">
-              <span>Favoritos</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center gap-3 px-4 py-2 rounded hover:bg-[#3c56a5] transition-colors">
-              <span>Historial</span>
-            </a>
-          </li>
+          {config.map((item, index) => (
+            <SideBarItem key={index} text={item.title} path={item.path}/>
+          ))}
         </ul>
 
         {/* Sección inferior */}
