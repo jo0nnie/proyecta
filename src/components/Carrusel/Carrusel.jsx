@@ -22,7 +22,7 @@ export default function Carrusel() {
   return (
     <div className="w-full mx-auto relative px-6">
       <Swiper
-        className="carrusel-container" // esto sirve para el CSS personalizado
+        className="carrusel-container" 
         slidesPerView={5}
         navigation={true}
         modules={[Navigation]}

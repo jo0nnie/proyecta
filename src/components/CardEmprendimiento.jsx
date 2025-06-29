@@ -25,7 +25,7 @@ export default function CardEmprendimiento({ nombre, descripcion, categoria, ima
         />
         <button
           onClick={toggleGuardado}
-          className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
+          className="absolute top-2 right-2 bg-white p-2 rounded-full text-xl text-gray-600 hover:text-blue-600"
         >
           {guardado ? <FaBookmark /> : <FaRegBookmark />}
         </button>
