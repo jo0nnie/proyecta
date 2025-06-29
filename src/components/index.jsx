@@ -7,4 +7,5 @@ import TestForm from "./TestForm";
 import CardEmprendimiento from "./CardEmprendimiento";
 import Navbar from "./NavBar"
 import SideBar from "./Sidebar";
-export { Container, Button, TextField, TestForm, CardEmprendimiento, Navbar, SideBar };
+import Carrusel from "./Carrusel/Carrusel";
+export { Container, Button, TextField, TestForm, CardEmprendimiento, Navbar, SideBar, Carrusel };
