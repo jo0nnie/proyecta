@@ -1,8 +1,9 @@
-import { Navbar, CardEmprendimiento } from "../../components";
+import { Navbar, CardEmprendimiento, Carrusel } from "../../components";
+
 import emprendimientos from "../../utils/emprendimientoMock.json";
 function displayEmprendimientos() {
   return (
-    <div className="flex flex-wrap gap-6 justify-start p-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 p-3">
       {emprendimientos.map((item, index) => (
         <CardEmprendimiento
           key={index}
@@ -20,7 +21,12 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      {displayEmprendimientos()}
+      <div className="mt-2">
+        <Carrusel />
+      </div>
+      <div className="-mt-10">
+        {displayEmprendimientos()}
+      </div>
     </>
   );
 }
