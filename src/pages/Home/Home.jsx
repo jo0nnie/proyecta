@@ -1,11 +1,15 @@
 import { Navbar, CardEmprendimiento } from "../../components";
-import emprendimientos from "../../utils/emprendimientoMock.json";
+import emprendimientos from "../../utils/emprendimientoMock.json"; //lista de emprendimientos
+
 function displayEmprendimientos() {
   return (
     <div className="flex flex-wrap gap-6 justify-start p-6">
-      {emprendimientos.map((item, index) => (
+      {emprendimientos.map((item) => (
         <CardEmprendimiento
-          key={index}
+          // ¡Importante! Usar item.id como key.
+          key={item.id}
+          // ¡Pasamos el ID aquí!
+          id={item.id}
           nombre={item.nombre}
           descripcion={item.descripcion}
           categoria={item.categoria}
@@ -20,7 +24,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      {displayEmprendimientos()}
+      {displayEmprendimientos()} {}
     </>
   );
 }
