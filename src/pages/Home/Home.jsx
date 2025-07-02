@@ -1,10 +1,11 @@
-import { Navbar, CardEmprendimiento } from "../../components";
-import emprendimientos from "../../utils/emprendimientoMock.json"; //lista de emprendimientos
+import { Navbar, CardEmprendimiento, Carrusel } from "../../components";
 
+import emprendimientos from "../../utils/emprendimientoMock.json";
 function displayEmprendimientos() {
   return (
-    <div className="flex flex-wrap gap-6 justify-start p-6">
-      {emprendimientos.map((item) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 p-3">
+      {emprendimientos.map((item, index) => (
+
         <CardEmprendimiento
           // ¡Importante! Usar item.id como key.
           key={item.id}
@@ -24,7 +25,12 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      {displayEmprendimientos()} {}
+      <div className="mt-2">
+        <Carrusel />
+      </div>
+      <div className="-mt-10">
+        {displayEmprendimientos()}
+      </div>
     </>
   );
 }
