@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
+import { Badge } from "./Badge";
 
 /**
  * Renderiza:
@@ -34,9 +35,7 @@ export default function CardEmprendimiento({ nombre, descripcion, categoria, ima
       <div className="p-4">
         <h3 className="text-xl font-semibold mb-1">{nombre}</h3>
         <p className="text-sm text-gray-700 mb-3">{descripcion}</p>
-        <span className="inline-block text-xs font-medium bg-blue-100 text-blue-800 px-3 py-1 rounded-full">
-          {categoria}
-        </span>
+        <Badge text={categoria} />
       </div>
     </div>
   );
