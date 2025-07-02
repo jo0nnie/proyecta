@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import { LoginScreen, RegisterScreen, AppScreen } from "./pages";
 import AuthLayout from "./components/layouts/AuthLayout";
 import Home from "./pages/Home/Home";
+import Favoritos from "./pages/Favoritos/Favoritos";
 
 export const router = createBrowserRouter([
   {
@@ -13,4 +14,11 @@ export const router = createBrowserRouter([
     ],
   },
   { path: "/", children: [{ index: true, element: <Home /> }] },
+  {
+    
+    children: [
+      { path: "/Favoritos", element: <Favoritos /> },
+    ],
+  },
+
 ]);

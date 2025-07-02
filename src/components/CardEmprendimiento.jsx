@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react"; // Importa useEffect
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { Badge } from "./Badge";
 
@@ -7,12 +7,35 @@ import { Badge } from "./Badge";
  * - img, boton guardar, nombre, descripcion, categoría
 
  * Props que recibe:
- * - nombre, descripcion, categoria e imagen
+ * - nombre, descripcion, categoria, imagen, y AHORA TAMBIÉN 'id'
  */
-export default function CardEmprendimiento({ nombre, descripcion, categoria, imagen }) {
+export default function CardEmprendimiento({ nombre, descripcion, categoria, imagen, id }) {
   const [guardado, setGuardado] = useState(false);
 
+  // useEffect para cargar el estado de guardado desde localStorage al montar el componente
+  useEffect(() => {
+    // obtiene los IDs de los favoritos desde localStorage
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    // verifica si el ID de este emprendimiento está en la lista de favoritos y actualizar el estado
+    setGuardado(favorites.includes(id));
+  }, [id]); //se vuelve a ejecutar si el 'id' cambia
+
+  //función para cambiar el estado de guardado y actualizar localStorage
   const toggleGuardado = () => {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if (guardado) {
+      // si ya estaba guardado, se elimina de la lista
+      favorites = favorites.filter(favId => favId !== id);
+    } else {
+      // si no estaba guardado, se añade
+      favorites.push(id);
+    }
+
+    // guardar la lista en localStorage
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+
+    // actualizar el estado para que el icono cambie
     setGuardado(!guardado);
   };
 
@@ -26,7 +49,8 @@ export default function CardEmprendimiento({ nombre, descripcion, categoria, ima
         />
         <button
           onClick={toggleGuardado}
-          className="absolute top-2 right-2 bg-white p-2 rounded-full text-xl text-gray-600 hover:text-blue-600"
+          className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
+          aria-label={guardado ? "Quitar de favoritos" : "Añadir a favoritos"} // Buena práctica de accesibilidad
         >
           {guardado ? <FaBookmark /> : <FaRegBookmark />}
         </button>
