@@ -2,6 +2,7 @@
 /* Para no instalar PostCSS (ya que tailwind 4.1.7 no reconoce automaticamente el archivo tailwind.config.js), se vio como alternativa 
 utilizar temas personalizados. */
 /* http://tailwindcss.com/docs/theme */
+
 @theme {
  /* colores base */
   --color-primary: oklch(78.46% 0.084 275.25); /* #A9B5EF */
