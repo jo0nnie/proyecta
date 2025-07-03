@@ -3,6 +3,7 @@ import { LoginScreen, RegisterScreen, AppScreen } from "./pages";
 import AuthLayout from "./components/layouts/AuthLayout";
 import Home from "./pages/Home/Home";
 import Favoritos from "./pages/Favoritos/Favoritos";
+import Historial from "./pages/Historial/Historial";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
     
     children: [
       { path: "/Favoritos", element: <Favoritos /> },
+      { path: "/Historial", element: <Historial /> },
     ],
   },
 
