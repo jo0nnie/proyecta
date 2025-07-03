@@ -25,7 +25,8 @@ export default function Favoritos() {
 
       {favoriteEmprendimientos.length > 0 ? (
         // si hay favoritos, se muestran
-        <div className="flex flex-wrap gap-6 justify-start p-6">
+        <div className="flex flex-wrap gap-8 justify-center p-6 -mt-5">
+          <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8 p-3 m-2">
           {favoriteEmprendimientos.map((item) => (
             <CardEmprendimiento
               key={item.id}
@@ -36,6 +37,7 @@ export default function Favoritos() {
               imagen={item.imagen}
             />
           ))}
+          </div>
         </div>
       ) : (
         // si no hay favoritos, muestra el mensaje
