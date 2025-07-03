@@ -3,5 +3,5 @@ export const config = [
     {title: "Categorías", path: "/" },
     {title: "Emprendimientos", path: "/" },
     {title: "Favoritos", path: "/Favoritos" },
-    {title: "Historial", path: "/" },
+    {title: "Historial", path: "/Historial" },
 ]
