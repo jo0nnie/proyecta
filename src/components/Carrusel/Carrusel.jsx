@@ -3,18 +3,22 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Carrusel.css"
-import { GiCookingPot } from "react-icons/gi";
 import { Link } from "react-router";
+import { GiCookingPot } from "react-icons/gi";
+import { AiFillBook, AiOutlineConsoleSql, AiFillCar, AiFillCustomerService, AiFillCamera, AiFillSkin } from "react-icons/ai";
+
+
+
 
 //este array lo puse de ejemplo, cuando definamos las categorias vamos a cambiar por sus iconos correspondientes
 
 const categories = [
-    { icon: GiCookingPot, label: "Cocina", path: "/", color: "#2C4692" },
-    { icon: GiCookingPot, label: "Cocina", path: "/", color: "#2C4692" },
-    { icon: GiCookingPot, label: "Cocina", path: "/", color: "#2C4692" },
-    { icon: GiCookingPot, label: "Cocina", path: "/", color: "#2C4692" },
-    { icon: GiCookingPot, label: "Cocina", path: "/", color: "#2C4692" },
-    { icon: GiCookingPot, label: "Cocina", path: "/", color: "#2C4692" },
+    { icon: AiOutlineConsoleSql, label: "Desarrollo", path: "/", color: "#2C4692" },
+    { icon: AiFillCamera, label: "Fotografía", path: "/", color: "#2C4692" },
+    { icon: AiFillCar, label: "Transporte", path: "/", color: "#2C4692" },
+    { icon: AiFillBook, label: "Librerías", path: "/", color: "#2C4692" },
+    { icon: AiFillCustomerService, label: "Música", path: "/", color: "#2C4692" },
+    { icon: AiFillSkin, label: "Moda", path: "/", color: "#2C4692" },
     { icon: GiCookingPot, label: "Cocina", path: "/", color: "#2C4692" }
 ];
 
