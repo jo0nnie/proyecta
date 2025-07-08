@@ -1,0 +1,32 @@
+[
+    {
+        "id":"1",
+        "foto":"vite.svg",
+        "nombre":"Don Pepito",
+        "descripcion":"Hombre de familia. Amo a mi familia",
+        "correo":"Pepisfam@gmail.com",
+        "ciudad":"Posadas, Misiones, Argentina",
+        "dateRegister":"Hace 1 mes/es",
+        "lastLog":"Hace 5 minutos"
+    },
+    {
+        "id":"2",
+        "foto":"",
+        "nombre":"Jose",
+        "descripcion":"Laburante",
+        "correo":"joseejemplo@gmail.com",
+        "ciudad":"Posadas, Misiones, Argentina",
+        "dateRegister":"Hace 3 mes/es",
+        "lastLog":"Hace 5 horas"
+    },
+    {
+        "id":"3",
+        "foto":"",
+        "nombre":"",
+        "descripcion":"",
+        "correo":"",
+        "ciudad":"",
+        "dateRegister":"",
+        "lastLog":""
+    }
+]
