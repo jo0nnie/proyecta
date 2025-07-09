@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router";
-import { LoginScreen, RegisterScreen, AppScreen } from "./pages";
+import { LoginScreen, RegisterScreen } from "./pages";
 import AuthLayout from "./components/layouts/AuthLayout";
 import Home from "./pages/Home/Home";
 import Favoritos from "./pages/Favoritos/Favoritos";
 import Historial from "./pages/Historial/Historial";
-
+import Perfil from "./pages/Usuario/Perfil"
 export const router = createBrowserRouter([
   {
     path: "/auth/",
@@ -20,6 +20,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/Favoritos", element: <Favoritos /> },
       { path: "/Historial", element: <Historial /> },
+      { path: "/perfil", element: <Perfil /> },
     ],
   },
 

@@ -1,6 +1,6 @@
 import { Navbar, CardEmprendimiento, Carrusel } from "../../components";
-
 import emprendimientos from "../../utils/emprendimientoMock.json";
+
 function displayEmprendimientos() {
   return (
     <div className="flex justify-center">

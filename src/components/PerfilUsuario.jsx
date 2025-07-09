@@ -1,4 +1,3 @@
-import React from 'react'
 import { PiUserCircleFill } from "react-icons/pi";
 import Button from './Button';
 
