@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "./Carrusel.css"
 import { Link } from "react-router";
-import { GiCookingPot } from "react-icons/gi";
+import { FaHamburger } from "react-icons/fa";
 import { AiFillBook, AiOutlineConsoleSql, AiFillCar, AiFillCustomerService, AiFillCamera, AiFillSkin } from "react-icons/ai";
 
 
@@ -19,7 +19,7 @@ const categories = [
     { icon: AiFillBook, label: "Librerías", path: "/", color: "#2C4692" },
     { icon: AiFillCustomerService, label: "Música", path: "/", color: "#2C4692" },
     { icon: AiFillSkin, label: "Moda", path: "/", color: "#2C4692" },
-    { icon: GiCookingPot, label: "Cocina", path: "/", color: "#2C4692" }
+    { icon: FaHamburger , label: "Comida", path: "/", color: "#2C4692" }
 ];
 
 export default function Carrusel() {
