@@ -2,7 +2,8 @@ import React from 'react'
 import { PiUserCircleFill } from "react-icons/pi";
 import Button from './Button';
 
-const PerfilUsuario = ({ foto, nombre, descripcion, correo, ciudad, dateRegister, lastLog }) => {
+const PerfilUsuario = ({usuario}) => {
+    const { foto, nombre, descripcion, correo, ciudad, dateRegister, lastLog } = usuario
     return (
         <div className="border border-gray-300 p-4 m-auto my-4 rounded-lg max-w-200">
 
