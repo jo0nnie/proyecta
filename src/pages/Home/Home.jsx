@@ -1,4 +1,5 @@
 import { Navbar, CardEmprendimiento, Carrusel } from "../../components";
+import Footer from "../../components/Footer/Footer";
 
 import emprendimientos from "../../utils/emprendimientoMock.json";
 function displayEmprendimientos() {
@@ -35,6 +36,7 @@ export default function Home() {
       <div className="-mt-10">
         {displayEmprendimientos()}
       </div>
+      <Footer/>
     </>
   );
 }
