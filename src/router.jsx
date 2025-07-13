@@ -4,6 +4,7 @@ import AuthLayout from "./components/layouts/AuthLayout";
 import Home from "./pages/Home/Home";
 import Favoritos from "./pages/Favoritos/Favoritos";
 import Historial from "./pages/Historial/Historial";
+import PerfilUsuario from "./pages/Usuario/PerfilUsuario/PerfilUsuarioScreen";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/Favoritos", element: <Favoritos /> },
       { path: "/Historial", element: <Historial /> },
+      { path: "/Perfil", element: <PerfilUsuario /> },
     ],
   },
 
