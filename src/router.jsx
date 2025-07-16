@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import Favoritos from "./pages/Favoritos/Favoritos";
 import Historial from "./pages/Historial/Historial";
 import PerfilUsuario from "./pages/Usuario/PerfilUsuario/PerfilUsuarioScreen";
+import Ajustes from "./pages/Ajustes/Ajustes"
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
       { path: "/Favoritos", element: <Favoritos /> },
       { path: "/Historial", element: <Historial /> },
       { path: "/Perfil", element: <PerfilUsuario /> },
+      { path: "/Ajustes", element: <Ajustes />},
     ],
   },
 
