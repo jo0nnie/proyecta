@@ -27,14 +27,14 @@ export default function Ajustes() {
                 textoBoton="Cambiar email"
             />
 
-            {/* esto es el "children" que recibe AjusteItem y se va a mostrar con un margen arriba */}
+            {/* este es el "children" que recibe AjusteItem y se muestra con un margen arriba */}
             <AjusteItem>
                 <MetodosDePago />
             </AjusteItem>
 
             <AjusteItem
                 titulo="Eliminar cuenta"
-                descripcion="Esta acción es borrar unicamente su cuenta sin afectar a su emprendimiento (si tiene alguno)"
+                descripcion="Esta acción borrara unicamente su cuenta sin afectar a su emprendimiento (si tiene alguno)"
                 textoBoton="Eliminar"
                 colorBoton="#060F2A"
             />
