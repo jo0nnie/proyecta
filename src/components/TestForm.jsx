@@ -30,20 +30,20 @@ export default function TestForm({title}) {
       <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
         <h3 className="text-[#2C4692] text-2xl font-medium">{title}</h3>
         <TextField
-          label="Your email"
+          label="Correo Eléctronico"
           type="email"
           name="email"
-          placeholder="example@example.com"
+          placeholder="ejemplo@proyecta.com"
         />
         <TextField
-          label="Your Password"
+          label="Contraseña"
           type="password"
           name="password"
           placeholder="********"
         />
         <Button 
         type = "submit"
-        text="Log in" />
+        text="Iniciar sesión" />
       </form>
     </Container>
   );
