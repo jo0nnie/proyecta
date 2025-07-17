@@ -40,7 +40,7 @@ export default function CardEmprendimiento({ nombre, descripcion, categoria, ima
   };
 
   return (
-    <div className="relative bg-white rounded-2xl shadow-md overflow-hidden w-80">
+    <div className="relative bg-white rounded-2xl shadow-md overflow-hidden w-80 transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
       <div className="relative h-48 w-full">
         <img
           src={imagen}
