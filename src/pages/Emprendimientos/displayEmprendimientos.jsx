@@ -12,9 +12,9 @@ export default function DisplayEmprendimientos() {
     const emprendimientosAMostrar = emprendimientos.slice(indiceInicio, indiceFin);
 
     return (
-        <div className="flex flex-col items-center min-h-screen p-1 bg-white">
+        <div className="flex flex-col justify-items-center min-h-screen p-1 bg-white">
             {/* grilla de tarjetas */}
-            <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-x-60 gap-y-6 w-full max-w-7xl mx-auto px-8 mt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 -px-8 py-6 max-w-7xl mx-auto justify-items-center">
                 {emprendimientosAMostrar.map((item) => (
                     <CardEmprendimiento
                         key={item.id}

@@ -6,10 +6,10 @@ export default function Emprendimiento() {
   return (
     <>
       <Navbar />
-      <div className="mt-2">
+      <div className="mt-6">
         <Carrusel />
       </div>
-      <div className="">
+      <div className="-mt-6">
         <DisplayEmprendimientos />
       </div>
       <Footer />

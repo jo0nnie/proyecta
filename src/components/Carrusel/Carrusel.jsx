@@ -37,7 +37,7 @@ export default function Carrusel() {
             <SwiperSlide key={index}>
               <Link
                 to={cat.path}
-                className="flex flex-col items-center justify-center hover:scale-102 transition-transform"
+                className="flex flex-col items-center justify-center hover:scale-101 transition-transform"
               >
                 <Icon size={50} color={cat.color} />
                 <div>
