@@ -12,6 +12,8 @@ Cloná el repositorio y ejecutá los siguientes comandos:
 ⁠cd nombre-carpeta-del-proyecto
 npm install
 npm run dev
+npm i react-icons
+
 
 ```
 
