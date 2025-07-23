@@ -14,8 +14,8 @@ const LoginScreen = () => {
     <div className="w-[810px] bg-white flex flex-col justify-center items-center h-full">
 
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-semibold text-[#2C4692] mb-2">Log in</h2>
-        <p className="text-[#2C4692] text-m">Don't have an account? <a className="text-[#2C4692] hover:underline">Sign up</a></p>
+        <h2 className="text-3xl font-semibold text-[#2C4692] mb-2">Accede a Proyecta</h2>
+        <p className="text-[#2C4692] text-m">No tienes una cuenta? <a className="text-[#2C4692] hover:underline">Regístrate</a></p>
 
         {/*aqui luego irian las opciones para loguearse con google y email*/}
 

@@ -14,38 +14,38 @@ const RegisterScreen = () => {
     <form className="bg-white w-[810px] flex flex-col gap-5 justify-center h-full font-[sans-serif] p-30">
         <div className="flex gap-5">
           <TextField
-          label="First name"
+          label="Nombres"
           type="text"
           name="name"
           />
           <TextField
-          label="Last name"
+          label="Apellidos"
           type="text"
           name="name"
           />
         </div>
         <TextField
-          label="Email address"
+          label="Correo eléctronico"
           type="email"
           name="email"
-          placeholder="example@example.com"
+          placeholder="ejemplo@proyecta.com"
         />
         <TextField
-          label="Password"
+          label="Contraseña"
           type="password"
           name="password"
         />
         <TextField
-          label="Confirm Password"
+          label="Confirme su contraseña"
           type="password"
           name="confirmPassword"
         />
         <Button
         type="submit"
-        text="Submit"
+        text="Registrarse"
         />
-        <label className="flex justify-center gap-2">Already have an account?
-          <Link to="/auth/login" className="underline"> Log in </Link>
+        <label className="flex justify-center gap-2">Ya tienes una cuenta?
+          <Link to="/auth/login" className="underline"> Inicia sesión </Link>
         </label>
     </form>
   </div>
