@@ -12,6 +12,8 @@ Cloná el repositorio y ejecutá los siguientes comandos:
 ⁠cd nombre-carpeta-del-proyecto
 npm install
 npm run dev
+npm i react-icons
+
 
 ```
 
@@ -31,7 +33,22 @@ npm run dev
 ```
 <-->
 
+Rutas
+```
 
+/auth/
+├── login                → LoginScreen
+└── register             → RegisterScreen
+
+/                        → Home
+├── Favoritos            → Favoritos
+├── Historial            → Historial
+└── Perfil               → PerfilUsuario
+
+/emprendimientos/
+└── :id                  → PerfilEmprendimiento
+```
+<-->
 ## Tecnologías utilizadas
 
 *Client:* React
