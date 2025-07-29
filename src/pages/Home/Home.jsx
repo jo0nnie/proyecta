@@ -1,11 +1,13 @@
 import { Navbar, Button } from "../../components";
 import Footer from "../../components/Footer/Footer";
 import { Link } from "react-router-dom";
-
 export default function Home() {
   return (
     <>
       <Navbar />
+      <div className="min-h-[82vh]">
+        {/* espacio para contenido*/}
+      </div>
       <section className="px-8 md:px-20 py-12 bg-white">
         <div className="bg-[#2C4692] text-white py-3 mb-10 text-center text-xl">
           Sobre Nosotros
