@@ -4,112 +4,112 @@
     "nombre": "Benicio",
     "descripcion": "Conocida por sus chipitas",
     "categoria": "Gastronomía",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCgp89I-i5ARGgdgly_aCODvcudQfKu7LDSQ&s"
+    "imagen": "https://i.imgur.com/3jQWWEN.jpeg"
   },
   {
     "id": "2",
-    "nombre": "Diseños indumentaria",
-    "descripcion": "indumentaria hecha a mano y a medida",
+    "nombre": "showroomguapas",
+    "descripcion": "Guapas✨ Indumentaria para toda la familia !",
     "categoria": "Moda",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuHkwwPMVrC-JxBqRuHT-dSw4yj3OF9DCCaA&s"
+    "imagen": "https://i.imgur.com/dar5Ixq.jpeg"
   },
   {
     "id": "3",
-    "nombre": "Benicio",
-    "descripcion": "Conocida por sus chipitas",
+    "nombre": "otluani",
+    "descripcion": "Belleza, cosmética y cuidado personal",
+    "categoria": "Salud y Bienestar",
+    "imagen": "https://i.imgur.com/IGszV56.jpeg"
+  },
+  {
+    "id": "4",
+    "nombre": "malu_memoriasdelsabor",
+    "descripcion": "MaLú | Comida casera",
     "categoria": "Gastronomía",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCgp89I-i5ARGgdgly_aCODvcudQfKu7LDSQ&s"
+    "imagen": "https://i.imgur.com/rnzmL28.jpeg"
   },
   {
-    "id": "2",
-    "nombre": "Diseños indumentaria",
-    "descripcion": "indumentaria hecha a mano y a medida",
-    "categoria": "Moda",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuHkwwPMVrC-JxBqRuHT-dSw4yj3OF9DCCaA&s"
+    "id": "5",
+    "nombre": "telefoniapoucompany",
+    "descripcion": "Celulares, Smart TVs, Jbl Notebooks y +",
+    "categoria": "Tecnología",
+    "imagen": "https://i.imgur.com/OTgkxtE.jpeg"
   },
   {
-    "id": "1",
-    "nombre": "Benicio",
-    "descripcion": "Conocida por sus chipitas",
+    "id": "6",
+    "nombre": "tinta_papelk",
+    "descripcion": "Tarjeteria para emprendimientos💘",
+    "categoria": "Diseños y regalos",
+    "imagen": "https://i.imgur.com/fzTI55m.jpeg"
+  },
+  {
+    "id": "7",
+    "nombre": "Boo Bakery",
+    "descripcion": "𝐂𝐨𝐬𝐢𝐭𝐚𝐬 𝐝𝐮𝐥𝐜𝐞𝐬 𝐞𝐧 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐬𝐚𝐥𝐮𝐝𝐚𝐛𝐥𝐞✨",
     "categoria": "Gastronomía",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCgp89I-i5ARGgdgly_aCODvcudQfKu7LDSQ&s"
+    "imagen": "https://i.imgur.com/MCKoYKL.jpeg"
   },
   {
-    "id": "2",
-    "nombre": "Diseños indumentaria",
-    "descripcion": "indumentaria hecha a mano y a medida",
+    "id": "8",
+    "nombre": "todopino.ok",
+    "descripcion": "Muebles en general y a medidas.",
+    "categoria": "Hogar",
+    "imagen": "https://i.imgur.com/Qltms7p.jpeg"
+  },
+  {
+    "id": "9",
+    "nombre": "italo_indumentaria_",
+    "descripcion": "ROPA SIN GENERO ⚡️",
     "categoria": "Moda",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuHkwwPMVrC-JxBqRuHT-dSw4yj3OF9DCCaA&s"
+    "imagen": "https://i.imgur.com/pdrnqx8.jpeg"
   },
   {
-    "id": "1",
-    "nombre": "Benicio",
-    "descripcion": "Conocida por sus chipitas",
+    "id": "10",
+    "nombre": "resetposadas",
+    "descripcion": "Celulares Posadas 🍎",
+    "categoria": "Tecnología",
+    "imagen": "https://i.imgur.com/3FxVTmQ.jpeg"
+  },
+  {
+    "id": "11",
+    "nombre": "mariquitaposadas",
+    "descripcion": "Mariquita Ropa y Accesorios❤",
+    "categoria": "Moda",
+    "imagen": "https://i.imgur.com/Qb1fuid.jpeg"
+  },
+  {
+    "id": "12",
+    "nombre": "dentalcentroposadas",
+    "descripcion": "Dental Centro | Odontología 🦷",
+    "categoria": "Salud y Bienestar",
+    "imagen": "https://i.imgur.com/JLbqSQx.jpeg"
+  },
+  {
+    "id": "13",
+    "nombre": "plecomcelulares",
+    "descripcion": "Plecom Celulares | Mayoristas | Servicio Técnico",
+    "categoria": "Tecnología",
+    "imagen": "https://i.imgur.com/V05ykpm.jpeg"
+  },
+  {
+    "id": "14",
+    "nombre": "mica_beauty_",
+    "descripcion": "𝐌𝐢𝐜𝐚 𝐁𝐞𝐚𝐮𝐭𝐲~𝑨𝒄𝒂𝒅𝒆𝒎𝒊𝒂 & 𝑺𝒂𝒍𝒐́𝒏",
+    "categoria": "Salud y Bienestar",
+    "imagen": "https://i.imgur.com/p7EIscK.jpeg"
+  },
+  {
+    "id": "15",
+    "nombre": "posadasfitok",
+    "descripcion": "𝙋𝙊𝙎𝘼𝘿𝘼𝙎 𝙁𝙄𝙏 ⚡𝙍𝙊𝙋𝘼 𝘿𝙀𝙋𝙊𝙍𝙏𝙄𝙑𝘼",
+    "categoria": "Moda",
+    "imagen": "https://i.imgur.com/TACPO2b.jpeg"
+  },
+  {
+    "id": "16",
+    "nombre": "manjar_posadas",
+    "descripcion": "ᑕᕼᑌᖇᖇᗝᔕ ᗰᗩᑎᒎᗩᖇ",
     "categoria": "Gastronomía",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCgp89I-i5ARGgdgly_aCODvcudQfKu7LDSQ&s"
-  },
-  {
-    "id": "2",
-    "nombre": "Diseños indumentaria",
-    "descripcion": "indumentaria hecha a mano y a medida",
-    "categoria": "Moda",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuHkwwPMVrC-JxBqRuHT-dSw4yj3OF9DCCaA&s"
-  },
-  {
-    "id": "1",
-    "nombre": "Benicio",
-    "descripcion": "Conocida por sus chipitas",
-    "categoria": "Gastronomía",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCgp89I-i5ARGgdgly_aCODvcudQfKu7LDSQ&s"
-  },
-  {
-    "id": "2",
-    "nombre": "Diseños indumentaria",
-    "descripcion": "indumentaria hecha a mano y a medida",
-    "categoria": "Moda",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuHkwwPMVrC-JxBqRuHT-dSw4yj3OF9DCCaA&s"
-  },
-  {
-    "id": "1",
-    "nombre": "Benicio",
-    "descripcion": "Conocida por sus chipitas",
-    "categoria": "Gastronomía",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCgp89I-i5ARGgdgly_aCODvcudQfKu7LDSQ&s"
-  },
-  {
-    "id": "2",
-    "nombre": "Diseños indumentaria",
-    "descripcion": "indumentaria hecha a mano y a medida",
-    "categoria": "Moda",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuHkwwPMVrC-JxBqRuHT-dSw4yj3OF9DCCaA&s"
-  },
-  {
-    "id": "1",
-    "nombre": "Benicio",
-    "descripcion": "Conocida por sus chipitas",
-    "categoria": "Gastronomía",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCgp89I-i5ARGgdgly_aCODvcudQfKu7LDSQ&s"
-  },
-  {
-    "id": "2",
-    "nombre": "Diseños indumentaria",
-    "descripcion": "indumentaria hecha a mano y a medida",
-    "categoria": "Moda",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuHkwwPMVrC-JxBqRuHT-dSw4yj3OF9DCCaA&s"
-  },
-  {
-    "id": "1",
-    "nombre": "Benicio",
-    "descripcion": "Conocida por sus chipitas",
-    "categoria": "Gastronomía",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCgp89I-i5ARGgdgly_aCODvcudQfKu7LDSQ&s"
-  },
-  {
-    "id": "2",
-    "nombre": "Diseños indumentaria",
-    "descripcion": "indumentaria hecha a mano y a medida",
-    "categoria": "Moda",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuHkwwPMVrC-JxBqRuHT-dSw4yj3OF9DCCaA&s"
+    "imagen": "https://i.imgur.com/nwhPTD2.jpeg"
   }
 
 ]
