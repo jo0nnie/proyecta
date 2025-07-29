@@ -6,6 +6,7 @@ import Favoritos from "./pages/Favoritos/Favoritos";
 import Historial from "./pages/Historial/Historial";
 import PerfilUsuario from "./pages/Usuario/PerfilUsuario/PerfilUsuarioScreen";
 import PerfilEmprendimiento from "./pages/Emprendimientos/PerfilEmprendimiento/PerfilEmprendimientosScreen";
+import Emprendimientos from "./pages/Emprendimientos/Emprendimientos";
 
 export const router = createBrowserRouter([
   {
@@ -19,10 +20,10 @@ export const router = createBrowserRouter([
   {
     path: "/",
     children: [
-      { index: true, element: <Home /> },
-      { path: "Favoritos", element: <Favoritos /> },
-      { path: "Historial", element: <Historial /> },
-      { path: "Perfil", element: <PerfilUsuario /> },
+      { path: "/favoritos", element: <Favoritos /> },
+      { path: "/historial", element: <Historial /> },
+      { path: "/perfil", element: <PerfilUsuario /> },
+      { path: "/emprendimietos", element: <Emprendimientos /> },
     ],
   },
   {
