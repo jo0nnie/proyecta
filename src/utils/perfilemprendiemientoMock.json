@@ -1,0 +1,211 @@
+[
+  {
+    "id": "1",
+    "nombre": "Benicio",
+    "categoria": "Gastronomía",
+    "imagen": "https://i.imgur.com/3jQWWEN.jpeg",
+    "resumen": "Tu parada de sabor 🌭",
+    "correo": "benicio@gmail.com.ar",
+    "fotos": [
+      "https://i.imgur.com/qi1St58.jpeg",
+      "https://i.imgur.com/tITzy2N.jpeg",
+      "https://i.imgur.com/CLJP7VI.jpeg"
+    ],
+    "descripcion": "En Benicio, el sabor tiene nombre propio. Somos tu rincón ideal para disfrutar de los auténticos chipas, las más ricas facturas recién horneadas, panchos para cualquier momento, y la refrescante variedad de jugos y helados. ¡Venite a vivir una experiencia deliciosa en tu parada del sabor!"
+  },
+  {
+    "id": "2",
+    "nombre": "showroomguapas",
+    "categoria": "Moda",
+    "imagen": "https://i.imgur.com/dar5Ixq.jpeg",
+    "resumen": "Indumentaria para toda la familia",
+    "correo": "showroomguapas@gmail.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246",
+      "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb"
+    ],
+    "descripcion": "En Showroom Guapas, creemos que la moda es una forma de expresión y queremos que cada miembro de tu hogar se sienta único y seguro. Contamos con una cuidada selección de indumentaria para mujeres, hombres y niños, abarcando desde las últimas tendencias hasta prendas básicas esenciales y atemporales."
+  },
+  {
+    "id": "3",
+    "nombre": "otluani",
+    "categoria": "Salud y Bienestar",
+    "imagen": "https://i.imgur.com/IGszV56.jpeg",
+    "resumen": "Cosmética natural y cuidado personal",
+    "correo": "otluani@gmail.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1600180758890-e06a3b3c4dbd",
+      "https://i.imgur.com/fASR9Xs.png"
+    ],
+    "descripcion": "Entendemos que la verdadera belleza comienza con una piel sana. Por eso, en Otluani, seleccionamos cuidadosamente las mejores marcas y formulaciones de skincare, desde limpiadores y tónicos, hasta sueros concentrados, hidratantes y tratamientos específicos para cada tipo de piel y necesidad. Te guiamos para construir una rutina de cuidado facial que nutra, proteja y transforme tu piel, revelando su mejor versión."
+  },
+  {
+    "id": "4",
+    "nombre": "malu_memoriasdelsabor",
+    "categoria": "Gastronomía",
+    "imagen": "https://i.imgur.com/rnzmL28.jpeg",
+    "resumen": "Comida casera como la de antes",
+    "correo": "malu_memoriasdelsabor@gmail.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+      "https://images.unsplash.com/photo-1572441710534-2a60c134f3e3"
+    ],
+    "descripcion": "En MaLú, creemos que los sabores de la infancia no se olvidan. Cocinamos como en casa, con recetas tradicionales, ingredientes frescos y mucho amor. ¡Volvé a disfrutar de la cocina de la abuela!"
+  },
+  {
+    "id": "5",
+    "nombre": "telefoniapoucompany",
+    "categoria": "Tecnología",
+    "imagen": "https://i.imgur.com/OTgkxtE.jpeg",
+    "resumen": "Tecnología accesible para todos",
+    "correo": "contacto@poucompany.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1510557880182-3f8e8a67b84c",
+      "https://images.unsplash.com/photo-1527430253228-e93688616381"
+    ],
+    "descripcion": "PouCompany se especializa en la venta de tecnología: celulares, Smart TVs, notebooks, y mucho más. Brindamos atención personalizada, asesoramiento y postventa con garantía asegurada."
+  },
+  {
+    "id": "6",
+    "nombre": "tinta_papelk",
+    "categoria": "Diseños y regalos",
+    "imagen": "https://i.imgur.com/fzTI55m.jpeg",
+    "resumen": "Tarjetería y papelería personalizada",
+    "correo": "tinta.papelk@gmail.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
+      "https://images.unsplash.com/photo-1507924538820-ede94a04019d"
+    ],
+    "descripcion": "Tinta PapelK crea productos de papelería personalizados para emprendimientos, eventos y regalos. Nuestro objetivo es brindar detalles únicos que transmitan identidad y creatividad."
+  },
+  {
+    "id": "7",
+    "nombre": "Boo Bakery",
+    "categoria": "Gastronomía",
+    "imagen": "https://i.imgur.com/MCKoYKL.jpeg",
+    "resumen": "Cositas dulces en versión saludable",
+    "correo": "boobakery@gmail.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93",
+      "https://images.unsplash.com/photo-1499636136210-6f4ee915583e"
+    ],
+    "descripcion": "Boo Bakery ofrece dulces y postres deliciosos hechos con ingredientes saludables y sin perder el sabor. Ideal para quienes cuidan su alimentación pero no quieren renunciar a un gusto dulce."
+  },
+  {
+    "id": "8",
+    "nombre": "todopino.ok",
+    "categoria": "Hogar",
+    "imagen": "https://i.imgur.com/Qltms7p.jpeg",
+    "resumen": "Muebles en general y a medidas",
+    "correo": "contacto@todopino.ok",
+    "fotos": [
+      "https://images.unsplash.com/photo-1493666438817-866a91353ca9",
+      "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6"
+    ],
+    "descripcion": "Todopino.ok fabrica y vende muebles a medida para todos los ambientes. Calidad, diseño y funcionalidad adaptados a tus espacios y necesidades."
+  },
+  {
+    "id": "9",
+    "nombre": "italo_indumentaria_",
+    "categoria": "Moda",
+    "imagen": "https://i.imgur.com/pdrnqx8.jpeg",
+    "resumen": "Ropa sin género y con estilo",
+    "correo": "italo.indumentaria@gmail.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1521334884684-d80222895322",
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f"
+    ],
+    "descripcion": "Italo Indumentaria ofrece ropa sin género, cómoda y moderna para quienes buscan expresar su estilo único con libertad y autenticidad."
+  },
+  {
+    "id": "10",
+    "nombre": "resetposadas",
+    "categoria": "Tecnología",
+    "imagen": "https://i.imgur.com/3FxVTmQ.jpeg",
+    "resumen": "Celulares Posadas 🍎",
+    "correo": "resetposadas@gmail.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1510557880182-3f8e8a67b84c",
+      "https://images.unsplash.com/photo-1527430253228-e93688616381"
+    ],
+    "descripcion": "Reset Posadas es tu tienda de confianza para celulares y accesorios en Posadas. Productos originales y servicio técnico especializado."
+  },
+  {
+    "id": "11",
+    "nombre": "mariquitaposadas",
+    "categoria": "Moda",
+    "imagen": "https://i.imgur.com/Qb1fuid.jpeg",
+    "resumen": "Ropa y accesorios para todos los estilos",
+    "correo": "mariquita.posadas@gmail.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246",
+      "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb"
+    ],
+    "descripcion": "Mariquita Posadas ofrece prendas y accesorios que combinan estilo y comodidad para quienes buscan renovar su guardarropa con tendencia."
+  },
+  {
+    "id": "12",
+    "nombre": "dentalcentroposadas",
+    "categoria": "Salud y Bienestar",
+    "imagen": "https://i.imgur.com/JLbqSQx.jpeg",
+    "resumen": "Odontología integral para toda la familia",
+    "correo": "info@dentalcentroposadas.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1588776814546-faff096eeac9",
+      "https://images.unsplash.com/photo-1600180758890-e06a3b3c4dbd"
+    ],
+    "descripcion": "Dental Centro Posadas ofrece servicios odontológicos completos con tecnología avanzada y atención personalizada para cuidar tu sonrisa y salud bucal."
+  },
+  {
+    "id": "13",
+    "nombre": "plecomcelulares",
+    "categoria": "Tecnología",
+    "imagen": "https://i.imgur.com/V05ykpm.jpeg",
+    "resumen": "Mayoristas y servicio técnico en celulares",
+    "correo": "plecomcelulares@gmail.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1510557880182-3f8e8a67b84c",
+      "https://images.unsplash.com/photo-1527430253228-e93688616381"
+    ],
+    "descripcion": "Plecom Celulares es tu opción para compra mayorista y reparación de celulares. Servicio rápido, confiable y con garantía."
+  },
+  {
+    "id": "14",
+    "nombre": "mica_beauty_",
+    "categoria": "Salud y Bienestar",
+    "imagen": "https://i.imgur.com/p7EIscK.jpeg",
+    "resumen": "Academia y salón de belleza",
+    "correo": "mica.beauty@gmail.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1600180758890-e06a3b3c4dbd",
+      "https://images.unsplash.com/photo-1620912189860-6ecbd2976731"
+    ],
+    "descripcion": "Mica Beauty es una academia y salón dedicado a la formación en estética y cuidado personal, ofreciendo servicios profesionales y cursos de alta calidad."
+  },
+  {
+    "id": "15",
+    "nombre": "posadasfitok",
+    "categoria": "Moda",
+    "imagen": "https://i.imgur.com/TACPO2b.jpeg",
+    "resumen": "Ropa deportiva y fitness",
+    "correo": "posadasfitok@gmail.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1521334884684-d80222895322",
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f"
+    ],
+    "descripcion": "Posadas Fit ofrece ropa deportiva funcional y con estilo para quienes viven activos y buscan comodidad y rendimiento en su día a día."
+  },
+  {
+    "id": "16",
+    "nombre": "manjar_posadas",
+    "categoria": "Gastronomía",
+    "imagen": "https://i.imgur.com/nwhPTD2.jpeg",
+    "resumen": "Churrasquería con sabor tradicional",
+    "correo": "contacto@manjarposadas.com",
+    "fotos": [
+      "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+      "https://images.unsplash.com/photo-1572441710534-2a60c134f3e3"
+    ],
+    "descripcion": "Manjar Posadas ofrece las mejores carnes a la parrilla con recetas tradicionales, atendiendo con esmero para que disfrutes el auténtico sabor argentino."
+  }
+]
