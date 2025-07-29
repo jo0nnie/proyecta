@@ -33,7 +33,22 @@ npm i react-icons
 ```
 <-->
 
+Rutas
+```
 
+/auth/
+├── login                → LoginScreen
+└── register             → RegisterScreen
+
+/                        → Home
+├── Favoritos            → Favoritos
+├── Historial            → Historial
+└── Perfil               → PerfilUsuario
+
+/emprendimientos/
+└── :id                  → PerfilEmprendimiento
+```
+<-->
 ## Tecnologías utilizadas
 
 *Client:* React
