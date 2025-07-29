@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import Favoritos from "./pages/Favoritos/Favoritos";
 import Historial from "./pages/Historial/Historial";
 import PerfilUsuario from "./pages/Usuario/PerfilUsuario/PerfilUsuarioScreen";
+import Ajustes from "./pages/Ajustes/Ajustes"
 import PerfilEmprendimiento from "./pages/Emprendimientos/PerfilEmprendimiento/PerfilEmprendimientosScreen";
 import Emprendimientos from "./pages/Emprendimientos/Emprendimientos";
 
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: "/favoritos", element: <Favoritos /> },
       { path: "/historial", element: <Historial /> },
       { path: "/perfil", element: <PerfilUsuario /> },
+      { path: "/ajustes", element: <Ajustes />},
       { path: "/emprendimietos", element: <Emprendimientos /> },
     ],
   },
