@@ -6,8 +6,7 @@ export default function Home() {
     <>
       <Navbar />
       <div className="min-h-[82vh]">
-      </div>
-      <section className="px-8 md:px-20 py-12 bg-white">
+<section className="px-8 md:px-20 py-12 bg-white">
         <div className="bg-[#2C4692] text-white py-3 mb-10 text-center text-xl">
           Sobre Nosotros
           </div>
@@ -110,6 +109,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </div>
+      
       <Footer />
     </>
   );
