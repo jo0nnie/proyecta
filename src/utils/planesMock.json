@@ -1,5 +1,6 @@
 [
     {
+        "id":"1",
         "titulo":"Impulso Inicial",
         "beneficio":[
             "Prioridad en tu categoria",
@@ -9,6 +10,7 @@
         "precio":"100"
     },
     {
+        "id":"2",
         "titulo":"Impulso Constante",
         "beneficio":[
             "Prioridad en tu categoria",
@@ -18,6 +20,7 @@
         "precio":"500"
     },
     {
+        "id":"3",
         "titulo":"Proyección Máxima",
         "beneficio":[
             "Prioridad en tu categoria",
