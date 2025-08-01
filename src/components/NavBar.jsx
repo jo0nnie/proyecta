@@ -1,4 +1,5 @@
-import Sidebar from "./SideBar/Sidebar"; 
+import { useState } from "react";
+import Sidebar from "./SideBar/Sidebar"; // Importá el componente
 
 export default function NavBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
