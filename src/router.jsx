@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
     element: <Ajustes />,
   },
   {
-    path: "/pago",
+    path: "/boosteo",
     element: <Pago />,
   },
   {
