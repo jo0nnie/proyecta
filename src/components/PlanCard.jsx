@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function PlanCard ({plan}) {
     const {titulo, beneficio, duracion, precio} = plan;
-    
+
     return (
-        <div className='border-3 rounded-xl border-[#2B4590] p-2 shadow-md hover:shadow-xl'>
+        <div className='border-3 rounded-xl border-[#2B4590] p-2 shadow-md hover:shadow-xl cursor-pointer'>
             <h2 className='text-xl font-bold m-2'>{titulo}</h2>
             <ul className='list-disc list-inside m-2'>
                 {beneficio.map((dato, index) => (
