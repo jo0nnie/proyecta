@@ -4,5 +4,4 @@ export const config = [
     {title: "Emprendimientos", path: "/emprendimientos" },
     {title: "Favoritos", path: "/favoritos" },
     {title: "Historial", path: "/historial" },
-    {title: "Boosteo", path: "/boosteo" },
 ]
