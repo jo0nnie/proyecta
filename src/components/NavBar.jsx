@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Sidebar from "./SideBar/Sidebar"; // Importá el componente
+import Sidebar from "./SideBar/Sidebar"; 
 
 export default function NavBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -25,7 +24,7 @@ export default function NavBar() {
           <input
             type="text"
             placeholder="Buscar"
-            className="w-full py-2 px-4 pl-5 pr-10 rounded-full bg-[#E9E2EF] text-[#2C4391] placeholder-[#2C4391] focus:outline-none"
+            className="w-full py-2 px-4 pl-5 pr-10 rounded-full bg-white text-[#2C4391] placeholder-[#2C4391] focus:outline-none"
           />
         </div>
 
