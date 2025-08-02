@@ -1,5 +1,5 @@
 import { TestForm } from "../../components";
-
+import { Link } from "react-router";
 const LoginScreen = () => {
   return <div className="flex h-screen"> 
 
@@ -15,7 +15,9 @@ const LoginScreen = () => {
 
       <div className="mb-8 text-center">
         <h2 className="text-3xl font-semibold text-[#2C4692] mb-2">Accede a Proyecta</h2>
-        <p className="text-[#2C4692] text-m">No tienes una cuenta? <a className="text-[#2C4692] hover:underline">Regístrate</a></p>
+        <p className="text-[#2C4692] text-m">No tienes una cuenta? 
+
+          <Link to="/auth/register" className="text-[#2C4692] hover:underline">Regístrate</Link></p>
 
         {/*aqui luego irian las opciones para loguearse con google y email*/}
 
