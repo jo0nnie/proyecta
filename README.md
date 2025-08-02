@@ -37,16 +37,20 @@ Rutas
 ```
 
 /auth/
-├── login                → LoginScreen
-└── register             → RegisterScreen
+├── login                -> LoginScreen
+└── register             -> RegisterScreen
 
-/                        → Home
-├── Favoritos            → Favoritos
-├── Historial            → Historial
-└── Perfil               → PerfilUsuario
+/                        -> Home
+├── Favoritos            -> Favoritos
+├── Historial            -> Historial
+├── Perfil               -> PerfilUsuario
+├── Ajustes              -> Configuración del usuario
+├── Categorías           -> Lista de emprendimientos según su categoría
+└── Boosteo              -> Pago para mejorar emprendimientos
 
-/emprendimientos/
-└── :id                  → PerfilEmprendimiento
+
+/emprendimientos/        -> Lista TODOS los emprendimientos
+└── :id                  → PerfilEmprendimiento según su id
 ```
 <-->
 ## Tecnologías utilizadas
