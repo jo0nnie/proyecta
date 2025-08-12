@@ -8,6 +8,7 @@ import PerfilUsuario from "./pages/Usuario/PerfilUsuario/PerfilUsuarioScreen";
 import Ajustes from "./pages/Ajustes/Ajustes"
 import PerfilEmprendimiento from "./pages/Emprendimientos/PerfilEmprendimiento/PerfilEmprendimientosScreen";
 import Emprendimientos from "./pages/Emprendimientos/Emprendimientos";
+import Pago from "./pages/Pago/Pago";
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +41,10 @@ export const router = createBrowserRouter([
     path: "/ajustes",
     element: <Ajustes />,
   },
-
+  {
+    path: "/boosteo",
+    element: <Pago />,
+  },
   {
     path: "/emprendimientos",
     element: <Emprendimientos />,
