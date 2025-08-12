@@ -8,6 +8,7 @@ import PerfilUsuario from "./pages/Usuario/PerfilUsuario/PerfilUsuarioScreen";
 import Ajustes from "./pages/Ajustes/Ajustes"
 import PerfilEmprendimiento from "./pages/Emprendimientos/PerfilEmprendimiento/PerfilEmprendimientosScreen";
 import Emprendimientos from "./pages/Emprendimientos/Emprendimientos";
+import Categorias from "./pages/Categorias/Categorias";
 import Pago from "./pages/Pago/Pago";
 
 export const router = createBrowserRouter([
@@ -40,6 +41,9 @@ export const router = createBrowserRouter([
   {
     path: "/ajustes",
     element: <Ajustes />,
+  },
+  {path: "/categorias",
+    element: <Categorias/>
   },
   {
     path: "/boosteo",

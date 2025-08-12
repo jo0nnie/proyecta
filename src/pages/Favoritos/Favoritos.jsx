@@ -21,7 +21,7 @@ export default function Favoritos() {
   return (
     <>
       <Navbar />
-      <h2 className="text-2xl font-bold p-6">Favoritos</h2> {}
+      <h1 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-4 p-4 text-center">Favoritos</h1> {}
 
       {favoriteEmprendimientos.length > 0 ? (
         // si hay favoritos, se muestran
