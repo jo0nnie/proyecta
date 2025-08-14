@@ -1,7 +1,7 @@
-import { Navbar, CardEmprendimiento, Carrusel } from "../../components";
+import { Carrusel } from "../../components";
 import Footer from "../../components/Footer/Footer";
 import { Outlet, useParams } from "react-router"; // 👈 Importamos Outlet
-import DisplayEmprendimientos from "./displayEmprendimientos";
+import DisplayEmprendimientos from "./components/displayEmprendimientos";
 import emprendimientos from "../../utils/emprendimientoMock.json";
 
 // function DisplayEmprendimientos() {
@@ -23,18 +23,15 @@ import emprendimientos from "../../utils/emprendimientoMock.json";
 //   );
 // }
 
-export default function Emprendimientos() {
+export default function EmprendimientosScreen() {
   return (
     <>
-      <Navbar />
       <div className="mt-2">
         <Carrusel />
       </div>
       <div className="-mt-10">
         <DisplayEmprendimientos />
       </div>
-      <Outlet /> 
-      <Footer />
     </>
   );
 }

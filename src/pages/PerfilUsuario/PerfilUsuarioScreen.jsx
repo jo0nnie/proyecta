@@ -1,8 +1,5 @@
 import React from 'react'
-import PerfilUsuario from '../../../components/PerfilUsuario'
-import usuarios from '../../../utils/usuarioMock.json'
-import NavBar from '../../../components/NavBar';
-
+import PerfilUsuario from '../../components/PerfilUsuario';
 
 const PerfilUsuarioScreen = () => {
     const usuarioMock = usuarios.find(item => item.id === "1");
@@ -11,7 +8,6 @@ const PerfilUsuarioScreen = () => {
 
     return (
         <div>
-            <NavBar/>
             <PerfilUsuario usuario={usuarioMock} />
         </div>
     )

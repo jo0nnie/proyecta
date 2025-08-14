@@ -1,10 +1,8 @@
-import { Navbar, Button } from "../../components";
-import Footer from "../../components/Footer/Footer";
+import { Button } from "../../components";
 import { Link } from "react-router-dom";
-export default function Home() {
+export default function HomeScreen() {
   return (
     <>
-      <Navbar />
       <div className="min-h-[82vh]">
 <section className="px-8 md:px-20 py-12 bg-white">
         <div className="bg-[#2C4692] text-white py-3 mb-10 text-center text-xl">
@@ -110,8 +108,6 @@ export default function Home() {
         </div>
       </section>
       </div>
-      
-      <Footer />
     </>
   );
 }

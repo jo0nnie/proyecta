@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CardEmprendimiento from "../../components/CardEmprendimiento";
-import emprendimientos from "../../utils/emprendimientoMock.json";
+import CardEmprendimiento from "../../../components/CardEmprendimiento";
+import emprendimientos from "../../../utils/emprendimientoMock.json";
 
 export default function DisplayEmprendimientos() {
     const [paginaActual, setPaginaActual] = useState(1);

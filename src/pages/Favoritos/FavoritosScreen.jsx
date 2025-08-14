@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar, CardEmprendimiento } from "../../components";
+import { CardEmprendimiento } from "../../components";
 import emprendimientos from "../../utils/emprendimientoMock.json";
 
-export default function Favoritos() {
+export default function FavoritosScreen() {
   const [favoriteEmprendimientos, setFavoriteEmprendimientos] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,6 @@ export default function Favoritos() {
 
   return (
     <>
-      <Navbar />
       <h1 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-4 p-4 text-center">Favoritos</h1> {}
 
       {favoriteEmprendimientos.length > 0 ? (

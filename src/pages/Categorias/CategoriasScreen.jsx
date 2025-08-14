@@ -1,9 +1,9 @@
-import { Navbar, CardEmprendimiento } from "../../components";
+import { CardEmprendimiento } from "../../components";
 import Footer from "../../components/Footer/Footer";
 import { useEffect, useState } from "react";
 import emprendimientos from "../../utils/emprendimientoMock.json";
 
-export default function Categorias() {
+export default function CategoriasScreen() {
     const [emprendimientosPorCategoria, setEmprendimientosPorCategoria] = useState({});
 
     useEffect(() => {
@@ -16,8 +16,6 @@ export default function Categorias() {
     }, []);
     // revisar el gap-x de las cards
     return (
-        <>
-            <Navbar />
             <main className="min-h-screen bg-gray-100 px-6 py-8">
                 <h1 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-1 p-2 text-center">
                     Categorías
@@ -42,8 +40,5 @@ export default function Categorias() {
                     </div>
                 ))}
             </main>
-
-            <Footer />
-        </>
     );
 }

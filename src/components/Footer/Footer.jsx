@@ -20,7 +20,7 @@ const Footer = () => {
                 </div>
                 {/* redes */}
                 <div className="flex gap-4 text-xl">
-                    <a href="https://instagram.com">
+                    <a href="https://instagram.com/proyecta">
                         <FaInstagram className="w-6 h-6"/>
                     </a>
                     <a href="https://facebook.com">
