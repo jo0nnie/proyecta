@@ -1,4 +1,3 @@
-import React from 'react'
 import PerfilUsuario from '../../components/PerfilUsuario';
 
 const PerfilUsuarioScreen = () => {

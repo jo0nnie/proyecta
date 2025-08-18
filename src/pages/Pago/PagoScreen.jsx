@@ -1,4 +1,3 @@
-import React from 'react';
 import PlanCard from '../../components/PlanCard';
 import planes from '../../utils/planesMock';
 import CardEmprendimiento from '../../components/CardEmprendimiento';

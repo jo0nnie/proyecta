@@ -1,4 +1,4 @@
-import LoginScreen from "./Login/LoginScreen";
+import LoginScreen from "./PerfilUsuario/Login/LoginScreen";
 import RegisterScreen from "./Register/RegisterScreen";
 import AjustesScreen from "./Ajustes/AjustesScreen";
 import CategoriasScreen from "./Categorias/CategoriasScreen";

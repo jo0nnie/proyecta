@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { Badge } from "./Badge";
 import { Link } from "react-router-dom"; // ✅ Import necesario para usar <Link>

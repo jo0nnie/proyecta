@@ -1,8 +1,5 @@
 import { Carrusel } from "../../components";
-import Footer from "../../components/Footer/Footer";
-import { Outlet, useParams } from "react-router"; // 👈 Importamos Outlet
 import DisplayEmprendimientos from "./components/displayEmprendimientos";
-import emprendimientos from "../../utils/emprendimientoMock.json";
 
 // function DisplayEmprendimientos() {
 //   return (
@@ -26,7 +23,7 @@ import emprendimientos from "../../utils/emprendimientoMock.json";
 export default function EmprendimientosScreen() {
   return (
     <>
-      <div className="mt-2">
+      <div className="mt-5">
         <Carrusel />
       </div>
       <div className="-mt-10">

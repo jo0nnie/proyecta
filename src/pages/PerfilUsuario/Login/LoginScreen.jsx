@@ -1,5 +1,6 @@
-import { TestForm } from "../../components";
+
 import { Link } from "react-router";
+import { LoginForm } from "../../../components";
 
 const LoginScreen = () => {
   return (
@@ -37,7 +38,7 @@ const LoginScreen = () => {
           </span>
         </div>
 
-        <TestForm />
+        <LoginForm />
       </div>
     </div>
   );

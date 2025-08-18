@@ -1,4 +1,3 @@
-import React from "react";
 import datosMock from "../../utils/perfilemprendiemientoMock.json";
 import { useParams } from "react-router-dom";
 import PerfilEmprendimiento from "./components/PerfilEmprendimiento";

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { PiUserCircleFill } from "react-icons/pi";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
