@@ -1,6 +1,3 @@
-import React from 'react';
-import NavBar from '../../components/NavBar';
-import Footer from '../../components/Footer/Footer';
 import PlanCard from '../../components/PlanCard';
 import planes from '../../utils/planesMock';
 import CardEmprendimiento from '../../components/CardEmprendimiento';
@@ -8,11 +5,9 @@ import Button from '../../components/Button';
 import MetodoPagoCard from '../../components/MetodoPagoCard';
 import TextField from '../../components/TextField';
 
-export default function Pago(){
+export default function PagoScreen(){
 
     return (
-        <>
-            <NavBar/>
             <div>
                 <nav className='p-5 border-b border-[#2B4590]'>
                     <h1 className='flex justify-center text-xl font-bold'>Boosteo de Emprendimientos</h1>   
@@ -89,7 +84,6 @@ export default function Pago(){
                     </div>
                 </div>
             </div>
-            <Footer/>
-        </>
+    
     )
 }

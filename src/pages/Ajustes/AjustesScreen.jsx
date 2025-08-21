@@ -1,11 +1,9 @@
-import { Navbar } from "../../components";
-import AjusteItem from "./AjusteItem";
-import MetodosDePago from "./MetodosDePago";
+import AjusteItem from "./components/AjusteItem";
+import MetodosDePago from "./components/MetodosDePago";
 
-export default function Ajustes() {
+export default function AjustesScreen() {
     return (
         <>
-            <Navbar />
             <h2 className="text-2xl font-bold pl-7 pt-5" style={{ color: "#2C4391" }}>
                 Ajustes
             </h2>

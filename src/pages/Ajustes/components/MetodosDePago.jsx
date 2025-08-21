@@ -1,5 +1,5 @@
 import { useState } from "react";
-import MetodoPagoCard from "../../components/MetodoPagoCard";
+import MetodoPagoCard from "../../../components/MetodoPagoCard";
 
 export default function MetodosDePago() {
     const [metodos, setMetodos] = useState([

@@ -1,13 +1,12 @@
-import { Navbar, CardEmprendimiento } from "../../components";
+import { CardEmprendimiento } from "../../components";
 import emprendimientos from "../../utils/emprendimientoMock.json";
 
-export default function Historial() {
+export default function HistorialScreen() {
 
     //cree una variable para mostrar, a modo de ejemplo, un solo emprendimiento en la pagina del historial
     const emprendimientoEjemplo = emprendimientos.find(item => item.id === "1");
   return (
     <>
-      <Navbar />
       <div>
         <h2 className="text-2xl font-bold pl-7 pt-5">Historial</h2>
         <div className="ml-7 mr-7 mb-6">

@@ -2,9 +2,6 @@ import { FaInstagram, FaFacebookF, FaXTwitter } from "react-icons/fa6";
 
 import { Link } from "react-router";
 
-
-
-
 const Footer = () => {
     return (
         <footer className="bg-[#2B449E] text-white py-4 px-6">
@@ -20,13 +17,13 @@ const Footer = () => {
                 </div>
                 {/* redes */}
                 <div className="flex gap-4 text-xl">
-                    <a href="https://instagram.com">
+                    <a href="https://instagram.com/proyecta">
                         <FaInstagram className="w-6 h-6"/>
                     </a>
                     <a href="https://facebook.com">
                         <FaFacebookF className="w-6 h-6"/>
                     </a>
-                    <a href="https://twitter.com">
+                    <a href="https://x.com">
                         <FaXTwitter className="w-6 h-6"/>
                     </a>
                 </div>

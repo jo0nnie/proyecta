@@ -9,7 +9,7 @@ import Button from './Button';
  */
 
 
-export default function TestForm({title}) {
+export default function LoginForm({title}) {
   // esta const es para manejar el evento del formulario
   const handleSubmit = (evento) => {
     //previene la recarga de la pagina (lo que usualmente hace un form html)
