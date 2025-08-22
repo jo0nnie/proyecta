@@ -11,7 +11,6 @@ export default function MetodosDePago() {
         },
     ]);
 
-    //   hola lo siguiente esta solo porque queria probar como se veria si anduviera, borren nomas con confianza
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
     const [nuevoMetodo, setNuevoMetodo] = useState({
         tipo: "",
@@ -46,7 +45,6 @@ export default function MetodosDePago() {
             alert("Por favor completá todos los campos.");
         }
     };
-    // posta, es borrar esto nomas, no se rompe nada, solo deja de andar esto
 
     const eliminarMetodo = (index) => {
         const nuevos = metodos.filter((_, i) => i !== index);
@@ -70,13 +68,12 @@ export default function MetodosDePago() {
                         terminacion={m.terminacion}
                         vencimiento={m.vencimiento}
                         cvcGuardado={m.cvcGuardado}
-                        onEditar={() => alert("Simulación de edición")} //es solo para que "ande el boton", borrenlo nomas si gustan
-                        onEliminar={() => eliminarMetodo(idx)} //recarguen la pagina y vuelve, relax
+                        onEditar={() => alert("Simulación de edición")} 
+                        onEliminar={() => eliminarMetodo(idx)} 
                     />
                 ))}
                 <MetodoPagoCard esAgregar={true} onEditar={() => setMostrarFormulario(true)} />
             </div>
-            {/* lo siguiente es porque queria probar/ver como andaba nomas :( */}
             {mostrarFormulario && (
                 <div className="mt-6 bg-white p-4 rounded border shadow-md max-w-md">
                     <h3 className="font-bold text-[#2C4391] mb-3">Nuevo método de pago</h3>
@@ -129,7 +126,6 @@ export default function MetodosDePago() {
                     </div>
                 </div>
             )}
-            {/* pero pueden borrar tranquilamente jj. no se rompe nada */}
         </div>
     );
 }
