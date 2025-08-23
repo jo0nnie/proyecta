@@ -1,4 +1,5 @@
 import PerfilUsuario from '../../components/PerfilUsuario';
+import usuarios from './../../utils/usuarioMock.json'
 
 const PerfilUsuarioScreen = () => {
     const usuarioMock = usuarios.find(item => item.id === "1");
