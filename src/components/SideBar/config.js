@@ -5,3 +5,8 @@ export const config = [
     {title: "Favoritos", path: "/favoritos" },
     {title: "Historial", path: "/historial" },
 ]
+
+export const configDrop = [
+    {title: "Perfil", path: "/perfil"},
+    {title: "Metodos de Pago", path: "/"}
+]
