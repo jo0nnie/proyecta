@@ -1,34 +1,20 @@
 import { FiUsers, FiHome, FiTag, FiDollarSign } from 'react-icons/fi';
 import { MdOutlineRestaurantMenu } from 'react-icons/md';
-import { FaRegCalendarAlt, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { FaRegCalendarAlt} from 'react-icons/fa';
+import emprendimientos from '../../utils/emprendimientoMock.json';
+import usuarios from '../../utils/usuarioMock.json'
 
 export default function DashboardScreen() {
-  const stats = [
-    { label: 'Usuarios Boosted', value: 100, icon: FiUsers },
-    { label: 'Establecimientos Boosted', value: 5, icon: FiHome },
-    { label: 'Categorías Boosted', value: 10, icon: FiTag },
-    { label: 'Ingresos Generados', value: '$4000', icon: FiDollarSign },
-  ];
+  // stats dinamicas
+  const totalEmprendimientos = emprendimientos.length;
+  const boosteados = 5; //falta leer usuarios boosteados en un mock
+  const ingresos = '$4000'; //falta leer ingresos tambien que seria una funcion
 
-  const users = [
-    {
-      nombre: "Mauro's Food",
-      categoria: 'Cocina',
-      fecha: '22/06/05',
-      estado: 'Pagado',
-    },
-    {
-      nombre: '---',
-      categoria: '---',
-      fecha: '19/06/25',
-      estado: 'No Pagado',
-    },
-    {
-      nombre: '---',
-      categoria: 'Categoría',
-      fecha: '19/06/25',
-      estado: 'Pagado',
-    },
+  const stats = [
+    { label: 'Usuarios', value: usuarios.length, icon: FiUsers },
+    { label: 'Emprendimientos boosteados', value: boosteados, icon: FiHome },
+    { label: 'Emprendimientos totales', value: totalEmprendimientos, icon: FiTag },
+    { label: 'Ingresos Generados', value: ingresos, icon: FiDollarSign },
   ];
 
   return (
@@ -42,7 +28,7 @@ export default function DashboardScreen() {
         </p>
       </div>
 
-      {/* stats con íconos en azul */}
+      {/* stats con íconos */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
@@ -65,49 +51,37 @@ export default function DashboardScreen() {
         })}
       </div>
 
-      {/* tabla de users con íconos en azul */}
+      {/* tabla de usuarios */}
       <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-xl font-semibold mb-4 flex items-center gap-2" style={{ color: '#2C4692' }}>
           <FiUsers style={{ color: '#2C4692' }} />
-          Usuarios Boostedados
+          Usuarios registrados
         </h2>
         <div className="overflow-x-auto">
           <table className="min-w-full table-auto">
             <thead>
-              <tr style={{ backgroundColor: '#2C4692', opacity: 0.1, color: '#2C4692' }}>
+              <tr style={{ backgroundColor: '#2C4692', color: 'white' }}>
                 <th className="px-4 py-2">Nombre</th>
-                <th className="px-4 py-2">Categoría</th>
-                <th className="px-4 py-2">Fecha de pago</th>
-                <th className="px-4 py-2">Estado</th>
+                <th className="px-4 py-2">Correo</th>
+                <th className="px-4 py-2">Ciudad</th>
+                <th className="px-4 py-2">Último acceso</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((user, index) => (
+              {usuarios.map((user, index) => (
                 <tr
                   key={index}
                   className="border-b border-gray-200 hover:bg-gray-50"
                 >
                   <td className="px-4 py-2 flex items-center gap-2">
                     <MdOutlineRestaurantMenu style={{ color: '#2C4692' }} />
-                    {user.nombre}
+                    {user.nombre || 'Sin nombre'}
                   </td>
-                  <td className="px-4 py-2">{user.categoria}</td>
+                  <td className="px-4 py-2">{user.correo || 'Sin correo'}</td>
+                  <td className="px-4 py-2">{user.ciudad || 'Sin ciudad'}</td>
                   <td className="px-4 py-2 flex items-center gap-2">
                     <FaRegCalendarAlt style={{ color: '#2C4692', opacity: 0.6 }} />
-                    {user.fecha}
-                  </td>
-                  <td className="px-4 py-2 font-medium flex items-center gap-2">
-                    {user.estado === 'Pagado' ? (
-                      <>
-                        <FaCheckCircle style={{ color: '#2C4692' }} />
-                        <span style={{ color: '#2C4692' }}>{user.estado}</span>
-                      </>
-                    ) : (
-                      <>
-                        <FaTimesCircle style={{ color: '#E53E3E' }} />
-                        <span style={{ color: '#E53E3E' }}>{user.estado}</span>
-                      </>
-                    )}
+                    {user.lastLog || 'Sin datos'}
                   </td>
                 </tr>
               ))}
