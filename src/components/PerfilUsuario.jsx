@@ -1,17 +1,18 @@
 import React from 'react'
 import { PiUserCircleFill } from "react-icons/pi";
 import Button from './Button';
+import { Link } from 'react-router-dom';
 
-const PerfilUsuario = ({usuario}) => {
+const PerfilUsuario = ({ usuario }) => {
     const { foto, nombre, descripcion, correo, ciudad, dateRegister, lastLog } = usuario
     return (
         <div className="border border-gray-300 p-4 m-auto my-4 rounded-lg max-w-200">
 
             <div className='flex my-5 item-start gap-10 justify-between'>
                 {foto ?
-                (<img src={foto} alt={nombre}  className="w-24 h-24 rounded-full object-cover" />) 
-                :
-                (<PiUserCircleFill className="w-24 h-24 rounded-full p-2"/>)
+                    (<img src={foto} alt={nombre} className="w-24 h-24 rounded-full object-cover" />)
+                    :
+                    (<PiUserCircleFill className="w-24 h-24 rounded-full p-2" />)
                 }
                 <nav className='flex-1 mt-1'>
                     <h2>{nombre}</h2>
@@ -19,7 +20,7 @@ const PerfilUsuario = ({usuario}) => {
                     <p>{correo}</p>
                 </nav>
                 <nav className='self-start'>
-                <Button text={"Editar Perfil"}/>
+                    <Button text={"Editar Perfil"} />
                 </nav>
             </div>
 
@@ -28,7 +29,7 @@ const PerfilUsuario = ({usuario}) => {
                 <div className='flex flex-col'>
                     <p className='font-semibold text-[#2B4590] mb-2'>Ciudad: </p>
                     <p className='text-[#666666]'>{ciudad || ''}</p>
-                </div> 
+                </div>
 
                 <div className='flex gap-52'>
                     <nav className='flex flex-col'>
@@ -44,11 +45,13 @@ const PerfilUsuario = ({usuario}) => {
             </div>
 
             <nav className='flex justify-end'>
-            <Button text={"Cambiar Contraseña"}/>
+                <Link to="/perfil/miemprendimiento">
+                    <Button text={"Crear Emprendimiento"} />
+                </Link>
             </nav>
 
         </div>
-  )
+    )
 }
 
 export default PerfilUsuario
