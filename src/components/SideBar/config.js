@@ -4,6 +4,7 @@ export const config = [
     {title: "Emprendimientos", path: "/emprendimientos" },
     {title: "Favoritos", path: "/favoritos" },
     {title: "Historial", path: "/historial" },
+  {title: "Dashboard", path: "/dashboard" },
 ]
 
 export const configDrop = [
