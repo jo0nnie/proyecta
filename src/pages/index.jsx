@@ -23,6 +23,6 @@ export {
   PagoScreen,
   PerfilEmprendimientosScreen,
   PerfilUsuarioScreen, 
-  DashboardScreen
+  DashboardScreen,
   CrearEmprendimientoScreen
 };
