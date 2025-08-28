@@ -9,6 +9,7 @@ import HomeScreen from "./Home/HomeScreen";
 import PagoScreen from "./Pago/PagoScreen";
 import PerfilEmprendimientosScreen from "./PerfilEmprendimiento/PerfilEmprendimientosScreen";
 import PerfilUsuarioScreen from "./PerfilUsuario/PerfilUsuarioScreen";
+import DashboardScreen from "./Dashboard/DashboardScreen";
 import CrearEmprendimientoScreen from "./Emprendimientos/CrearEmprendimientoScreen";
 export {
   LoginScreen,
@@ -21,6 +22,7 @@ export {
   HomeScreen,
   PagoScreen,
   PerfilEmprendimientosScreen,
-  PerfilUsuarioScreen,
+  PerfilUsuarioScreen, 
+  DashboardScreen
   CrearEmprendimientoScreen
 };
