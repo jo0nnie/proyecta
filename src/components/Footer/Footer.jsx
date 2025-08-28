@@ -8,7 +8,7 @@ const Footer = () => {
             <div className="container mx-auto flex justify-between items-center">
                 {/* logo app */}
                 <Link to="/">
-                    <img src="../../../public/Logo Cohete White.svg" alt="Logo Nave" className="w-11 h-11 cursor-pointer" />
+                    <img src="/Logo Cohete White.svg" alt="Logo Nave" className="w-11 h-11 cursor-pointer" />
                 </Link>
                 <div className="text-center text-sm leading-tight">
                     <p>Proyecta 2025</p>

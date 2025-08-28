@@ -1,0 +1,158 @@
+import React, { useState, useRef } from 'react';
+
+const CrearEmprendimientoForm = () => {
+  const [formData, setFormData] = useState({
+    nombre: '',
+    descripcion: '',
+    categoria: '',
+    correo: '',
+    sitio: '',
+    imagen: null,
+  });
+
+  const fileInputRef = useRef(null);
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === 'imagen') {
+      setFormData(prev => ({ ...prev, imagen: files[0] }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const isFormValid = () => {
+    return (
+      formData.nombre.trim() &&
+      formData.descripcion.trim() &&
+      formData.categoria &&
+      /\S+@\S+\.\S+/.test(formData.correo)
+    );
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isFormValid()) {
+      alert('Por favor completá todos los campos obligatorios correctamente.');
+      return;
+    }
+    console.log('Datos del emprendimiento:', formData);
+    alert('¡Emprendimiento creado con éxito!');
+  };
+
+  const handleFileClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label htmlFor="nombre" className="block font-medium mb-1 text-[#2B4590]">Nombre del emprendimiento *</label>
+        <input
+          id="nombre"
+          type="text"
+          name="nombre"
+          value={formData.nombre}
+          onChange={handleChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+
+      <div>
+        <label htmlFor="descripcion" className="block font-medium mb-1 text-[#2B4590]">Descripción *</label>
+        <textarea
+          id="descripcion"
+          name="descripcion"
+          value={formData.descripcion}
+          onChange={handleChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+
+      <div>
+        <label htmlFor="categoria" className="block font-medium mb-1 text-[#2B4590]">Categoría *</label>
+        <select
+          id="categoria"
+          name="categoria"
+          value={formData.categoria}
+          onChange={handleChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        >
+          <option value="">Seleccionar categoría</option>
+          <option value="arte">Arte</option>
+          <option value="tecnología">Tecnología</option>
+          <option value="moda">Moda</option>
+          <option value="gastronomía">Gastronomía</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="correo" className="block font-medium mb-1 text-[#2B4590]">Correo de contacto *</label>
+        <input
+          id="correo"
+          type="email"
+          name="correo"
+          value={formData.correo}
+          onChange={handleChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+
+      <div>
+        <label htmlFor="sitio" className="block font-medium mb-1 text-[#2B4590]">Sitio web o redes sociales</label>
+        <input
+          id="sitio"
+          type="url"
+          name="sitio"
+          value={formData.sitio}
+          onChange={handleChange}
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+      </div>
+
+      <div>
+        <label className="block font-medium mb-1 text-[#2B4590]">Imagen del emprendimiento</label>
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            readOnly
+            value={formData.imagen ? formData.imagen.name : "Sin archivos seleccionados"}
+            className="flex-grow p-2 border border-gray-300 rounded bg-gray-100 text-sm text-gray-700"
+          />
+          <button
+            type="button"
+            onClick={handleFileClick}
+            className="px-4 py-2 bg-[#2B4590] text-white rounded hover:bg-[#1f3266]"
+          >
+            Seleccionar archivo
+          </button>
+          <input
+            ref={fileInputRef}
+            id="imagen"
+            type="file"
+            name="imagen"
+            accept="image/*"
+            onChange={handleChange}
+            className="hidden"
+          />
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        disabled={!isFormValid()}
+        className="w-full py-2 bg-[#2B4590] text-white rounded hover:bg-[#1f3266] disabled:opacity-50"
+      >
+        Crear
+      </button>
+    </form>
+  );
+};
+
+export default CrearEmprendimientoForm;
