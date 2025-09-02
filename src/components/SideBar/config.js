@@ -9,5 +9,5 @@ export const config = [
 
 export const configDrop = [
     {title: "Perfil", path: "/perfil"},
-    {title: "Metodos de Pago", path: "/"}
+    {title: "Metodos de Pago", path: "/metodosdepago"}
 ]
