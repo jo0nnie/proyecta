@@ -19,9 +19,11 @@ const PerfilUsuario = ({ usuario }) => {
                     <p>{descripcion}</p>
                     <p>{correo}</p>
                 </nav>
-                <nav className='self-start'>
+            <nav className='flex justify-end'>
+                <Link to="/perfil/editarperfil">
                     <Button text={"Editar Perfil"} />
-                </nav>
+                </Link>
+            </nav>
             </div>
 
             <div className='flex flex-col my-5 border-y border-[#2B4590] p-4 space-y-4'>
