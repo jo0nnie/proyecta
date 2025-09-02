@@ -1,11 +1,9 @@
-import { Navbar } from "../../components";
-import AjusteItem from "./AjusteItem";
-import MetodosDePago from "./MetodosDePago";
+import AjusteItem from "./components/AjusteItem";
+import MetodosDePago from "./components/MetodosDePago";
 
-export default function Ajustes() {
+export default function AjustesScreen() {
     return (
         <>
-            <Navbar />
             <h2 className="text-2xl font-bold pl-7 pt-5" style={{ color: "#2C4391" }}>
                 Ajustes
             </h2>
@@ -17,7 +15,6 @@ export default function Ajustes() {
                 titulo="Cambiar contraseña"
                 descripcion="Cambia la contraseña de tu cuenta desde acá"
                 textoBoton="Cambiar contraseña"
-                // esto es solo para probar que funciona el boton
                 onClick={() => console.log("Clic en cambiar contraseña")}
             />
 
@@ -44,7 +41,6 @@ export default function Ajustes() {
                 descripcion="Esta acción borrara TODOS los datos de la cuenta, incluyendo emprendimientos (si tiene alguno)"
                 textoBoton="Eliminar todo"
                 colorBoton="#060F2A"
-                //lo mismo que el anterior jej
                 onClick={() => console.log("Clic en borrar todo")}
             />
         </>
