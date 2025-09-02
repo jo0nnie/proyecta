@@ -29,7 +29,10 @@ export default function SideBar({ isOpen, onClose }) {
 
         {/* Sección inferior */}
         <div className="p-4 border-t border-white space-y-2">
-          <SideBarDropItem text={"Ajustes"} items={configDrop}/>
+
+
+          <SideBarDropItem text={"Ajustes"} items={configDrop} />
+
           <a href="#" className="flex items-center gap-3 px-4 py-2 rounded hover:bg-[#3c56a5] transition-colors">
             <span>Cerrar Sesión</span>
           </a>
