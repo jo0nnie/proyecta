@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import { AjustesScreen, CategoriasScreen, EmprendimientosScreen, FavoritosScreen, HistorialScreen, HomeScreen, LoginScreen, PagoScreen, PerfilEmprendimientosScreen, PerfilUsuarioScreen, RegisterScreen, CrearEmprendimientoScreen, DashboardScreen } from "./pages";
 import AuthLayout from "./components/layouts/AuthLayout";
 import MainLayout from "./components/layouts/MainLayout";
+import EditarPerfil from "./pages/PerfilUsuario/EditarPerfilUsuarioScreen";
 
 
 export const router = createBrowserRouter([
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
           {
             path: "/perfil/miemprendimiento",
             element: <CrearEmprendimientoScreen />,
+          },
+          {
+            path: "/perfil/editarperfil",
+            element: <EditarPerfil />,
           },
           {
             path: "/ajustes",
