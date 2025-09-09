@@ -1,0 +1,39 @@
+[
+  {
+    "id": "1",
+    "titulo": "Impulso Inicial",
+    "beneficio": [
+      "Prioridad en tu categoría durante 7 días",
+      "Recomendación destacada en la página principal",
+      "Ideal para lanzamientos o promociones relámpago",
+      "Visibilidad inmediata sin compromiso a largo plazo"
+    ],
+    "duracion": "Una Semana",
+    "precio": "100"
+  },
+  {
+    "id": "2",
+    "titulo": "Impulso Constante",
+    "beneficio": [
+      "Prioridad sostenida en tu categoría durante 30 días",
+      "Recomendación frecuente en la página principal",
+      "Seguimiento semanal del rendimiento",
+      "Ideal para mantener presencia y atraer nuevos clientes"
+    ],
+    "duracion": "Un Mes",
+    "precio": "500"
+  },
+  {
+    "id": "3",
+    "titulo": "Proyección Máxima",
+    "beneficio": [
+      "Prioridad premium en tu categoría durante 12 meses",
+      "Recomendación fija en la página principal",
+      "Informe mensual de impacto y alcance",
+      "Soporte personalizado para campañas estratégicas",
+      "Ideal para marcas consolidadas que buscan expansión"
+    ],
+    "duracion": "Un Año",
+    "precio": "10000"
+  }
+]
