@@ -54,6 +54,11 @@ Rutas
 ```
 <-->
 ## Tecnologías utilizadas
+- Javascript (como main language)
+- React (Componetización)
+- TailwindCSS (Para estilos css)
+- React Router (Rutas)
+- Swiper JS (Para crear Carruseles)
 
 *Client:* React
 
