@@ -1,10 +1,11 @@
 import { MdAddCard } from "react-icons/md";
+import Button from "./Button";
 
 export default function MetodoPagoCard({
   tipo,
   terminacion,
   vencimiento,
-  cvcGuardado,
+  cvc,
   onEditar,
   onEliminar,
   esAgregar,
@@ -36,26 +37,16 @@ export default function MetodoPagoCard({
         <div className="bg-[#2C4391] rounded-t-lg h-8"></div>
         <div className="px-4 pt-3 pb-7 text-sm text-gray-600">
           <p className="font-bold text-[#2C4391]">
-            {tipo} ••••{terminacion}
+            {tipo} {terminacion}
           </p>
           <p>
-            {vencimiento} / {cvcGuardado ? "CVC guardado" : "CVC no guardado"}
+            {vencimiento} / {cvc}
           </p>
         </div>
       </div>
       <div className="mt-3 flex gap-2 justify-center">
-        <button
-          className="bg-[#2C4391] text-white px-3 py-1 rounded-full text-sm"
-          onClick={onEditar}
-        >
-          Editar
-        </button>
-        <button
-          className="bg-[#060F2A] text-white px-3 py-1 rounded-full text-sm"
-          onClick={onEliminar}
-        >
-          Eliminar
-        </button>
+        <Button type="button" text="Editar" onClick={onEditar} />
+        <Button type="button" text="Eliminar" onClick={onEliminar} />
       </div>
     </div>
   );
