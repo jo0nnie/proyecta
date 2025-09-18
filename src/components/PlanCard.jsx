@@ -1,20 +1,26 @@
-import React from 'react';
+import { Link } from "react-router";
+import Button from "./Button"
+export default function PlanCard({ plan }) {
+  const { titulo, beneficio, duracion, precio } = plan;
 
-export default function PlanCard ({plan}) {
-    const {titulo, beneficio, duracion, precio} = plan;
+  return (
+    <div className='flex flex-col justify-between border-2 rounded-xl border-[#2B4590] p-6 shadow-md hover:shadow-xl cursor-pointer bg-white h-full'>
+      <div>
+        <h2 className='text-2xl font-bold text-[#2B4590] mb-4'>{titulo}</h2>
+        <ul className='list-disc list-inside mb-4 text-gray-700'>
+          {beneficio.map((dato, index) => (
+            <li key={index}>{dato}</li>
+          ))}
+        </ul>
+        <p className='text-sm text-gray-600 mb-2'>Duración: <span className='font-semibold'>{duracion}</span></p>
+        <p className='text-3xl font-bold text-[#2B4590] mb-4'>${precio}</p>
+      </div>
 
-    return (
-        <div className='border-3 rounded-xl border-[#2B4590] p-2 shadow-md hover:shadow-xl cursor-pointer'>
-            <h2 className='text-xl font-bold m-2'>{titulo}</h2>
-            <ul className='list-disc list-inside m-2'>
-                {beneficio.map((dato, index) => (
-                <li key={index}>{dato}</li> 
-                ))}
-            </ul>
-            <nav className='flex justify-between'>
-            <p className='text-[#2B4590] underline m-2 '>{duracion}</p>
-            <p className='text-xl text-[#2B4590] font-bold m-2 '>${precio}</p>
-            </nav>
-        </div>
-    )
+      <div className='flex flex-col gap-2'>
+        <Link to= "/boosteo">
+                <Button text="Obtener"></Button>
+        </Link>
+      </div>
+    </div>
+  );
 }
