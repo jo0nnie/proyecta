@@ -1,5 +1,10 @@
 import { useState } from "react";
 import Sidebar from "./SideBar/Sidebar"; // Importá el componente
+import usuarioMock from "../utils/usuarioMock.json"
+
+//get usuario foto
+const usuarioLogueado = usuarioMock[0];
+const fotoUsuario = usuarioLogueado.foto;
 
 export default function NavBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -14,11 +19,12 @@ export default function NavBar() {
           <button onClick={toggleSidebar} className="text-white text-2xl focus:outline-none">
             ☰
           </button>
-          <img
+          <a href="/"> <img
             src="/Logo Cohete White.svg"
             alt="Logo Cohete"
             className="h-12 w-auto"
-          />
+          /></a>
+
         </div>
 
         <div className="flex-1 mx-3 max-w-[600px] relative">
@@ -32,6 +38,8 @@ export default function NavBar() {
         <div className="flex items-center space-x-4">
           <a href="/auth/login" className="text-white hover:text-[#E9E2EF]">Iniciar Sesión</a>
           <a href="/auth/register" className="text-white hover:text-[#E9E2EF]">Registrarse</a>
+          {/* aca deberia de recibir la imagen del perfil del usuario */}
+          <a href="/perfil"> <img src={fotoUsuario} alt="imagen usuario" width={40}></img></a>
         </div>
       </nav>
 

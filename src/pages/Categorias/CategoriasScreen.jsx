@@ -21,7 +21,8 @@ export default function CategoriasScreen() {
 
       {Object.entries(emprendimientosPorCategoria).map(([categoria, items]) => (
         <div key={categoria} className="mb-12">
-          <section className="flex items-center justify-between mb-4 px-4" id={categoria}>
+          <section className="flex items-center justify-between mb-4 px-4" href={categoria}>
+
             <h2 className="text-2xl font-semibold mb-2 text-[#2C4692] mx-21">{categoria}</h2>
           </section>
 
