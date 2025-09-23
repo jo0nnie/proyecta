@@ -8,7 +8,6 @@ import { FaDesktop, FaGift, FaHome, FaTshirt, FaUtensils } from "react-icons/fa"
 import { MdFavorite } from "react-icons/md";
 
 
-//este array lo puse de ejemplo, cuando definamos las categorias vamos a cambiar por sus iconos correspondientes
 
 const categories = [
   { icon: FaDesktop, label: "Tecnología", path: "/categorias#tecnologia", color: "#2C4692" },
