@@ -2,6 +2,7 @@
   {
     "id": "1",
     "nombre": "Benicio",
+    "usuarioId": 16,
     "categoria": "Gastronomía",
     "imagen": "https://i.imgur.com/3jQWWEN.jpeg",
     "resumen": "Tu parada de sabor 🌭",
@@ -16,6 +17,7 @@
   {
     "id": "2",
     "nombre": "showroomguapas",
+    "usuarioId": 15,
     "categoria": "Moda",
     "imagen": "https://i.imgur.com/dar5Ixq.jpeg",
     "resumen": "Indumentaria para toda la familia",
@@ -29,6 +31,7 @@
   {
     "id": "3",
     "nombre": "otluani",
+    "usuarioId": 14,
     "categoria": "Salud y Bienestar",
     "imagen": "https://i.imgur.com/IGszV56.jpeg",
     "resumen": "Cosmética natural y cuidado personal",
@@ -42,6 +45,7 @@
   {
     "id": "4",
     "nombre": "malu_memoriasdelsabor",
+    "usuarioId": 13,
     "categoria": "Gastronomía",
     "imagen": "https://i.imgur.com/rnzmL28.jpeg",
     "resumen": "Comida casera como la de antes",
@@ -55,6 +59,7 @@
   {
     "id": "5",
     "nombre": "telefoniapoucompany",
+    "usuarioId": 12,
     "categoria": "Tecnología",
     "imagen": "https://i.imgur.com/OTgkxtE.jpeg",
     "resumen": "Tecnología accesible para todos",
@@ -68,6 +73,7 @@
   {
     "id": "6",
     "nombre": "tinta_papelk",
+    "usuarioId": 11,
     "categoria": "Diseños y regalos",
     "imagen": "https://i.imgur.com/fzTI55m.jpeg",
     "resumen": "Tarjetería y papelería personalizada",
@@ -81,6 +87,7 @@
   {
     "id": "7",
     "nombre": "Boo Bakery",
+    "usuarioId": 10,
     "categoria": "Gastronomía",
     "imagen": "https://i.imgur.com/MCKoYKL.jpeg",
     "resumen": "Cositas dulces en versión saludable",
@@ -94,6 +101,7 @@
   {
     "id": "8",
     "nombre": "todopino.ok",
+    "usuarioId": 9,
     "categoria": "Hogar",
     "imagen": "https://i.imgur.com/Qltms7p.jpeg",
     "resumen": "Muebles en general y a medidas",
@@ -107,6 +115,7 @@
   {
     "id": "9",
     "nombre": "italo_indumentaria_",
+    "usuarioId": 8,
     "categoria": "Moda",
     "imagen": "https://i.imgur.com/pdrnqx8.jpeg",
     "resumen": "Ropa sin género y con estilo",
@@ -120,6 +129,7 @@
   {
     "id": "10",
     "nombre": "resetposadas",
+    "usuarioId": 7,
     "categoria": "Tecnología",
     "imagen": "https://i.imgur.com/3FxVTmQ.jpeg",
     "resumen": "Celulares Posadas 🍎",
@@ -133,6 +143,7 @@
   {
     "id": "11",
     "nombre": "mariquitaposadas",
+    "usuarioId": 6,
     "categoria": "Moda",
     "imagen": "https://i.imgur.com/Qb1fuid.jpeg",
     "resumen": "Ropa y accesorios para todos los estilos",
@@ -146,6 +157,7 @@
   {
     "id": "12",
     "nombre": "dentalcentroposadas",
+    "usuarioId": 5,
     "categoria": "Salud y Bienestar",
     "imagen": "https://i.imgur.com/JLbqSQx.jpeg",
     "resumen": "Odontología integral para toda la familia",
@@ -159,6 +171,7 @@
   {
     "id": "13",
     "nombre": "plecomcelulares",
+    "usuarioId": 4,
     "categoria": "Tecnología",
     "imagen": "https://i.imgur.com/V05ykpm.jpeg",
     "resumen": "Mayoristas y servicio técnico en celulares",
@@ -172,6 +185,7 @@
   {
     "id": "14",
     "nombre": "mica_beauty_",
+    "usuarioId": 17,
     "categoria": "Salud y Bienestar",
     "imagen": "https://i.imgur.com/p7EIscK.jpeg",
     "resumen": "Academia y salón de belleza",
@@ -185,6 +199,7 @@
   {
     "id": "15",
     "nombre": "posadasfitok",
+    "usuarioId": 3,
     "categoria": "Moda",
     "imagen": "https://i.imgur.com/TACPO2b.jpeg",
     "resumen": "Ropa deportiva y fitness",
@@ -198,6 +213,7 @@
   {
     "id": "16",
     "nombre": "manjar_posadas",
+    "usuarioId": 2,
     "categoria": "Gastronomía",
     "imagen": "https://i.imgur.com/nwhPTD2.jpeg",
     "resumen": "Churrasquería con sabor tradicional",
@@ -207,5 +223,33 @@
       "https://images.unsplash.com/photo-1572441710534-2a60c134f3e3"
     ],
     "descripcion": "Manjar Posadas ofrece las mejores carnes a la parrilla con recetas tradicionales, atendiendo con esmero para que disfrutes el auténtico sabor argentino."
+  },
+  {
+    "id": "998",
+    "nombre": "Pep's Food",
+    "usuarioId": 1,
+    "categoria": "Gastronomía",
+    "imagen": "https://i.pinimg.com/736x/fa/a1/0b/faa10b1c754b38126382675bb6cd5091.jpg",
+    "resumen": "Emprendimiento boosteado para el ejemplo. No esta entre los emprendimientos.",
+    "correo": "Pepisfam@gmail.com",
+    "fotos": [
+      "https://i.pinimg.com/736x/93/b2/7e/93b27e4ba5e6f85fe2fec07564b0b327.jpg",
+      "https://i.pinimg.com/736x/05/53/1e/05531ef2bfde3f8837de1c3b85535d18.jpg"
+    ],
+    "descripcion": "Este emprendimiento fue creado como ejemplo visual para el simulacro. No está vinculado a datos reales, pero sirve para mostrar el diseño y la funcionalidad esperada."
+  },
+  {
+    "id": "999",
+    "nombre": "Tienda EcoPosadas",
+    "usuarioId": 1,
+    "categoria": "Hogar",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.33dc3a43-90fd-4c34-bde7-cc5729594cbd.png",
+    "resumen": "Emprendimiento no boosteado para el ejemplo. No esta entre los emprendimientos.",
+    "correo": "eco@posadas.com",
+    "fotos": [
+      "https://i.pinimg.com/736x/cf/99/c1/cf99c1ecd0758f883e517a45120018ba.jpg",
+      "https://copilot.microsoft.com/th/id/BCO.0a366f55-1c2b-4713-bef0-ad1ce0a4b875.png"
+    ],
+    "descripcion": "Este emprendimiento fue creado como ejemplo visual para el simulacro. No está vinculado a datos reales, pero sirve para mostrar el diseño y la funcionalidad esperada."
   }
 ]
