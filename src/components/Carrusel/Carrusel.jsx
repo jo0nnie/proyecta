@@ -3,7 +3,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Carrusel.css"
-import { Link } from "react-router";
+import { href, Link } from "react-router";
 import { FaDesktop, FaGift, FaHome, FaTshirt, FaUtensils } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
 
@@ -11,7 +11,7 @@ import { MdFavorite } from "react-icons/md";
 //este array lo puse de ejemplo, cuando definamos las categorias vamos a cambiar por sus iconos correspondientes
 
 const categories = [
-  { icon: FaDesktop, label: "Tecnología", path: "/categorias", color: "#2C4692" },
+  { icon: FaDesktop, label: "Tecnología", path: "/categorias", href: "Tecnología", color: "#2C4692" },
   { icon: FaTshirt, label: "Moda", path: "/categorias", color: "#2C4692" },
   { icon: FaHome, label: "Hogar", path: "/categorias", color: "#2C4692" },
   { icon: FaUtensils, label: "Gastronomía", path: "/categorias", color: "#2C4692" },
