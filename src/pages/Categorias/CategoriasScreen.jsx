@@ -32,6 +32,7 @@ export default function CategoriasScreen() {
         Categorías
       </h1>
 
+
       {Object.entries(emprendimientosPorCategoria).map(([categoria, items]) => {
         const slug = slugify(categoria);
         return (

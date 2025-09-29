@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
-import { AjustesScreen, CategoriasScreen, EmprendimientosScreen, FavoritosScreen, HistorialScreen, HomeScreen, LoginScreen, PagoScreen, PerfilEmprendimientosScreen, PerfilUsuarioScreen, RegisterScreen, CrearEmprendimientoScreen, DashboardScreen, MetodosdePagoScreen } from "./pages";
+import { AjustesScreen, CategoriasScreen, EmprendimientosScreen, FavoritosScreen, HistorialScreen, HomeScreen, LoginScreen, PagoScreen, PerfilEmprendimientosScreen, PerfilUsuarioScreen, RegisterScreen, CrearEmprendimientoScreen, DashboardScreen, MetodosdePagoScreen, PlanesScreen } from "./pages";
 import AuthLayout from "./components/layouts/AuthLayout";
-import MainLayout from "./components/layouts/MainLayout";
+import MainLayout from "./components/layouts/MainLayout/MainLayout";
 import EditarPerfil from "./pages/PerfilUsuario/EditarPerfilUsuarioScreen";
 
 
@@ -65,6 +65,10 @@ export const router = createBrowserRouter([
           {
             path: "/dashboard",
             element: <DashboardScreen />,
+          },
+          {
+            path: "/infoplanes",
+            element: <PlanesScreen />,
           },
           {
             path: "/metodosdepago",
