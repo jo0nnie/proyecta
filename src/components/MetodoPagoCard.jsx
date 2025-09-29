@@ -45,8 +45,8 @@ export default function MetodoPagoCard({
         </div>
       </div>
       <div className="mt-3 flex gap-2 justify-center">
-        <Button type="button" text="Editar" onClick={onEditar} />
-        <Button type="button" text="Eliminar" onClick={onEliminar} />
+        <Button text="Editar" onClick={onEditar} variante="light"/>
+        <Button text="Eliminar" onClick={onEliminar}/>
       </div>
     </div>
   );
