@@ -3,13 +3,14 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Carrusel.css"
-import { Link } from "react-router";
+import { href, Link } from "react-router";
 import { FaDesktop, FaGift, FaHome, FaTshirt, FaUtensils } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
 
 
 
 const categories = [
+
   { icon: FaDesktop, label: "Tecnología", path: "/categorias#tecnologia", color: "#2C4692" },
   { icon: FaTshirt, label: "Moda", path: "/categorias#moda", color: "#2C4692" },
   { icon: FaHome, label: "Hogar", path: "/categorias#hogar", color: "#2C4692" },

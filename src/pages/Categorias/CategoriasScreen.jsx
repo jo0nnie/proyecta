@@ -37,6 +37,7 @@ export default function CategoriasScreen() {
         const slug = slugify(categoria);
         return (
           <section key={categoria} id={slug} className="mb-12">
+
             <h2 className="text-2xl font-semibold mb-2 text-[#2C4692] mx-21">{categoria}</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 -px-8 py-6 max-w-7xl mx-auto justify-items-center">
