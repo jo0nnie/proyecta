@@ -66,7 +66,7 @@ const PerfilUsuario = ({ usuario }) => {
 
                                 {emprendimiento.id === "999" && (
                                     <div className="absolute bottom-2 right-4 md:right-4 sm:left-1/2 sm:transform sm:-translate-x-1/2">
-                                        <Link to={`/boostear/${emprendimiento.id}`}>
+                                        <Link to={`/boosteo/${emprendimiento.id}`}>
                                             <Button text="Boostear" />
                                         </Link>
                                     </div>
