@@ -192,12 +192,12 @@ export default function MetodosdePagoScreen() {
             <div className="flex gap-3 mt-1">
               {editarMetododePago !== null ? (
                 <Button
-                  type="button"
                   text="Guardar Cambios"
                   onClick={guardarCambios}
+                  variante="light"
                 />
               ) : (
-                <Button type="button" text="Guardar" onClick={agregarMetodo} />
+                <Button type="button" text="Guardar" onClick={agregarMetodo} variante="light"/>
               )}
               <Button type="button" text="Cancelar" onClick={cancelar} />
             </div>
