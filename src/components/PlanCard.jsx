@@ -1,6 +1,6 @@
-import { Link } from "react-router";
-import Button from "./Button"
-export default function PlanCard({ plan }) {
+import Button from "./Button";
+
+export default function PlanCard({ plan, onObtener, isSeleccionado }) {
   const { titulo, beneficio, duracion, precio } = plan;
 
   return (
@@ -17,9 +17,10 @@ export default function PlanCard({ plan }) {
       </div>
 
       <div className='flex flex-col gap-2'>
-        <Link to= "/boosteo">
-                <Button text="Obtener"></Button>
-        </Link>
+        <Button
+          text={isSeleccionado ? "Seleccionado" : "Obtener"}
+          onClick={() => onObtener(plan)}
+        />
       </div>
     </div>
   );

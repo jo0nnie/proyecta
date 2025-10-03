@@ -9,5 +9,9 @@ import Navbar from "./NavBar"
 import Carrusel from "./Carrusel/Carrusel";
 import SideBar from "./SideBar/Sidebar";
 import LoginForm from "./LoginForm";
-export { LoginForm, Container, Button, TextField, TestForm, CardEmprendimiento, Navbar, SideBar, Carrusel };
+import MetodoPagoCard from "./MetodoPagoCard";
+import PlanCard from "./PlanCard";
+import CarritoResumen from './CarritoResumen';
+import SelectorEmprendimiento from "./SelectorEmprendimiento";
+export { LoginForm, Container, Button, TextField, TestForm, CardEmprendimiento, Navbar, SideBar, Carrusel, MetodoPagoCard, PlanCard, CarritoResumen, SelectorEmprendimiento };
 
