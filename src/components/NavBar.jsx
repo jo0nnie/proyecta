@@ -38,9 +38,10 @@ export default function NavBar() {
         <div className="flex items-center space-x-4">
           <a href="/auth/login" className="text-white hover:text-[#E9E2EF]">Iniciar Sesión</a>
           <a href="/auth/register" className="text-white hover:text-[#E9E2EF]">Registrarse</a>
-          {/* aca deberia de recibir la imagen del perfil del usuario */}
-          <a href="/perfil"> <img src={fotoUsuario} alt="imagen usuario" width={40}></img></a>
+          <a href="/perfil/miemprendimiento" className="text-white hover:text-[#E9E2EF]">Crear emprendimiento</a>
+          <a href="/perfil"> <img src={fotoUsuario} alt="imagen usuario" width={40} /></a>
         </div>
+
       </nav>
 
       {/* Acá montamos la Sidebar */}
