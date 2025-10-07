@@ -7,7 +7,7 @@
             "Ser recomendado en la pagina principal"
         ],
         "duracion":"Una Semana",
-        "precio":"100"
+        "precio":100
     },
     {
         "id":"2",
@@ -16,8 +16,8 @@
             "Prioridad en tu categoria",
             "Ser recomendado en la pagina principal"
         ],
-        "duracion":"Una Mes",
-        "precio":"500"
+        "duracion":"Un Mes",
+        "precio":500
     },
     {
         "id":"3",
@@ -27,6 +27,6 @@
             "Ser recomendado en la pagina principal"
         ],
         "duracion":"Un Año",
-        "precio":"10000"
+        "precio":10000
     }
 ]

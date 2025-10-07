@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Button } from "../../components";
 import MetodoPagoCard from "../../components/MetodoPagoCard";
+import TextField from "../../components/TextField";
 
 export default function MetodosdePagoScreen() {
   const [metodos, setMetodos] = useState([
     {
-      tipo: "Mastercard",
+      tipo: "MasterCard",
       terminacion: "0004",
       vencimiento: "06/27",
-      cvcGuardado: true,
+      cvc: "123",
     },
   ]);
 
@@ -17,14 +18,15 @@ export default function MetodosdePagoScreen() {
     tipo: "",
     terminacion: "",
     vencimiento: "",
-    cvcGuardado: false,
+    cvc: "",
   });
+  const [editarMetododePago, seteditarMetododePago] = useState(null);
 
   const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setNuevoMetodo((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     }));
   };
 
@@ -32,14 +34,44 @@ export default function MetodosdePagoScreen() {
     if (
       nuevoMetodo.tipo &&
       nuevoMetodo.terminacion &&
-      nuevoMetodo.vencimiento
+      nuevoMetodo.vencimiento &&
+      nuevoMetodo.cvc
     ) {
       setMetodos([...metodos, nuevoMetodo]);
       setNuevoMetodo({
         tipo: "",
         terminacion: "",
         vencimiento: "",
-        cvcGuardado: false,
+        cvc: "",
+      });
+      setMostrarFormulario(false);
+    } else {
+      alert("Por favor completá todos los campos.");
+    }
+  };
+
+  const editarMetodo = (index) => {
+    seteditarMetododePago(index);
+    setNuevoMetodo(metodos[index]);
+    setMostrarFormulario(true);
+  };
+
+  const guardarCambios = () => {
+    if (
+      nuevoMetodo.tipo &&
+      nuevoMetodo.terminacion &&
+      nuevoMetodo.vencimiento &&
+      nuevoMetodo.cvc
+    ) {
+      const metodosActualizados = [...metodos];
+      metodosActualizados[editarMetododePago] = nuevoMetodo;
+      setMetodos(metodosActualizados);
+      seteditarMetododePago(null);
+      setNuevoMetodo({
+        tipo: "",
+        terminacion: "",
+        vencimiento: "",
+        cvc: "",
       });
       setMostrarFormulario(false);
     } else {
@@ -48,12 +80,29 @@ export default function MetodosdePagoScreen() {
   };
 
   const eliminarMetodo = (index) => {
-    const nuevos = metodos.filter((_, i) => i !== index);
-    setMetodos(nuevos);
+    const confirmacion = window.confirm(
+      "¿quiere eliminar este método de pago?"
+    );
+
+    if (confirmacion) {
+      const nuevos = metodos.filter((_, i) => i !== index);
+      setMetodos(nuevos);
+    }
+  };
+
+  const cancelar = () => {
+    setMostrarFormulario(false);
+    seteditarMetododePago(null);
+    setNuevoMetodo({
+      tipo: "",
+      terminacion: "",
+      vencimiento: "",
+      cvc: "",
+    });
   };
 
   return (
-    <div container mx-auto p-4>
+    <div className="pb-8">
       <div>
         <h2 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-4 p-2 text-center">
           Mis Métodos de Pago
@@ -71,8 +120,8 @@ export default function MetodosdePagoScreen() {
               tipo={m.tipo}
               terminacion={m.terminacion}
               vencimiento={m.vencimiento}
-              cvcGuardado={m.cvcGuardado}
-              onEditar={() => alert("Simulación de edición")}
+              cvc={m.cvc}
+              onEditar={() => editarMetodo(idx)}
               onEliminar={() => eliminarMetodo(idx)}
             />
           ))}
@@ -83,57 +132,74 @@ export default function MetodosdePagoScreen() {
         </div>
         {mostrarFormulario && (
           <div className="mt-6 p-4 rounded border shadow-md max-w-md flex-grow ml-8">
-            <h3 className="font-bold text-[#2C4391] mb-3">
-              Nuevo método de pago
+            <h3 className="text-[#2C4391] mb-3 flex justify-center font-bold">
+              {editarMetododePago !== null
+                ? "Editar Método de Pago"
+                : "Nuevo Método de Pago"}
             </h3>
-            <input
-              type="text"
+            <p className="mt-1 text-black pb-1">Metodo de Pago</p>
+            <select
+              className="border-2 p-2 px-4 mb-2 block w-full border-primary-500 rounded-[10px] focus:outline-none focus:ring-2 focus:ring-[#2C4692]"
               name="tipo"
-              placeholder="Tipo de tarjeta (Visa, etc)"
               value={nuevoMetodo.tipo}
               onChange={handleInputChange}
-              className="border p-2 mb-2 block w-full"
-            />
-            <input
-              type="text"
+            >
+              <option value="" disabled hidden>
+                Seleccione un tipo de tarjeta
+              </option>
+              <option value="MasterCard">MasterCard</option>
+              <option value="Visa">Visa</option>
+            </select>
+
+            <p className="mt-1 text-black pb-1">Número de Tarjeta</p>
+            <TextField
+              placeholder={"0000 0000 0000 0000"}
+              onInput={(e) => {
+                if (e.target.value.length > e.target.maxLength) {
+                  e.target.value = e.target.value.slice(0, e.target.maxLength);
+                }
+              }}
+              maxLength={16}
+              type="number"
               name="terminacion"
-              placeholder="Últimos 4 dígitos"
               value={nuevoMetodo.terminacion}
               onChange={handleInputChange}
               className="border p-2 mb-2 block w-full"
             />
-            <input
-              type="text"
+            <p className="mt-1 text-black pb-1">Vencimiento (MM/AA)</p>
+            <TextField
+              type="date"
               name="vencimiento"
-              placeholder="Vencimiento (MM/AA)"
               value={nuevoMetodo.vencimiento}
               onChange={handleInputChange}
               className="border p-2 mb-2 block w-full"
             />
-            <label className="flex items-center gap-2 text-sm mb-3">
-              <input
-                type="checkbox"
-                name="cvcGuardado"
-                checked={nuevoMetodo.cvcGuardado}
-                onChange={handleInputChange}
-              />
-              Guardar CVC
-            </label>
-            <div className="flex gap-3">
-              <Button type="button" text="Guardar" onClick={agregarMetodo} />
-              <Button
-                type="button"
-                text="Cancelar"
-                onClick={() => {
-                  setMostrarFormulario(false);
-                  setNuevoMetodo({
-                    tipo: "",
-                    terminacion: "",
-                    vencimiento: "",
-                    cvcGuardado: false,
-                  });
-                }}
-              />
+            <p className="mt-1 text-black pb-1">CVC</p>
+            <TextField
+              placeholder={"0000"}
+              onInput={(e) => {
+                if (e.target.value.length > e.target.maxLength) {
+                  e.target.value = e.target.value.slice(0, e.target.maxLength);
+                }
+              }}
+              maxLength={4}
+              type="number"
+              name="cvc"
+              value={nuevoMetodo.cvc}
+              onChange={handleInputChange}
+              className="border p-2 mb-2 block w-full "
+            />
+            <div className="flex gap-3 mt-1">
+              {editarMetododePago !== null ? (
+                <Button
+                  text="Guardar Cambios"
+                  onClick={guardarCambios}
+                  variante="light"
+                />
+              ) : (
+                <Button type="button" text="Guardar" onClick={agregarMetodo} variante="light"/>
+              )}
+              <Button type="button" text="Cancelar" onClick={cancelar} />
             </div>
           </div>
         )}
