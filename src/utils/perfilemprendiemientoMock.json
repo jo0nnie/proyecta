@@ -225,6 +225,34 @@
     "descripcion": "Manjar Posadas ofrece las mejores carnes a la parrilla con recetas tradicionales, atendiendo con esmero para que disfrutes el auténtico sabor argentino."
   },
   {
+    "id": "996",
+    "nombre": "Estudio Creativo Pixel",
+    "usuarioId": 1,
+    "categoria": "Diseño",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.a1f66d18-8426-45b4-b9d6-7051d8b48a4d.png",
+    "resumen": "Diseño gráfico y branding para emprendimientos emergentes.",
+    "correo": "pixel@estudio.com",
+    "fotos": [
+      "https://i.pinimg.com/736x/ab/cd/ef/abcdef1234567890.jpg",
+      "https://copilot.microsoft.com/th/id/BCO.1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p.png"
+    ],
+    "descripcion": "Estudio creativo especializado en identidad visual, diseño de marca y comunicación digital. Ideal para emprendimientos que buscan destacar."
+  },
+  {
+    "id": "997",
+    "nombre": "Panadería La Miga",
+    "usuarioId": 1,
+    "categoria": "Gastronomía",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.0a13e133-3d95-437a-91ba-2e2136b2e62a.png",
+    "resumen": "Panadería artesanal con productos locales y sin conservantes.",
+    "correo": "lamiga@panaderia.com",
+    "fotos": [
+      "https://i.pinimg.com/736x/1f/2a/3b/1f2a3b4c5d6e7f8g9h0i.jpg",
+      "https://copilot.microsoft.com/th/id/BCO.7a8b9c0d-1e2f-3g4h-5i6j-7k8l9m0n1o2p.png"
+    ],
+    "descripcion": "Panadería tradicional con enfoque en productos frescos, locales y sin aditivos. Ideal para quienes valoran lo artesanal."
+  },
+  {
     "id": "998",
     "nombre": "Pep's Food",
     "usuarioId": 1,

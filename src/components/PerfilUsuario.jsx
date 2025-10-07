@@ -57,7 +57,20 @@ const PerfilUsuario = ({ usuario }) => {
                         {emprendimientosDelUsuario.map((emprendimiento) => (
                             <div key={emprendimiento.id} className="relative">
                                 <CardEmprendimiento {...emprendimiento} descripcion={emprendimiento.resumen} />
-
+                                {emprendimiento.id === "996" && (
+                                    <div className="absolute bottom-2 right-4 md:right-4 sm:left-1/2 sm:transform sm:-translate-x-1/2">
+                                        <Link to={`/boosteo/${emprendimiento.id}`}>
+                                            <Button text="Boostear" />
+                                        </Link>
+                                    </div>
+                                )}
+                                {emprendimiento.id === "997" && (
+                                    <div className="absolute bottom-2 right-4 md:right-4 sm:left-1/2 sm:transform sm:-translate-x-1/2">
+                                        <Link to={`/boosteo/${emprendimiento.id}`}>
+                                            <Button text="Boostear" />
+                                        </Link>
+                                    </div>
+                                )}
                                 {emprendimiento.id === "998" && (
                                     <div className="absolute top-4 left-4">
                                         <BadgeBoost isBoosted={true} />
