@@ -1,12 +1,10 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 const CrearEmprendimientoForm = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     descripcion: '',
-    categoria: '',
-    correo: '',
-    sitio: '',
+    categoriaId: '',
     imagen: null,
   });
 
@@ -25,20 +23,57 @@ const CrearEmprendimientoForm = () => {
     return (
       formData.nombre.trim() &&
       formData.descripcion.trim() &&
-      formData.categoria &&
-      /\S+@\S+\.\S+/.test(formData.correo)
+      formData.categoriaId
     );
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!isFormValid()) {
-      alert('Por favor completá todos los campos obligatorios correctamente.');
-      return;
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!isFormValid()) {
+    alert('Por favor completá todos los campos obligatorios.');
+    return;
+  }
+
+  const data = new FormData();
+  data.append('nombre', formData.nombre.trim());
+  data.append('descripcion', formData.descripcion.trim());
+  data.append('categoriaId', Number(formData.categoriaId)); 
+
+  if (formData.imagen) {
+    data.append('imagen', formData.imagen); 
+  }
+
+  // for (let [key, value] of data.entries()) {
+  //   console.log(`${key}:`, value);
+  // }
+
+  try {
+    const response = await fetch('http://localhost:3000/emprendimientos', {
+      method: 'POST',
+      body: data,
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Respuesta del backend:', errorText);
+      throw new Error('Error al crear el emprendimiento');
     }
-    console.log('Datos del emprendimiento:', formData);
+
+    const result = await response.json();
     alert('¡Emprendimiento creado con éxito!');
-  };
+    setFormData({
+      nombre: '',
+      descripcion: '',
+      categoriaId: '',
+      imagen: null,
+    });
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  } catch (error) {
+    console.error('Error en el envío:', error);
+    alert('Hubo un problema al enviar el formulario.');
+  }
+};
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
@@ -74,46 +109,21 @@ const CrearEmprendimientoForm = () => {
       </div>
 
       <div>
-        <label htmlFor="categoria" className="block font-medium mb-1 text-[#2B4590]">Categoría *</label>
+        <label htmlFor="categoriaId" className="block font-medium mb-1 text-[#2B4590]">Categoría *</label>
         <select
-          id="categoria"
-          name="categoria"
-          value={formData.categoria}
+          id="categoriaId"
+          name="categoriaId"
+          value={formData.categoriaId}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded"
           required
         >
           <option value="">Seleccionar categoría</option>
-          <option value="arte">Arte</option>
-          <option value="tecnología">Tecnología</option>
-          <option value="moda">Moda</option>
-          <option value="gastronomía">Gastronomía</option>
+          <option value="1">Tecnología</option>
+          <option value="2">Arte</option>
+          <option value="3">Moda</option>
+          <option value="4">Gastronomía</option>
         </select>
-      </div>
-
-      <div>
-        <label htmlFor="correo" className="block font-medium mb-1 text-[#2B4590]">Correo de contacto *</label>
-        <input
-          id="correo"
-          type="email"
-          name="correo"
-          value={formData.correo}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
-          required
-        />
-      </div>
-
-      <div>
-        <label htmlFor="sitio" className="block font-medium mb-1 text-[#2B4590]">Sitio web o redes sociales</label>
-        <input
-          id="sitio"
-          type="url"
-          name="sitio"
-          value={formData.sitio}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
       </div>
 
       <div>
