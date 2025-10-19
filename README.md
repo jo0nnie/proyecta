@@ -46,7 +46,7 @@ Rutas
 ├── Perfil               -> PerfilUsuario
 ├── Ajustes              -> Configuración del usuario
 ├── Categorías           -> Lista de emprendimientos según su categoría
-└── Boosteo              -> Pago para mejorar emprendimientos
+└── Carrito              -> Pago para mejorar emprendimientos
 
 
 /emprendimientos/        -> Lista TODOS los emprendimientos

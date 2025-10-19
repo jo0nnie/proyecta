@@ -110,6 +110,54 @@
     "descripcion": "ᑕᕼᑌᖇᖇᗝᔕ ᗰᗩᑎᒎᗩᖇ",
     "categoria": "Gastronomía",
     "imagen": "https://i.imgur.com/nwhPTD2.jpeg"
+  },
+  {
+    "id": "993",
+    "nombre": "Taller de Cerámica Tierra Roja",
+    "descripcion": "Cerámica artesanal inspirada en la tierra colorada de Misiones.",
+    "categoria": "Hogar",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.d7d95e8e-2dcd-4f46-85af-808a8aa7801f.png"
+  },
+  {
+    "id": "994",
+    "nombre": "Estética Vegana Alma",
+    "descripcion": "Tratamientos estéticos libres de crueldad animal.",
+    "categoria": "Salud y Bienestar",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.631954a9-03f7-4d58-9de6-06e00fd88cd8.png"
+  },
+  {
+    "id": "995",
+    "nombre": "Papelería Creativa Mandarina",
+    "descripcion": "Papelería personalizada para eventos y emprendimientos.",
+    "categoria": "Diseños y regalos",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.189d326d-106b-4577-82d4-cf5b599c3867.png"
+  },
+  {
+    "id": "996",
+    "nombre": "Estudio Creativo Pixel",
+    "descripcion": "Diseño gráfico y branding para emprendimientos emergentes.",
+    "categoria": "Diseños y regalos",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.a1f66d18-8426-45b4-b9d6-7051d8b48a4d.png"
+  },
+  {
+    "id": "997",
+    "nombre": "Panadería La Miga",
+    "descripcion": "Panadería artesanal con productos locales y sin conservantes.",
+    "categoria": "Gastronomía",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.0a13e133-3d95-437a-91ba-2e2136b2e62a.png"
+  },
+  {
+    "id": "998",
+    "nombre": "Pep's Food",
+    "descripcion": "Emprendimiento boosteado para el ejemplo. No esta entre los emprendimientos.",
+    "categoria": "Gastronomía",
+    "imagen": "https://i.pinimg.com/736x/fa/a1/0b/faa10b1c754b38126382675bb6cd5091.jpg"
+  },
+  {
+    "id": "999",
+    "nombre": "Tienda EcoPosadas",
+    "descripcion": "Emprendimiento no boosteado para el ejemplo. No esta entre los emprendimientos.",
+    "categoria": "Hogar",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.33dc3a43-90fd-4c34-bde7-cc5729594cbd.png"
   }
-
 ]

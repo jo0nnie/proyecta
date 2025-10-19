@@ -1,35 +1,82 @@
 import { useState } from 'react';
-import { PlanCard, CardEmprendimiento, Button, TextField, MetodoPagoCard, CarritoResumen, SelectorEmprendimiento } from '../../components';
+import { PlanCard, MetodoPagoCard, CarritoResumen, SelectorEmprendimiento, DetallePago } from '../../components';
 import planes from '../../utils/planesMock';
-import perfilemprendimientoMock from '../../utils/perfilemprendiemientoMock';
+import perfilemprendimientoMock from "../../utils/perfilemprendiemientoMock.json";
 
 export default function PagoScreen() {
     const emprendimientosDelPerfil = [
         { id: "999", nombre: "Tienda EcoPosadas" },
         { id: "997", nombre: "Panadería La Miga" },
-        { id: "996", nombre: "Estudio Creativo Pixel" }
+        { id: "996", nombre: "Estudio Creativo Pixel" },
+        { id: "995", nombre: "Papelería Creativa Mandarina" },
+        { id: "994", nombre: "Estética Vegana Alma" },
+        { id: "993", nombre: "Taller de Cerámica Tierra Roja" }
     ];
 
     const [emprendimientoActivoId, setEmprendimientoActivoId] = useState(emprendimientosDelPerfil[0].id);
     const [carrito, setCarrito] = useState([]);
+    const [boostearTodos, setBoostearTodos] = useState(false);
 
     const emprendimientoActivo = perfilemprendimientoMock.find(
         (e) => String(e.id) === String(emprendimientoActivoId)
     );
 
     const agregarAlCarrito = (plan) => {
-        const yaExiste = carrito.find(
-            (p) => p.titulo === plan.titulo && p.emprendimientoId === emprendimientoActivo.id
+        if (boostearTodos) {
+            const nuevosItems = emprendimientosDelPerfil.map((e) => {
+                const perfil = perfilemprendimientoMock.find(p => String(p.id) === String(e.id));
+                return {
+                    ...plan,
+                    emprendimientoId: e.id,
+                    nombreEmprendimiento: e.nombre,
+                    imagen: perfil?.imagen || ""
+                };
+            });
+            setCarrito(nuevosItems);
+            return;
+        }
+
+        const indexExistente = carrito.findIndex(
+            (p) => p.emprendimientoId === emprendimientoActivo.id
         );
-        if (!yaExiste) { setCarrito([...carrito, { ...plan, emprendimientoId: emprendimientoActivo.id, nombreEmprendimiento: emprendimientoActivo.nombre }]); }
+
+        const yaSeleccionado = carrito[indexExistente]?.titulo === plan.titulo;
+        const perfilActivo = perfilemprendimientoMock.find(p => String(p.id) === String(emprendimientoActivo.id));
+
+        if (yaSeleccionado) {
+            const nuevoCarrito = [...carrito];
+            nuevoCarrito.splice(indexExistente, 1);
+            setCarrito(nuevoCarrito);
+        } else {
+            const nuevoCarrito = [...carrito];
+            const nuevoItem = {
+                ...plan,
+                emprendimientoId: emprendimientoActivo.id,
+                nombreEmprendimiento: emprendimientoActivo.nombre,
+                imagen: perfilActivo?.imagen || ""
+            };
+
+            if (indexExistente !== -1) {
+                nuevoCarrito[indexExistente] = nuevoItem;
+            } else {
+                nuevoCarrito.push(nuevoItem);
+            }
+
+            setCarrito(nuevoCarrito);
+        }
     };
 
     const vaciarCarrito = () => setCarrito([]);
+    const eliminarDelCarrito = (index) => {
+        const nuevoCarrito = [...carrito];
+        nuevoCarrito.splice(index, 1);
+        setCarrito(nuevoCarrito);
+    };
 
     return (
         <div>
             <nav className='p-5 border-b border-[#2B4590]'>
-                <h1 className='flex justify-center text-xl font-bold'>Boosteo de Emprendimientos</h1>
+                <h1 className='flex justify-center text-xl font-bold '>Boosteo de Emprendimientos</h1>
                 <h1 className='flex justify-center'>¡Haz que tu emprendimiento llegue a más personas!</h1>
             </nav>
 
@@ -46,25 +93,25 @@ export default function PagoScreen() {
                     </div>
                 ))}
             </div>
-            <div className="flex justify-center items-center gap-4 p-4">
-                <SelectorEmprendimiento
-                    emprendimientos={emprendimientosDelPerfil}
-                    selectedId={emprendimientoActivoId}
-                    onChange={setEmprendimientoActivoId}
-                />
-            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-10">
                 <div className="flex justify-center items-start">
-                    <CarritoResumen carrito={carrito} onVaciar={vaciarCarrito} />
+                    <SelectorEmprendimiento
+                        emprendimientos={emprendimientosDelPerfil}
+                        selectedId={emprendimientoActivoId}
+                        onSelect={setEmprendimientoActivoId}
+                        boostearTodos={boostearTodos}
+                        setBoostearTodos={setBoostearTodos}
+                    />
                 </div>
 
                 <div className="flex justify-center items-start">
-                    {emprendimientoActivo ? (
-                        <div className="flex flex-col items-center gap-4">
-                            <CardEmprendimiento {...emprendimientoActivo} />
-                        </div>
-                    ) : (
-                        <p className='text-red-500'>Emprendimiento no encontrado</p>
+                    {carrito.length > 0 && (
+                        <CarritoResumen
+                            carrito={carrito}
+                            onVaciar={vaciarCarrito}
+                            onEliminar={eliminarDelCarrito}
+                        />
                     )}
                 </div>
 
@@ -77,38 +124,7 @@ export default function PagoScreen() {
                             <MetodoPagoCard />
                         </ul>
                     </nav>
-
-                    <nav className='border rounded-xl border-[#2B4590] w-full'>
-                        <p className='border-b border-[#2B4590] p-5'>
-                            <h1 className='flex justify-center font-bold'>Detalles de Pago</h1>
-                        </p>
-                        <ul className='m-5'>
-                            <p>Titular de Tarjeta</p>
-                            <TextField placeholder={"Nombre en el frente de la tarjeta"} />
-                            <p>Numero de Tarjeta</p>
-                            <TextField placeholder={"0000 0000 0000 0000"} />
-                            <p>Fecha de Expiración</p>
-                            <nav className='flex gap-10'>
-                                <select className="w-1/2 border rounded p-2 text-sm text-gray-600">
-                                    <option value="">Mes</option>
-                                    {[...Array(12)].map((_, i) => (
-                                        <option key={i} value={i + 1}>{String(i + 1).padStart(2, '0')}</option>
-                                    ))}
-                                </select>
-                                <select className="w-1/2 border rounded p-2 text-sm text-gray-600">
-                                    <option value="">Año</option>
-                                    {[...Array(10)].map((_, i) => {
-                                        const year = new Date().getFullYear() + i;
-                                        return <option key={i} value={year}>{year}</option>;
-                                    })}
-                                </select>
-                            </nav>
-                            <p>Codigo de Seguridad</p>
-                            <TextField placeholder={"CVC"} />
-                        </ul>
-                    </nav>
-
-                    <Button text={"Confirmar y Pagar"} />
+                    <DetallePago />
                 </div>
             </div>
         </div>
