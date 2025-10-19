@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { api } from '../../../api/api';
 
 const CrearEmprendimientoForm = () => {
   const [formData, setFormData] = useState({
@@ -38,29 +39,19 @@ const CrearEmprendimientoForm = () => {
   const data = new FormData();
   data.append('nombre', formData.nombre.trim());
   data.append('descripcion', formData.descripcion.trim());
-  data.append('categoriaId', Number(formData.categoriaId)); 
-
+  data.append('categoriaId', Number(formData.categoriaId));
   if (formData.imagen) {
-    data.append('imagen', formData.imagen); 
+    data.append('imagen', formData.imagen);
   }
 
-  // for (let [key, value] of data.entries()) {
-  //   console.log(`${key}:`, value);
-  // }
-
   try {
-    const response = await fetch('http://localhost:3000/emprendimientos', {
-      method: 'POST',
-      body: data,
+    const response = await api.post('/emprendimientos', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Respuesta del backend:', errorText);
-      throw new Error('Error al crear el emprendimiento');
-    }
-
-    const result = await response.json();
+    // Axios ya parsea JSON y lanza error si no es 2xx
     alert('¡Emprendimiento creado con éxito!');
     setFormData({
       nombre: '',
@@ -70,10 +61,11 @@ const CrearEmprendimientoForm = () => {
     });
     if (fileInputRef.current) fileInputRef.current.value = '';
   } catch (error) {
-    console.error('Error en el envío:', error);
+    console.error('Error en el envío:', error.response?.data || error.message);
     alert('Hubo un problema al enviar el formulario.');
   }
 };
+
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
@@ -120,9 +112,9 @@ const CrearEmprendimientoForm = () => {
         >
           <option value="">Seleccionar categoría</option>
           <option value="1">Tecnología</option>
-          <option value="2">Arte</option>
-          <option value="3">Moda</option>
-          <option value="4">Gastronomía</option>
+          <option value="3">Arte</option>
+          <option value="4">Moda</option>
+          <option value="5">Gastronomía</option>
         </select>
       </div>
 
