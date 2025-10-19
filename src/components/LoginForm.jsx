@@ -1,31 +1,36 @@
-import Container from './Container';
-import TextField from './TextField';
-import Button from './Button';
-/**
- * Componente TestForm (lo cree para testear los componentes del ticket y mostrar algo al recargar la página, si quieren pueden borrarlo)
- * @returns 
- * Renderiza un form con los componentes creados en el ticket <PRO-9>
- * Envia un console.log de los datos ingresados en los inputs
- */
+import { useNavigate } from "react-router-dom";
+import Container from "./Container";
+import TextField from "./TextField";
+import Button from "./Button";
+import { api } from "../api/api.js"; // instancia de Axios
 
+export default function LoginForm({ title }) {
+  const navigate = useNavigate();
 
-export default function LoginForm({title}) {
-  // esta const es para manejar el evento del formulario
-  const handleSubmit = (evento) => {
-    //previene la recarga de la pagina (lo que usualmente hace un form html)
+  const handleSubmit = async (evento) => {
     evento.preventDefault();
-    //creo una const de formdata para agregar los datos y luego debo crear un objeto para poder guardarlos
-    const formData = new FormData(evento.target)
+    const formData = new FormData(evento.target);
     const data = {
-      email: formData.get('email'),
-      password: formData.get('password'),
+      email: formData.get("email"),
+      contrasena: formData.get("password"), // backend espera 'contrasena'
     };
-    // el print de consola
-    console.log(data);
+
+    try {
+      const res = await api.post("api/usuarios/login", data);
+
+      // Guardamos usuario y token en localStorage
+      localStorage.setItem("user", JSON.stringify(res.data.usuario));
+      localStorage.setItem("token", res.data.token);
+
+      alert("Login exitoso ✅");
+      navigate("/"); // redirige a la página principal
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+      alert("Usuario y/o contraseña incorrectos ❌");
+    }
   };
 
   return (
-    //aca utilizo el component Container, TextField y Button.
     <Container>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
         <h3 className="text-[#2C4692] text-2xl font-medium">{title}</h3>
@@ -41,11 +46,8 @@ export default function LoginForm({title}) {
           name="password"
           placeholder="********"
         />
-        <Button 
-        type = "submit"
-        text="Iniciar sesión" />
+        <Button type="submit" text="Iniciar sesión" />
       </form>
     </Container>
   );
 }
-
