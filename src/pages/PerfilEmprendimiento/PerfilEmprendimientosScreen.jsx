@@ -1,23 +1,43 @@
-import datosMock from "../../utils/perfilemprendiemientoMock.json";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { api } from "../../api/api";
 import PerfilEmprendimiento from "./components/PerfilEmprendimiento";
 
 const PerfilEmprendimientosScreen = () => {
-  // obtiene el ID del emprendimiento desde la URL
   const { id } = useParams();
+  const [emprendimiento, setEmprendimiento] = useState(null);
+  const [error, setError] = useState(null);
 
-  // busca el emprendimiento con el ID en eñ mock
-  const emprendimiento = datosMock.find(e => e.id === id);
+  useEffect(() => {
+    api.get(`/emprendimientos/${id}`)
+      .then((res) => {
+        const datos = res.data.emprendimiento;
 
-  if (!emprendimiento) return <p>No se encontró el emprendimiento.</p>;
+        const datosEmprendimiento = {
+          nombre: datos.nombre,
+          imagen: datos.imagen,
+          descripcion: datos.descripcion,
+          categoria: datos.Categorias?.nombre || "Sin categoría",
+          resumen: datos.resumen || "", 
+          correo: datos.Usuarios?.email || "", 
+          fotos: datos.fotos || [], 
+        };
+
+        setEmprendimiento(datosEmprendimiento);
+      })
+      .catch((err) => {
+        console.error("Error al obtener emprendimiento:", err);
+        setError("No se encontró el emprendimiento.");
+      });
+  }, [id]);
+
+  if (error) return <p>{error}</p>;
+  if (!emprendimiento) return <p>Cargando...</p>;
 
   return (
-    <>
-      <div className="min-h-screen bg-gray-50 p-1">
-        {/* perfil del emprendimiento */}
-        <PerfilEmprendimiento emprendimiento={emprendimiento} />
-      </div>
-    </>
+    <div className="min-h-screen bg-gray-50 p-1">
+      <PerfilEmprendimiento emprendimiento={emprendimiento} />
+    </div>
   );
 };
 
