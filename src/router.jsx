@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
             element: <HistorialScreen />,
           },
           {
-            path: "/perfil",
+            path: "/perfil/:id",
             element: <PerfilUsuarioScreen />,
           },
           {
@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
             element: <CrearEmprendimientoScreen />,
           },
           {
-            path: "/perfil/editarperfil",
+            path: "/perfil/editar/:id",
             element: <EditarPerfil />,
           },
           {
