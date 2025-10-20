@@ -1,11 +1,13 @@
-import { useState, useRef } from 'react';
-import { api } from '../../../api/api';
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router";
+import { api } from "../../../api/api";
 
 const CrearEmprendimientoForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    nombre: '',
-    descripcion: '',
-    categoriaId: '',
+    nombre: "",
+    descripcion: "",
+    categoriaId: "",
     imagen: null,
   });
 
@@ -13,10 +15,10 @@ const CrearEmprendimientoForm = () => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === 'imagen') {
-      setFormData(prev => ({ ...prev, imagen: files[0] }));
+    if (name === "imagen") {
+      setFormData((prev) => ({ ...prev, imagen: files[0] }));
     } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -29,43 +31,48 @@ const CrearEmprendimientoForm = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!isFormValid()) {
-    alert('Por favor completá todos los campos obligatorios.');
-    return;
-  }
+    if (!isFormValid()) {
+      alert("Por favor completá todos los campos obligatorios.");
+      return;
+    }
 
-  const data = new FormData();
-  data.append('nombre', formData.nombre.trim());
-  data.append('descripcion', formData.descripcion.trim());
-  data.append('categoriaId', Number(formData.categoriaId));
-  if (formData.imagen) {
-    data.append('imagen', formData.imagen);
-  }
+    const data = new FormData();
+    const token = localStorage.getItem("token");
+    console.log(token)
+    data.append("nombre", formData.nombre.trim());
+    data.append("descripcion", formData.descripcion.trim());
+    data.append("categoriaId", Number(formData.categoriaId));
+    if (formData.imagen) {
+      data.append("imagen", formData.imagen);
+    }
 
-  try {
-    const response = await api.post('/emprendimientos', data, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
-    // Axios ya parsea JSON y lanza error si no es 2xx
-    alert('¡Emprendimiento creado con éxito!');
-    setFormData({
-      nombre: '',
-      descripcion: '',
-      categoriaId: '',
-      imagen: null,
-    });
-    if (fileInputRef.current) fileInputRef.current.value = '';
-  } catch (error) {
-    console.error('Error en el envío:', error.response?.data || error.message);
-    alert('Hubo un problema al enviar el formulario.');
-  }
-};
-
+    try {
+      const response = await api.post("/emprendimientos", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("Respuesta del servidor:", response.data);
+      alert("¡Emprendimiento creado con éxito!");
+      setFormData({
+        nombre: "",
+        descripcion: "",
+        categoriaId: "",
+        imagen: null,
+      });
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      navigate("/emprendimientos");
+    } catch (error) {
+      console.error(
+        "Error en el envío:",
+        error.response?.data || error.message
+      );
+      alert("Hubo un problema al enviar el formulario.");
+    }
+  };
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
@@ -76,7 +83,12 @@ const CrearEmprendimientoForm = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="nombre" className="block font-medium mb-1 text-[#2B4590]">Nombre del emprendimiento *</label>
+        <label
+          htmlFor="nombre"
+          className="block font-medium mb-1 text-[#2B4590]"
+        >
+          Nombre del emprendimiento *
+        </label>
         <input
           id="nombre"
           type="text"
@@ -89,7 +101,12 @@ const CrearEmprendimientoForm = () => {
       </div>
 
       <div>
-        <label htmlFor="descripcion" className="block font-medium mb-1 text-[#2B4590]">Descripción *</label>
+        <label
+          htmlFor="descripcion"
+          className="block font-medium mb-1 text-[#2B4590]"
+        >
+          Descripción *
+        </label>
         <textarea
           id="descripcion"
           name="descripcion"
@@ -101,7 +118,12 @@ const CrearEmprendimientoForm = () => {
       </div>
 
       <div>
-        <label htmlFor="categoriaId" className="block font-medium mb-1 text-[#2B4590]">Categoría *</label>
+        <label
+          htmlFor="categoriaId"
+          className="block font-medium mb-1 text-[#2B4590]"
+        >
+          Categoría *
+        </label>
         <select
           id="categoriaId"
           name="categoriaId"
@@ -119,12 +141,18 @@ const CrearEmprendimientoForm = () => {
       </div>
 
       <div>
-        <label className="block font-medium mb-1 text-[#2B4590]">Imagen del emprendimiento</label>
+        <label className="block font-medium mb-1 text-[#2B4590]">
+          Imagen del emprendimiento
+        </label>
         <div className="flex items-center gap-2">
           <input
             type="text"
             readOnly
-            value={formData.imagen ? formData.imagen.name : "Sin archivos seleccionados"}
+            value={
+              formData.imagen
+                ? formData.imagen.name
+                : "Sin archivos seleccionados"
+            }
             className="flex-grow p-2 border border-gray-300 rounded bg-gray-100 text-sm text-gray-700"
           />
           <button
