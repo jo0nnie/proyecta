@@ -11,7 +11,8 @@ import SideBar from "./SideBar/Sidebar";
 import LoginForm from "./LoginForm";
 import MetodoPagoCard from "./MetodoPagoCard";
 import PlanCard from "./PlanCard";
-import CarritoResumen from './CarritoResumen';
-import SelectorEmprendimiento from "./SelectorEmprendimiento";
-export { LoginForm, Container, Button, TextField, TestForm, CardEmprendimiento, Navbar, SideBar, Carrusel, MetodoPagoCard, PlanCard, CarritoResumen, SelectorEmprendimiento };
+import CarritoResumen from '../pages/Pago/components/CarritoResumen';
+import SelectorEmprendimiento from "../pages/Pago/components/SelectorEmprendimiento";
+import DetallePago from "../pages/Pago/components/DetallePago";
+export { LoginForm, Container, Button, TextField, TestForm, CardEmprendimiento, Navbar, SideBar, Carrusel, MetodoPagoCard, PlanCard, CarritoResumen, SelectorEmprendimiento, DetallePago };
 
