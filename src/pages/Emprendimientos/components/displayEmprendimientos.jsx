@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CardEmprendimiento from "../../../components/CardEmprendimiento";
-import emprendimientos from "../../../utils/emprendimientoMock.json";
+import { api } from "../../../api/api";
 
 export default function DisplayEmprendimientos() {
     const [paginaActual, setPaginaActual] = useState(1);
+    const [emprendimientos, setEmprendimientos] = useState([]);
     const emprendimientosPorPagina = 12;
+
+    useEffect(() => {
+        api.get("/emprendimientos")
+            .then((res) => {
+                if (Array.isArray(res.data.emprendimientos)) {
+                    setEmprendimientos(res.data.emprendimientos);
+                } else {
+                    console.error("Formato inesperado:", res.data);
+                }
+            })
+            .catch((err) => {
+                console.error("Error al obtener emprendimientos:", err);
+            });
+    }, []);
 
     const totalPaginas = Math.ceil(emprendimientos.length / emprendimientosPorPagina);
     const indiceInicio = (paginaActual - 1) * emprendimientosPorPagina;
@@ -21,7 +36,7 @@ export default function DisplayEmprendimientos() {
                         id={item.id}
                         nombre={item.nombre}
                         descripcion={item.descripcion}
-                        categoria={item.categoria}
+                        categoria={item.Categorias?.nombre || "Sin categoría"}
                         imagen={item.imagen}
                     />
                 ))}
