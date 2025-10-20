@@ -18,9 +18,9 @@ const PerfilUsuario = ({ usuario }) => {
 
             <div className='flex my-5 item-start gap-10 justify-between'>
                 {foto ?
-                (<img src={foto} alt={nombre}  className="w-24 h-24 rounded-full object-cover" />) 
-                :
-                (<PiUserCircleFill className="w-24 h-24 rounded-full p-2"/>)
+                    (<img src={foto} alt={nombre} className="w-24 h-24 rounded-full object-cover" />)
+                    :
+                    (<PiUserCircleFill className="w-24 h-24 rounded-full p-2" />)
                 }
                 <nav className='flex-1 mt-1'>
                     <h2>{nombre}</h2>
@@ -28,7 +28,7 @@ const PerfilUsuario = ({ usuario }) => {
                     <p>{correo}</p>
                 </nav>
                 <nav className='self-start'>
-                <Button text={"Editar Perfil"}/>
+                    <Button text={"Editar Perfil"} />
                 </nav>
             </div>
 
@@ -57,16 +57,37 @@ const PerfilUsuario = ({ usuario }) => {
                         {emprendimientosDelUsuario.map((emprendimiento) => (
                             <div key={emprendimiento.id} className="relative">
                                 <CardEmprendimiento {...emprendimiento} descripcion={emprendimiento.resumen} />
+                                {emprendimiento.id === "993" && (
+                                    <div className="absolute bottom-2 right-4 md:right-4 sm:left-1/2 sm:transform sm:-translate-x-1/2">
+                                        <Link to={`/carrito/${emprendimiento.id}`}>
+                                            <Button text="Boostear" />
+                                        </Link>
+                                    </div>
+                                )}
+                                {emprendimiento.id === "994" && (
+                                    <div className="absolute bottom-2 right-4 md:right-4 sm:left-1/2 sm:transform sm:-translate-x-1/2">
+                                        <Link to={`/carrito/${emprendimiento.id}`}>
+                                            <Button text="Boostear" />
+                                        </Link>
+                                    </div>
+                                )}
+                                {emprendimiento.id === "995" && (
+                                    <div className="absolute bottom-2 right-4 md:right-4 sm:left-1/2 sm:transform sm:-translate-x-1/2">
+                                        <Link to={`/carrito/${emprendimiento.id}`}>
+                                            <Button text="Boostear" />
+                                        </Link>
+                                    </div>
+                                )}
                                 {emprendimiento.id === "996" && (
                                     <div className="absolute bottom-2 right-4 md:right-4 sm:left-1/2 sm:transform sm:-translate-x-1/2">
-                                        <Link to={`/boosteo/${emprendimiento.id}`}>
+                                        <Link to={`/carrito/${emprendimiento.id}`}>
                                             <Button text="Boostear" />
                                         </Link>
                                     </div>
                                 )}
                                 {emprendimiento.id === "997" && (
                                     <div className="absolute bottom-2 right-4 md:right-4 sm:left-1/2 sm:transform sm:-translate-x-1/2">
-                                        <Link to={`/boosteo/${emprendimiento.id}`}>
+                                        <Link to={`/carrito/${emprendimiento.id}`}>
                                             <Button text="Boostear" />
                                         </Link>
                                     </div>
@@ -79,7 +100,7 @@ const PerfilUsuario = ({ usuario }) => {
 
                                 {emprendimiento.id === "999" && (
                                     <div className="absolute bottom-2 right-4 md:right-4 sm:left-1/2 sm:transform sm:-translate-x-1/2">
-                                        <Link to={`/boosteo/${emprendimiento.id}`}>
+                                        <Link to={`/carrito/${emprendimiento.id}`}>
                                             <Button text="Boostear" />
                                         </Link>
                                     </div>

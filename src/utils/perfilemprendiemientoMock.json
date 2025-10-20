@@ -225,10 +225,52 @@
     "descripcion": "Manjar Posadas ofrece las mejores carnes a la parrilla con recetas tradicionales, atendiendo con esmero para que disfrutes el auténtico sabor argentino."
   },
   {
+    "id": "993",
+    "nombre": "Taller de Cerámica Tierra Roja",
+    "usuarioId": 1,
+    "categoria": "Hogar",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.d7d95e8e-2dcd-4f46-85af-808a8aa7801f.png",
+    "resumen": "Cerámica artesanal inspirada en la tierra colorada de Misiones.",
+    "correo": "tierra@ceramica.com",
+    "fotos": [
+      "https://i.pinimg.com/originals/12/34/56/1234567890abcdef.jpg",
+      "https://copilot.microsoft.com/th/id/BCO.abcdef12-3456-7890-abcd-ef1234567890.png"
+    ],
+    "descripcion": "Taller dedicado a la creación de piezas únicas en cerámica, fusionando tradición guaraní con diseño contemporáneo."
+  },
+  {
+    "id": "994",
+    "nombre": "Estética Vegana Alma",
+    "usuarioId": 1,
+    "categoria": "Salud y Bienestar",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.631954a9-03f7-4d58-9de6-06e00fd88cd8.png",
+    "resumen": "Tratamientos estéticos libres de crueldad animal.",
+    "correo": "alma@vegana.com",
+    "fotos": [
+      "https://i.pinimg.com/736x/98/76/54/9876543210abcdef.jpg",
+      "https://copilot.microsoft.com/th/id/BCO.12345678-90ab-cdef-1234-567890abcdef.png"
+    ],
+    "descripcion": "Centro de estética especializado en productos veganos y orgánicos, con enfoque en bienestar integral y respeto por el entorno."
+  },
+  {
+    "id": "995",
+    "nombre": "Papelería Creativa Mandarina",
+    "usuarioId": 1,
+    "categoria": "Diseños y regalos",
+    "imagen": "https://copilot.microsoft.com/th/id/BCO.189d326d-106b-4577-82d4-cf5b599c3867.png",
+    "resumen": "Papelería personalizada para eventos y emprendimientos.",
+    "correo": "hola@mandarina.com",
+    "fotos": [
+      "https://i.pinimg.com/originals/aa/bb/cc/aabbccddeeff0011.jpg",
+      "https://copilot.microsoft.com/th/id/BCO.ffeeddcc-bbaa-9988-7766-554433221100.png"
+    ],
+    "descripcion": "Diseñamos agendas, stickers, packaging y papelería creativa para marcas que quieren destacar con estilo propio."
+  },
+  {
     "id": "996",
     "nombre": "Estudio Creativo Pixel",
     "usuarioId": 1,
-    "categoria": "Diseño",
+    "categoria": "Diseños y regalos",
     "imagen": "https://copilot.microsoft.com/th/id/BCO.a1f66d18-8426-45b4-b9d6-7051d8b48a4d.png",
     "resumen": "Diseño gráfico y branding para emprendimientos emergentes.",
     "correo": "pixel@estudio.com",
