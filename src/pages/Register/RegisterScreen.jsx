@@ -26,7 +26,7 @@ const RegisterScreen = () => {
     }
 
     try {
-      const res = await api.post("api/usuarios/registro", {
+      const res = await api.post("/usuarios/registro", {
         nombre: formData.nombre,
         apellido: formData.apellido,
         email: formData.email,

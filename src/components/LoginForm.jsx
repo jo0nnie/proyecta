@@ -16,7 +16,7 @@ export default function LoginForm({ title }) {
     };
 
     try {
-      const res = await api.post("api/usuarios/login", data);
+      const res = await api.post("/usuarios/login", data);
 
       // Guardamos usuario y token en localStorage
       localStorage.setItem("user", JSON.stringify(res.data.usuario));
