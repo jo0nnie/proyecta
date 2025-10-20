@@ -112,9 +112,9 @@ const CrearEmprendimientoForm = () => {
         >
           <option value="">Seleccionar categoría</option>
           <option value="1">Tecnología</option>
-          <option value="3">Arte</option>
-          <option value="4">Moda</option>
-          <option value="5">Gastronomía</option>
+          <option value="2">Arte</option>
+          <option value="3">Moda</option>
+          <option value="4">Gastronomía</option>
         </select>
       </div>
 
