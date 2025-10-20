@@ -27,7 +27,7 @@ const PerfilEmprendimiento = ({ emprendimiento }) => {
                             <Badge text={categoria} />
                         </h1>
                         <p className="text-gray-600">{resumen}</p>
-                        <p className="text-blue-700">{correo}</p>
+                        <p className="text-black-700">Usuario: {nombre}</p>
                     </div>
                 </div>
 
