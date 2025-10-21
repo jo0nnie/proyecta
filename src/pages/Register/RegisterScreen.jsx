@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, TextField } from "../../components";
+import { useNavigate } from "react-router";
 import { api } from "../../api/api.js";
 
 const RegisterScreen = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -34,12 +36,13 @@ const RegisterScreen = () => {
         fechaNacimiento: formData.fechaNacimiento,
       });
 
-      alert("Usuario registrado correctamente ✅");
+      alert("Usuario registrado correctamente");
+      navigate("/auth/login");
       console.log(res.data);
     } catch (err) {
       console.log(err);
       console.error(err);
-      alert("Error al registrar usuario ❌");
+      alert("Error al registrar usuario");
     }
   };
   return (

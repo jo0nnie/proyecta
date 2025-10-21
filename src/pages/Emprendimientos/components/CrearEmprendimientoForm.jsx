@@ -4,6 +4,7 @@ import { api } from "../../../api/api";
 
 const CrearEmprendimientoForm = () => {
   const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",

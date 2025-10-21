@@ -22,11 +22,11 @@ export default function LoginForm({ title }) {
       localStorage.setItem("user", JSON.stringify(res.data.usuario));
       localStorage.setItem("token", res.data.token);
 
-      alert("Login exitoso ✅");
+      alert("Login exitoso");
       navigate("/"); // redirige a la página principal
     } catch (err) {
       console.error(err.response?.data || err.message);
-      alert("Usuario y/o contraseña incorrectos ❌");
+      alert("Usuario y/o contraseña incorrectos");
     }
   };
 
