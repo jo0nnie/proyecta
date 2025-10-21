@@ -1,4 +1,3 @@
-import React from "react";
 import { PiUserCircleFill } from "react-icons/pi";
 import Button from "./Button";
 import { Link } from "react-router-dom";
@@ -15,7 +14,7 @@ const PerfilUsuario = ({ usuario }) => {
     estado,
     emprendimiento = [],
   } = usuario;
-
+  console.log(usuario)
   const nombreCompleto =
     [nombre, apellido].filter(Boolean).join(" ") || "Usuario";
   const descripcion = "";
@@ -68,6 +67,8 @@ const PerfilUsuario = ({ usuario }) => {
                   id={emp.id}
                   nombre={emp.nombre}
                   descripcion={emp.descripcion || "Sin descripción"}
+                  categoria={emp.Categorias?.nombre || "Sin categoría"} 
+                  imagen={emp.imagen}
                 />
                 {emp.id === 998 && (
                   <div className="absolute top-3 left-3">
