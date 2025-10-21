@@ -12,7 +12,6 @@ const PerfilEmprendimientosScreen = () => {
     api.get(`/emprendimientos/${id}`)
       .then((res) => {
         const datos = res.data.emprendimiento;
-
         const datosEmprendimiento = {
           nombre: datos.nombre,
           imagen: datos.imagen,
