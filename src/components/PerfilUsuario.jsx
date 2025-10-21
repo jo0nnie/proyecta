@@ -38,7 +38,7 @@ const PerfilUsuario = ({ usuario }) => {
         </div>
 
         <div className="self-start">
-          <Link to={`/perfil/editar/${id}`}>
+          <Link to={`/perfil/editar/`}>
             <Button text="Editar Perfil" />
           </Link>
         </div>
