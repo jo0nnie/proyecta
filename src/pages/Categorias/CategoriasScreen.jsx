@@ -37,7 +37,7 @@ export default function CategoriasScreen() {
               {categoria.nombre}
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 -px-8 py-6 max-w-7xl mx-auto justify-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 px-4 md:px-6 lg:px-8 py-6 w-full">
               {categoria.emprendimiento.length > 0 ? (
                 categoria.emprendimiento.map((item) => (
                   <CardEmprendimiento
