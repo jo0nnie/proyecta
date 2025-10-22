@@ -35,7 +35,7 @@ export default function DisplayEmprendimientos() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* grilla de tarjetas */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 px-4 md:px-6 lg:px-8 py-6 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4 md:px-6 lg:px-8 py-6 w-full">
         {emprendimientosAMostrar.map((item) => (
           <CardEmprendimiento
             key={item.id}

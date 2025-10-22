@@ -1,5 +1,16 @@
 [
-  
+  {
+    "id": "1",
+    "titulo": "Impulso Inicial",
+    "beneficio": [
+            "Prioridad en tu categoría durante 7 días",
+            "Recomendación destacada en la página principal",
+            "Ideal para lanzamientos o promociones relámpago",
+            "Visibilidad inmediata sin compromiso a largo plazo"
+        ],
+    "duracion": "Una Semana",
+    "precio": "1000"
+},
   {
     "id": "2",
     "titulo": "Impulso Constante",
@@ -10,7 +21,7 @@
       "Ideal para mantener presencia y atraer nuevos clientes"
     ],
     "duracion": "Un Mes",
-    "precio": "500"
+    "precio": "2000"
   },
   {
     "id": "3",
