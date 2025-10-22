@@ -7,7 +7,7 @@ import slugify from "../../functions/slugify";
 export default function CategoriasScreen() {
   const [emprendimientosPorCategoria, setEmprendimientosPorCategoria] = useState({});
   const location = useLocation();
-//use effect para efecto de scrolleo automático
+  //use effect para efecto de scrolleo automático
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace("#", "");
@@ -40,7 +40,7 @@ export default function CategoriasScreen() {
 
             <h2 className="text-2xl font-semibold mb-2 text-[#2C4692] mx-21">{categoria}</h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 -px-8 py-6 max-w-7xl mx-auto justify-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 md:px-6 lg:px-8 py-6 w-full">
               {items.map((item) => (
                 <CardEmprendimiento
                   key={item.id}

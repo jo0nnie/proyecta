@@ -22,7 +22,7 @@ export default function LoginForm({ title }) {
       localStorage.setItem("user", JSON.stringify(res.data.usuario));
       localStorage.setItem("token", res.data.token);
 
-      alert("Login exitoso");
+      alert("Bienvenido");
       navigate("/"); // redirige a la página principal
     } catch (err) {
       console.error(err.response?.data || err.message);

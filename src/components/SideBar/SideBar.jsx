@@ -1,11 +1,13 @@
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { configPublic, configPrivate, configDrop } from "./config";
 import { SideBarItem, SideBarDropItem } from "./SideBarItem";
-import { useNavigate } from "react-router-dom";
 
 export default function SideBar({ isOpen, onClose }) {
+  const sidebarRef = useRef();
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const config = token ? configPrivate : configPublic;
-  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -13,8 +15,29 @@ export default function SideBar({ isOpen, onClose }) {
     navigate("/");
   };
 
+  // Detectar clic fuera del sidebar
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target)
+      ) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
   return (
     <div
+      ref={sidebarRef}
       className={`fixed top-0 left-0 h-full w-64 bg-[#2C4391] text-white transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out z-40 shadow-lg flex flex-col`}
@@ -34,13 +57,24 @@ export default function SideBar({ isOpen, onClose }) {
       {/* Menú principal */}
       <ul className="p-4 space-y-2 flex-1">
         {config.map((item, index) => (
-          <SideBarItem key={index} text={item.title} path={item.path} />
+          <SideBarItem
+            key={index}
+            text={item.title}
+            path={item.path}
+            onClose={onClose}
+          />
         ))}
       </ul>
 
       {/* Sección inferior */}
       <div className="p-4 border-t border-white space-y-2">
-        {token && <SideBarDropItem text="Ajustes" items={configDrop} />}
+        {token && (
+          <SideBarDropItem
+            text="Ajustes"
+            items={configDrop}
+            onClose={onClose} // ✅ corregido
+          />
+        )}
 
         {token && (
           <button

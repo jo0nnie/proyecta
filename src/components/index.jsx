@@ -7,7 +7,7 @@ import TestForm from "./LoginForm";
 import CardEmprendimiento from "./CardEmprendimiento";
 import Navbar from "./NavBar"
 import Carrusel from "./Carrusel/Carrusel";
-import SideBar from "./SideBar/Sidebar";
+import SideBar from "./SideBar/SideBar";
 import LoginForm from "./LoginForm";
 import MetodoPagoCard from "./MetodoPagoCard";
 import PlanCard from "./PlanCard";

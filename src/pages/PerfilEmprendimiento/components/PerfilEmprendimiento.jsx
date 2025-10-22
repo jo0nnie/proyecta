@@ -24,10 +24,11 @@ const PerfilEmprendimiento = ({ emprendimiento }) => {
                     <div>
                         <h1 className="text-4xl font-semibold flex items-center gap-2">
                             {nombre}
-                            <Badge text={categoria} />
                         </h1>
-                        <p className="text-gray-600">{resumen}</p>
-                        <p className="text-black-700">Usuario: {nombre}</p>
+                        <div className="mt-2">
+                            <Badge text={categoria} />
+                        </div>
+                        {/* <p className="text-gray-600">{resumen}</p> */}
                     </div>
                 </div>
 
