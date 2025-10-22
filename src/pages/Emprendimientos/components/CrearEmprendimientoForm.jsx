@@ -4,7 +4,7 @@ import { api } from "../../../api/api";
 
 const CrearEmprendimientoForm = () => {
   const navigate = useNavigate();
-  
+  const [enviando, setEnviando] = useState(false);
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
@@ -34,10 +34,11 @@ const CrearEmprendimientoForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!isFormValid()) {
+    if (!isFormValid() || enviando) {
       alert("Por favor completá todos los campos obligatorios.");
       return;
     }
+    setEnviando(true);
 
     const data = new FormData();
     const token = localStorage.getItem("token");
@@ -72,7 +73,10 @@ const CrearEmprendimientoForm = () => {
         error.response?.data || error.message
       );
       alert("Hubo un problema al enviar el formulario.");
+    } finally {
+      setEnviando(false);
     }
+
   };
 
   const handleFileClick = () => {
@@ -177,10 +181,10 @@ const CrearEmprendimientoForm = () => {
 
       <button
         type="submit"
-        disabled={!isFormValid()}
+        disabled={!isFormValid() || enviando}
         className="w-full py-2 bg-[#2B4590] text-white rounded hover:bg-[#1f3266] disabled:opacity-50"
       >
-        Crear
+        {enviando ? "Enviando" : "Crear"}
       </button>
     </form>
   );
