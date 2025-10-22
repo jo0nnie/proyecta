@@ -11,11 +11,11 @@ export default function SideBar({ isOpen, onClose }) {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     onClose();
     navigate("/");
   };
 
-  // Detectar clic fuera del sidebar
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
