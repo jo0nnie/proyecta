@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Badge } from '../../../components/Badge';
 import { PiUserCircleFill } from "react-icons/pi";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 
 const PerfilEmprendimiento = ({ emprendimiento }) => {
     const { nombre, categoria, imagen, resumen, correo, descripcion } = emprendimiento;
     const [guardado, setGuardado] = useState(false);
 
+    useEffect(() => {
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        setGuardado(favorites.includes(emprendimiento.id));
+    }, [emprendimiento.id]);
+
     const toggleGuardado = () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        if (guardado) {
+            favorites = favorites.filter(favId => favId !== emprendimiento.id);
+        } else {
+            favorites.push(emprendimiento.id);
+        }
+        localStorage.setItem('favorites', JSON.stringify(favorites));
         setGuardado(!guardado);
     };
 
@@ -34,11 +46,12 @@ const PerfilEmprendimiento = ({ emprendimiento }) => {
 
                 {/* Botón de favoritos */}
                 <div className='text-right'>
-                    <button onClick={toggleGuardado}>
-                        {guardado
-                            ? <BsBookmarkFill className="text-2xl text-blue-700 cursor-pointer" />
-                            : <BsBookmark className="text-2xl text-blue-700 cursor-pointer" />
-                        }
+                    <button
+                        onClick={toggleGuardado}
+                        className="bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
+                        aria-label={guardado ? "Quitar de favoritos" : "Añadir a favoritos"}
+                    >
+                        {guardado ? <FaBookmark /> : <FaRegBookmark />}
                     </button>
                 </div>
             </div>
