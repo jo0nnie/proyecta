@@ -34,7 +34,7 @@ export default function CardEmprendimiento({ nombre, descripcion, categoria, ima
 
   return (
     <Link to={`/emprendimientos/${id}`} className="block">
-  <div className="relative bg-white rounded-2xl shadow-md overflow-hidden w-full max-w-[360px] h-[360px] flex flex-col transform transition duration-300 ease-in-out hover:scale-101 hover:shadow-lg">
+  <div className="relative bg-white rounded-2xl shadow-md overflow-hidden w-full max-w-[360px] h-[360px] flex flex-col transform transition duration-300 ease-in-out hover:scale-101 hover:shadow-lg mb-3">
     
     {/* Imagen */}
     <div className="relative h-48 w-full shrink-0">
