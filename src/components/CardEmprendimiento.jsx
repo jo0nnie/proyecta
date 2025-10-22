@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { Badge } from "./Badge";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 
 /**
  * Renderiza:
@@ -19,7 +19,7 @@ export default function CardEmprendimiento({ nombre, descripcion, categoria, ima
 
 
   const toggleGuardado = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     if (guardado) {
@@ -33,29 +33,37 @@ export default function CardEmprendimiento({ nombre, descripcion, categoria, ima
   };
 
   return (
-    <Link to={`/emprendimientos/${id}`} className="block"> 
-      <div className="relative bg-white rounded-2xl shadow-md overflow-hidden w-80 transform transition duration-300 ease-in-out hover:scale-101 hover:shadow-lg">
-        <div className="relative h-48 w-full">
-          <img
-            src={imagen}
-            alt={nombre}
-            className="object-cover h-full w-full"
-          />
-          <button
-            onClick={toggleGuardado}
-            className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
-            aria-label={guardado ? "Quitar de favoritos" : "Añadir a favoritos"}
-          >
-            {guardado ? <FaBookmark /> : <FaRegBookmark />}
-          </button>
-        </div>
+    <Link to={`/emprendimientos/${id}`} className="block">
+  <div className="relative bg-white rounded-2xl shadow-md overflow-hidden w-full max-w-[360px] h-[360px] flex flex-col transform transition duration-300 ease-in-out hover:scale-101 hover:shadow-lg mb-3">
+    
+    {/* Imagen */}
+    <div className="relative h-48 w-full shrink-0">
+      <img
+        src={imagen}
+        alt={nombre}
+        className="object-cover h-full w-full"
+      />
+      <button
+        onClick={toggleGuardado}
+        className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
+        aria-label={guardado ? "Quitar de favoritos" : "Añadir a favoritos"}
+      >
+        {guardado ? <FaBookmark /> : <FaRegBookmark />}
+      </button>
+    </div>
 
-        <div className="p-4">
-          <h3 className="text-xl font-semibold mb-1">{nombre}</h3>
-          <p className="text-sm text-gray-700 mb-3">{descripcion}</p>
-          <Badge text={categoria} />
-        </div>
+    {/* Contenido */}
+    <div className="p-4 flex flex-col flex-grow">
+      <div className="mb-2">
+        <h3 className="text-xl font-semibold mb-1">{nombre}</h3>
+        <p className="text-sm text-gray-700 line-clamp-3">{descripcion}</p>
       </div>
-    </Link>
+      <div className="mt-auto">
+        <Badge text={categoria} />
+      </div>
+    </div>
+
+  </div>
+</Link>
   );
 }
