@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
             element: <CrearEmprendimientoScreen />,
           },
           {
-            path: "/perfil/editarperfil",
+            path: "/perfil/editar",
             element: <EditarPerfil />,
           },
           {
@@ -59,7 +59,7 @@ export const router = createBrowserRouter([
             element: <AjustesScreen />,
           },
           {
-            path: "/boosteo/:id",
+            path: "/carrito/:id",
             element: <PagoScreen />,
           },
           {

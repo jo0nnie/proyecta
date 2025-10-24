@@ -1,12 +1,13 @@
 import { useState } from "react";
-import Sidebar from "./SideBar/Sidebar"; // Importá el componente
-import usuarioMock from "../utils/usuarioMock.json"
+import SideBar from "./SideBar/SideBar";
+import usuarioMock from "../utils/usuarioMock.json";
+import { PiUserCircleFill } from "react-icons/pi";
 
-//get usuario foto
 const usuarioLogueado = usuarioMock[0];
 const fotoUsuario = usuarioLogueado.foto;
 
 export default function NavBar() {
+  const token = localStorage.getItem("token");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
@@ -16,15 +17,20 @@ export default function NavBar() {
     <>
       <nav className="bg-[#2C4391] px-6 py-3 flex justify-between items-center shadow-md relative">
         <div className="flex items-center space-x-3">
-          <button onClick={toggleSidebar} className="text-white text-2xl focus:outline-none">
+          {/* Botón ☰ siempre visible */}
+          <button
+            onClick={toggleSidebar}
+            className="text-white text-2xl focus:outline-none"
+          >
             ☰
           </button>
-          <a href="/"> <img
-            src="/Logo Cohete White.svg"
-            alt="Logo Cohete"
-            className="h-12 w-auto"
-          /></a>
-
+          <a href="/">
+            <img
+              src="/Logo Cohete White.svg"
+              alt="Logo Cohete"
+              className="h-12 w-auto"
+            />
+          </a>
         </div>
 
         <div className="flex-1 mx-3 max-w-[600px] relative">
@@ -36,16 +42,36 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <a href="/auth/login" className="text-white hover:text-[#E9E2EF]">Iniciar Sesión</a>
-          <a href="/auth/register" className="text-white hover:text-[#E9E2EF]">Registrarse</a>
-          <a href="/perfil/miemprendimiento" className="text-white hover:text-[#E9E2EF]">Crear emprendimiento</a>
-          <a href="/perfil"> <img src={fotoUsuario} alt="imagen usuario" width={40} /></a>
+          {!token ? (
+            <>
+              <a href="/auth/login" className="text-white hover:text-[#E9E2EF]">
+                Iniciar Sesión
+              </a>
+              <a href="/auth/register" className="text-white hover:text-[#E9E2EF]">
+                Registrarse
+              </a>
+              <a href="/emprendimientos" className="text-white hover:text-[#E9E2EF]">
+                Emprendimientos
+              </a>
+            </>
+          ) : (
+            <>
+              <a
+                href="/perfil/miemprendimiento"
+                className="text-white hover:text-[#E9E2EF]"
+              >
+                Crear emprendimiento
+              </a>
+              <a href="/perfil" className="text-white hover:text-[#E9E2EF]">
+                <PiUserCircleFill className="w-12 h-12" />
+              </a>
+            </>
+          )}
         </div>
-
       </nav>
 
-      {/* Acá montamos la Sidebar */}
-      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
+      {/* Sidebar siempre visible */}
+      <SideBar isOpen={sidebarOpen} onClose={closeSidebar} />
     </>
   );
 }

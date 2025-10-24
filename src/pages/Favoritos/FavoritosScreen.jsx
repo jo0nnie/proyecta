@@ -28,7 +28,7 @@ export default function FavoritosScreen() {
       {/* Contenido */}
       <div className="flex-1 flex flex-col items-center">
         {favoriteEmprendimientos.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8 p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 md:px-6 lg:px-8 py-6 w-full">
             {favoriteEmprendimientos.map((item) => (
               <CardEmprendimiento
                 key={item.id}
