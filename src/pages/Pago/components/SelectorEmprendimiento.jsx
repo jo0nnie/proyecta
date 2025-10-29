@@ -1,5 +1,5 @@
 import perfilemprendimientoMock from '../../../utils/perfilemprendiemientoMock.json';
-
+import { Button } from '../../../components';
 export default function SelectorEmprendimiento({ emprendimientos, selectedId, onSelect, boostearTodos, setBoostearTodos }) {
   return (
     <div className="w-full max-w-md h-[400px] overflow-y-auto border rounded-xl p-4 shadow">
@@ -21,13 +21,14 @@ export default function SelectorEmprendimiento({ emprendimientos, selectedId, on
               />
               <p className="font-semibold">{e.nombre}</p>
             </div>
-            <button
+            <Button
               onClick={() => onSelect(e.id)}
               className={`px-3 py-1 rounded text-sm ${selectedId === e.id ? 'bg-[#2B4590] text-white' : 'bg-gray-200 text-gray-700'
                 }`}
-            >
-              {selectedId === e.id ? 'Seleccionado' : 'Seleccionar'}
-            </button>
+
+              text ={selectedId === e.id ? 'Seleccionado': 'Seleccionar'}
+              
+            />
           </div>
         );
       })}

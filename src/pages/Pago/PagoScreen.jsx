@@ -12,9 +12,11 @@ export default function PagoScreen() {
         { id: "994", nombre: "Estética Vegana Alma" },
         { id: "993", nombre: "Taller de Cerámica Tierra Roja" }
     ];
-
+    //muestra emprendimientos seleccionados
     const [emprendimientoActivoId, setEmprendimientoActivoId] = useState(emprendimientosDelPerfil[0].id);
+    //para renderizar la lista de emprendimientos (carrito emprendimientos)
     const [carrito, setCarrito] = useState([]);
+
     const [boostearTodos, setBoostearTodos] = useState(false);
 
     const emprendimientoActivo = perfilemprendimientoMock.find(
@@ -79,8 +81,8 @@ export default function PagoScreen() {
                 <h1 className='flex justify-center text-xl font-bold '>Boosteo de Emprendimientos</h1>
                 <h1 className='flex justify-center'>¡Haz que tu emprendimiento llegue a más personas!</h1>
             </nav>
-
-            <div className="flex overflow-x-auto gap-4 p-6 border-b border-[#2B4590] bg-[#F9FAFB]">
+            
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-4 p-6 border-b w-full border-[#2B4590] bg-[#F9FAFB]">
                 {planes.map((plan, index) => (
                     <div key={index} className="flex-shrink-0">
                         <PlanCard
