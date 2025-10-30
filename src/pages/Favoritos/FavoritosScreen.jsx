@@ -53,7 +53,7 @@ export default function FavoritosScreen() {
           ))
         ) : (
           <p className=" text-gray-600 text-center">
-            No hay favoritos agregados.
+            Aún no tienes emprendimientos marcados como favoritos. Explora la página principal y añádelos!
           </p>
         )}
       </div>
