@@ -47,7 +47,7 @@ export default function FavoritosScreen() {
               id={item.emprendimiento.id}
               nombre={item.emprendimiento.nombre}
               descripcion={item.emprendimiento.descripcion}
-              categoria={item.emprendimiento.categoria}
+              categoria={item.emprendimiento.Categorias.nombre}
               imagen={item.emprendimiento.imagen}
             />
           ))
