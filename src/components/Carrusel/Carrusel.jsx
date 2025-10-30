@@ -3,7 +3,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Carrusel.css"
-import { href, Link } from "react-router";
+import { Link } from "react-router";
 import { FaDesktop, FaGift, FaHome, FaTshirt, FaUtensils } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
 

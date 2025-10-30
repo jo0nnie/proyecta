@@ -6,6 +6,7 @@ import slugify from "../../functions/slugify";
 
 export default function CategoriasScreen() {
   const [categorias, setCategorias] = useState([]);
+  const [categoriasCargadas, setCategoriasCargadas] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function CategoriasScreen() {
       .then((res) => {
         if (Array.isArray(res.data.categorias)) {
           setCategorias(res.data.categorias);
+          setCategoriasCargadas(true);
         } else {
           console.error("Formato inesperado:", res.data);
         }
@@ -22,6 +24,18 @@ export default function CategoriasScreen() {
         console.error("Error al obtener categorias:", err);
       });
   }, []);
+  useEffect(() => {
+    if (categoriasCargadas && location.hash) {
+      const id = location.hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    }
+  }, [location, categoriasCargadas]);
+
 
   return (
     <main className="min-h-screen bg-gray-100 px-6 py-8">
