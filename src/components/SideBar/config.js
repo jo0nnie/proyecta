@@ -4,6 +4,8 @@ export const configPublic = [
   { title: "Categorías", path: "/categorias" },
   { title: "Emprendimientos", path: "/emprendimientos" },
   { title: "Planes", path: "/infoplanes" },
+  { title: "Nosotros", path: "/sobre-nosotros" }
+
 ];
 
 // si esta logueado
@@ -15,6 +17,7 @@ export const configPrivate = [
   { title: "Historial", path: "/historial" },
   { title: "Dashboard", path: "/dashboard" },
   { title: "Planes", path: "/infoplanes" },
+  { title: "Nosotros", path: "/sobre-nosotros" }
 ];
 
 

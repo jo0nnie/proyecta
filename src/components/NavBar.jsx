@@ -50,8 +50,8 @@ export default function NavBar() {
               <a href="/auth/register" className="text-white hover:text-[#E9E2EF]">
                 Registrarse
               </a>
-              <a href="/emprendimientos" className="text-white hover:text-[#E9E2EF]">
-                Emprendimientos
+              <a href="/sobre-nosotros" className="text-white hover:text-[#E9E2EF]">
+                Nosotros
               </a>
             </>
           ) : (

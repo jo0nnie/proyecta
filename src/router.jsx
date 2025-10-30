@@ -3,9 +3,7 @@ import { AjustesScreen, CategoriasScreen, EmprendimientosScreen, FavoritosScreen
 import AuthLayout from "./components/layouts/AuthLayout";
 import MainLayout from "./components/layouts/MainLayout/MainLayout";
 import EditarPerfil from "./pages/PerfilUsuario/EditarPerfilUsuarioScreen";
-import { useState } from "react";
 
-const token = localStorage.getItem("token");
 
 
 
@@ -24,7 +22,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomeScreen />,
+        element: <EmprendimientosScreen/>,
+      },
+      {
+        path: "/sobre-nosotros",
+        element: <HomeScreen/>,
       },
       { path: "/categorias", element: <CategoriasScreen /> },
       {
