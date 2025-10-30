@@ -1,14 +1,31 @@
-import { CardEmprendimiento } from "../../components";
-import emprendimientos from "../../utils/emprendimientoMock.json";
+import { useEffect, useState } from "react";
+import { api } from "../../api/api";
+import { CardEmprendimiento, Button } from "../../components";
 
 export default function HistorialScreen() {
+  const [recientes, setRecientes] = useState([]);
 
-  //cree una variable para mostrar, a modo de ejemplo, un solo emprendimiento en la pagina del historial
-  const emprendimientoEjemplo = emprendimientos.filter(item => item.id > "5");
+  useEffect(() => {
+    api
+      .get("/historial")
+      .then((res) => {
+        if (Array.isArray(res.data)) {
+          setRecientes(res.data);
+        } else {
+          console.error("Formato inesperado: ", res.data);
+        }
+      })
+      .catch((err) => {
+        console.error("Error al obtener los emprendimientos ", err);
+      });
+  }, []);
+
   return (
     <>
       <div>
-        <h1 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-2 p-2 text-center">Historial</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-2 p-2 text-center">
+          Historial
+        </h1>
         <div className="ml-7 mr-7 mb-6">
           <p className=" text-gray-600 text-center">
             Emprendimientos que has visitado recientemente.
@@ -18,18 +35,21 @@ export default function HistorialScreen() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8 p-6">
-        {emprendimientoEjemplo.map((item) => (
-              <CardEmprendimiento
-                key={item.id}
-                id={item.id}
-                nombre={item.nombre}
-                descripcion={item.descripcion}
-                categoria={item.categoria}
-                imagen={item.imagen}
-              />
-            ))}
+        {recientes.length > 0 ? (
+          recientes.map((item) => (
+            <CardEmprendimiento
+              key={item.emprendimientos.id}
+              id={item.emprendimientos.id}
+              nombre={item.emprendimientos.nombre}
+              descripcion={item.emprendimientos.descripcion}
+              categoria={item.emprendimientos.Categorias.nombre}
+              imagen={item.emprendimientos.imagen}
+            />
+          ))
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
 }
-

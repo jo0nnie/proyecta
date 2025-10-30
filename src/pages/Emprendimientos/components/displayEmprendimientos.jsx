@@ -71,6 +71,5 @@ export default function DisplayEmprendimientos() {
         </button>
       </div>
     </div>
-
   );
 }
