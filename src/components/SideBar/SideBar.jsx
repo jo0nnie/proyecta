@@ -6,6 +6,7 @@ import { SideBarItem, SideBarDropItem } from "./SideBarItem";
 export default function SideBar({ isOpen, onClose }) {
   const sidebarRef = useRef();
   const navigate = useNavigate();
+  // TODO cambiar la logica del token en localStorage
   const token = localStorage.getItem("token");
   const config = token ? configPrivate : configPublic;
 

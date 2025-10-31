@@ -4,9 +4,12 @@ import usuarioMock from "../utils/usuarioMock.json";
 import { PiUserCircleFill } from "react-icons/pi";
 
 const usuarioLogueado = usuarioMock[0];
+
+// TODO constante que no se usa se borra
 const fotoUsuario = usuarioLogueado.foto;
 
 export default function NavBar() {
+  // TODO cambiar la logica del token guardado en localStorage
   const token = localStorage.getItem("token");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -44,6 +47,9 @@ export default function NavBar() {
         <div className="flex items-center space-x-4">
           {!token ? (
             <>
+            {/* TODO estos botones deberian ser un componente... 
+                TODO estan copiando codigo 5 veces
+                TODO puede ser un componente local en este mismo archivo */}
               <a href="/auth/login" className="text-white hover:text-primary-300">
                 Iniciar Sesión
               </a>

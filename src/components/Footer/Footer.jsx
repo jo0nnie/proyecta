@@ -8,6 +8,12 @@ const Footer = () => {
             <div className="container mx-auto flex justify-between items-center">
                 {/* logo app */}
                 <Link to="/">
+                {/* TODO los nombres de los archivos como este svg
+                    TODO deben escribirse con kevab case o snake case 
+                    TODO no se usan espacios...
+                    TODO logo-proyecta-ligth.svg --- cambiar "ligth" por "white" si lo prefieren
+                    TODO logo_proyecta_ligth.svg --- cambiar "ligth" por "white" si lo prefieren
+                 */}
                     <img src="/Logo Cohete White.svg" alt="Logo Nave" className="w-11 h-11 cursor-pointer" />
                 </Link>
                 <div className="text-center text-sm leading-tight">

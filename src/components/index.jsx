@@ -1,5 +1,7 @@
 // Este archivo es netamente para exportar componentes de esta carpeta 
 // y dejar mas limpias las importaciones en los archivos donde los utilicemos
+
+// TODO este archivo esta imcompleto, agregar componentes faltantes
 import Container from "./Container";
 import Button from "./Button";
 import TextField from "./TextField";

@@ -3,14 +3,12 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Carrusel.css"
-import { href, Link } from "react-router";
+import { Link } from "react-router";
 import { FaDesktop, FaGift, FaHome, FaTshirt, FaUtensils } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
 
-
-
+// TODO esto ya no deberia estar mockeado... usar categorias existentes en la BD
 const categories = [
-
   { icon: FaDesktop, label: "Tecnología", path: "/categorias#tecnologia", color: "#2C4692" },
   { icon: FaTshirt, label: "Moda", path: "/categorias#moda", color: "#2C4692" },
   { icon: FaHome, label: "Hogar", path: "/categorias#hogar", color: "#2C4692" },
@@ -24,6 +22,7 @@ export default function Carrusel() {
   return (
     <div className="w-full mx-auto relative px-6">
       <Swiper
+        // TODO: Es necesario usar un css para este estilo? si no lo es borrarlo y usar tailwind
         className="carrusel-container"
         slidesPerView={5}
         navigation={true}

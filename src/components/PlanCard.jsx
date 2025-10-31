@@ -5,7 +5,7 @@ export default function PlanCard({ plan, onObtener, isSeleccionado }) {
 
   return (
     <div
-      //min-h-[360px]
+      // altura minima anterior al fix: min-h-[360px]
       className={`flex-1 flex flex-col justify-between p-6  border-2 rounded-xl border-primary-500 shadow-md hover:shadow-xl cursor-pointer ${
         isSeleccionado
           ? "bg-primary-500 text-white"

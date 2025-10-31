@@ -19,9 +19,12 @@ export default function LoginForm({ title }) {
       const res = await api.post("/usuarios/login", data);
 
       // Guardamos usuario y token en localStorage
+      // TODO cambiar la logica del token guardado en localStorage
       localStorage.setItem("user", JSON.stringify(res.data.usuario));
       localStorage.setItem("token", res.data.token);
 
+      // TODO usar alert esta bastante feo y poco profesional a la vista del usuario
+      // TODO usar notificaciones toastif, react-toastify (npm i react-toastify)
       alert("Bienvenido");
       navigate("/"); // redirige a la página principal
     } catch (err) {

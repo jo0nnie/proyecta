@@ -21,11 +21,14 @@ export default function MetodoPagoCard({
           <div className="p-4 flex items-center justify-center gap-2 text-center">
             <MdAddCard className="text-primary-400 w-6 h-6" />
             <div>
+              {/* TODO no se porque hay 2 <p> para un mismo texto, buscar otra solucion, usando tailwind */}
               <p className="text-primary-400 font-bold m-0">Agregar método</p>
               <p className="text-sm text-gray-600 m-0">de pago</p>
             </div>
           </div>
         </div>
+        {/* TODO este div? si necesitan espaciado no se hace asi
+            TODO deberian agregar un mb al div de arriba */}
         <div className="mt-3 h-[34px]"></div>
       </div>
     );
