@@ -33,7 +33,7 @@ export default function LoginForm({ title }) {
   return (
     <Container>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
-        <h3 className="text-[#2C4692] text-2xl font-medium">{title}</h3>
+        <h3 className="text-primary-500 text-2xl font-medium">{title}</h3>
         <TextField
           label="Correo Eléctronico"
           type="email"

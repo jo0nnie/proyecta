@@ -53,7 +53,7 @@ export default function MetodosDePago() {
 
     return (
         <div>
-            <h2 className="text-2xl font-bold text-[#2C4391]">
+            <h2 className="text-2xl font-bold text-primary-400">
                 Editar métodos de pago
             </h2>
             <p className="text-gray-700 mb-4">
@@ -76,7 +76,7 @@ export default function MetodosDePago() {
             </div>
             {mostrarFormulario && (
                 <div className="mt-6 bg-white p-4 rounded border shadow-md max-w-md">
-                    <h3 className="font-bold text-[#2C4391] mb-3">Nuevo método de pago</h3>
+                    <h3 className="font-bold text-primary-400 mb-3">Nuevo método de pago</h3>
                     <input
                         type="text"
                         name="tipo"
@@ -112,7 +112,7 @@ export default function MetodosDePago() {
                     </label>
                     <div className="flex gap-3">
                         <button
-                            className="bg-[#2C4391] text-white px-4 py-1 rounded"
+                            className="bg-primary-400 text-white px-4 py-1 rounded"
                             onClick={agregarMetodo}
                         >
                             Guardar

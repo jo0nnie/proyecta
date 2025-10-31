@@ -43,19 +43,19 @@ const PerfilUsuario = ({ usuario }) => {
         </div>
       </div>
 
-      <div className="flex flex-col my-6 border-y border-[#2B4590] p-4 space-y-4">
+      <div className="flex flex-col my-6 border-y border-primary-500 p-4 space-y-4">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="flex flex-col">
-            <p className="font-semibold text-[#2B4590] mb-2">
+            <p className="font-semibold text-primary-500 mb-2">
               Fecha de nacimiento:
             </p>
-            <p className="text-[#666666]">{dateRegister}</p>
+            <p className="text-gray-400">{dateRegister}</p>
           </div>
         </div>
       </div>
 
       <div className="flex flex-col">
-        <p className="font-semibold text-[#2B4590] mb-3 ml-1">
+        <p className="font-semibold text-primary-500 mb-3 ml-1">
           Mis emprendimientos:
         </p>
 

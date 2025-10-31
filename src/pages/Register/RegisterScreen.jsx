@@ -47,7 +47,7 @@ const RegisterScreen = () => {
   };
   return (
     <div className="flex h-screen justify-between">
-      <div className="w-[1110px] bg-[#2C4692] flex justify-center items-center h-full">
+      <div className="w-[1110px] bg-primary-500 flex justify-center items-center h-full">
         <img
           src="/Logo PROYECTA White.svg"
           alt="Logo Cohete"

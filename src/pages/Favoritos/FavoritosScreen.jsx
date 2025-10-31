@@ -21,7 +21,7 @@ export default function FavoritosScreen() {
   return (
     <div className="flex flex-col flex-1 min-h-full">
       {/* Título */}
-      <h1 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-4 p-4 text-center">
+      <h1 className="text-3xl md:text-4xl font-bold text-primary-500 m-4 p-4 text-center">
         Favoritos
       </h1>
 

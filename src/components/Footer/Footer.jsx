@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const Footer = () => {
     return (
-        <footer className="bg-[#2B449E] text-white py-4 px-6">
+        <footer className="bg-primary-500 text-white py-4 px-6">
             <div className="container mx-auto flex justify-between items-center">
                 {/* logo app */}
                 <Link to="/">

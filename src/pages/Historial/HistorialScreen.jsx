@@ -8,12 +8,12 @@ export default function HistorialScreen() {
   return (
     <>
       <div>
-        <h1 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-2 p-2 text-center">Historial</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-primary-500 m-2 p-2 text-center">Historial</h1>
         <div className="ml-7 mr-7 mb-6">
           <p className=" text-gray-600 text-center">
             Emprendimientos que has visitado recientemente.
           </p>
-          <div className="absolute left-0 right-0 border-b border-[#2C4692] pt-4"></div>
+          <div className="absolute left-0 right-0 border-b border-primary-500 pt-4"></div>
         </div>
       </div>
 

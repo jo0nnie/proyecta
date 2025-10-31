@@ -27,7 +27,7 @@ export default function AjusteItem({ titulo, descripcion, textoBoton, onClick, c
       {children && <div className="pt-3">{children}</div>} 
       {/* el contenido en el children se muestra con un margen arriba*/}
 
-      <div className="border-b border-[#2C4692] pt-4"></div>
+      <div className="border-b border-primary-500 pt-4"></div>
     </div>
   );
 }

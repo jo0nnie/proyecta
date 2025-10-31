@@ -8,7 +8,7 @@ export default function AjustesScreen() {
                 Ajustes
             </h2>
             <div className="ml-7 mr-7 mb">
-                <div className="border-b border-[#2C4692] pt-8"></div>
+                <div className="border-b border-primary-500 pt-8"></div>
             </div>
 
             <AjusteItem

@@ -1,16 +1,27 @@
-export default function Button({ type, text, onClick, variante = "dark" }) {
+export default function Button({
+  type,
+  text,
+  onClick,
+  variant = "dark",
+  fullWidth = false,
+  customStyle,
+}) {
   const VariantedeColor =
-    variante === "dark" ? "bg-primary-500" : "bg-primary-400";
+    variant === "dark" ? "bg-primary-500 text-white" : "bg-white text-primary-500";
+
+  const baseStyle = "py-2 px-6 text-size-base font-medium rounded-[12px] shadow-md transition-all duration-200 mx-auto block font-family-inter cursor-pointer";
+  const widthClass = fullWidth ? "w-full" : "w-auto";
 
   return (
-    <div>
-      <button
-        type={type}
-        onClick={onClick}
-        className={`py-2 px-6 ${VariantedeColor} text-dark-logo text-size-base font-medium rounded-[12px] shadow-md transition-all duration-200 mx-auto block font-family-inter cursor-pointer`}
-      >
-        {text}
-      </button>
-    </div>
+    <button
+      type={type}
+      onClick={onClick}
+      className={
+        customStyle ??
+        `${baseStyle} ${VariantedeColor} ${widthClass} ${customStyle}`
+      }
+    >
+      {text}
+    </button>
   );
 }

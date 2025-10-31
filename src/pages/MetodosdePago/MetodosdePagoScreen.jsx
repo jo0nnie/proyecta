@@ -104,7 +104,7 @@ export default function MetodosdePagoScreen() {
   return (
     <div className="pb-8">
       <div>
-        <h2 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-4 p-2 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-primary-500 m-4 p-2 text-center">
           Mis Métodos de Pago
         </h2>
         <p className="mt-1 text-black text-center">
@@ -132,14 +132,14 @@ export default function MetodosdePagoScreen() {
         </div>
         {mostrarFormulario && (
           <div className="mt-6 p-4 rounded border shadow-md max-w-md flex-grow ml-8">
-            <h3 className="text-[#2C4391] mb-3 flex justify-center font-bold">
+            <h3 className="text-primary-400 mb-3 flex justify-center font-bold">
               {editarMetododePago !== null
                 ? "Editar Método de Pago"
                 : "Nuevo Método de Pago"}
             </h3>
             <p className="mt-1 text-black pb-1">Metodo de Pago</p>
             <select
-              className="border-2 p-2 px-4 mb-2 block w-full border-primary-500 rounded-[10px] focus:outline-none focus:ring-2 focus:ring-[#2C4692]"
+              className="border-2 p-2 px-4 mb-2 block w-full border-primary-500 rounded-[10px] focus:outline-none focus:ring-2 focus:ring-primary-500"
               name="tipo"
               value={nuevoMetodo.tipo}
               onChange={handleInputChange}
@@ -194,10 +194,10 @@ export default function MetodosdePagoScreen() {
                 <Button
                   text="Guardar Cambios"
                   onClick={guardarCambios}
-                  variante="light"
+                  variant="light"
                 />
               ) : (
-                <Button type="button" text="Guardar" onClick={agregarMetodo} variante="light"/>
+                <Button type="button" text="Guardar" onClick={agregarMetodo} variant="light"/>
               )}
               <Button type="button" text="Cancelar" onClick={cancelar} />
             </div>

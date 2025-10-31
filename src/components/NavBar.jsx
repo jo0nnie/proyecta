@@ -15,7 +15,7 @@ export default function NavBar() {
 
   return (
     <>
-      <nav className="bg-[#2C4391] px-6 py-3 flex justify-between items-center shadow-md relative">
+      <nav className="bg-primary-500 px-6 py-3 flex justify-between items-center shadow-md relative">
         <div className="flex items-center space-x-3">
           {/* Botón ☰ siempre visible */}
           <button
@@ -37,20 +37,20 @@ export default function NavBar() {
           <input
             type="text"
             placeholder="Buscar"
-            className="w-full py-2 px-4 pl-5 pr-10 rounded-full bg-white text-[#2C4391] placeholder-[#2C4391] focus:outline-none"
+            className="w-full py-2 px-4 pl-5 pr-10 rounded-full bg-white text-primary-400 placeholder-primary-400 focus:outline-none"
           />
         </div>
 
         <div className="flex items-center space-x-4">
           {!token ? (
             <>
-              <a href="/auth/login" className="text-white hover:text-[#E9E2EF]">
+              <a href="/auth/login" className="text-white hover:text-primary-300">
                 Iniciar Sesión
               </a>
-              <a href="/auth/register" className="text-white hover:text-[#E9E2EF]">
+              <a href="/auth/register" className="text-white hover:text-primary-300">
                 Registrarse
               </a>
-              <a href="/emprendimientos" className="text-white hover:text-[#E9E2EF]">
+              <a href="/emprendimientos" className="text-white hover:text-primary-300">
                 Emprendimientos
               </a>
             </>
@@ -58,11 +58,11 @@ export default function NavBar() {
             <>
               <a
                 href="/perfil/miemprendimiento"
-                className="text-white hover:text-[#E9E2EF]"
+                className="text-white hover:text-primary-300"
               >
                 Crear emprendimiento
               </a>
-              <a href="/perfil" className="text-white hover:text-[#E9E2EF]">
+              <a href="/perfil" className="text-white hover:text-primary-300">
                 <PiUserCircleFill className="w-12 h-12" />
               </a>
             </>

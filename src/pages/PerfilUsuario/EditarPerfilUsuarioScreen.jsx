@@ -122,7 +122,7 @@ const EditarPerfil = () => {
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-[#2C4391] text-center mb-4">
+      <h1 className="text-2xl font-bold text-primary-400 text-center mb-4">
         Editar Perfil
       </h1>
 

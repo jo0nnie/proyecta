@@ -25,7 +25,7 @@ export default function CategoriasScreen() {
 
   return (
     <main className="min-h-screen bg-gray-100 px-6 py-8">
-      <h1 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-1 -mt-2 p-2 text-center">
+      <h1 className="text-3xl md:text-4xl font-bold text-primary-500 m-1 -mt-2 p-2 text-center">
         Categorías
       </h1>
       {categorias.map((categoria) => {
@@ -33,7 +33,7 @@ export default function CategoriasScreen() {
 
         return (
           <section key={categoria.id} id={slug} className="mb-12">
-            <h2 className="text-2xl font-semibold mb-2 text-[#2C4692] mx-21">
+            <h2 className="text-2xl font-semibold mb-2 text-primary-500 mx-21">
               {categoria.nombre}
             </h2>
 

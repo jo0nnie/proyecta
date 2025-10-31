@@ -25,8 +25,8 @@ export default function DetallePago() {
 
 
   return (
-    <nav className='border rounded-xl border-[#2B4590] w-full'>
-      <p className='border-b border-[#2B4590] p-5'>
+    <nav className='border rounded-xl border-primary-500 w-full'>
+      <p className='border-b border-primary-500 p-5'>
         <h1 className='flex justify-center font-bold'>Detalles de Pago</h1>
       </p>
       <ul className='m-5'>

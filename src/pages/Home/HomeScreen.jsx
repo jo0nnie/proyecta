@@ -4,13 +4,13 @@ export default function HomeScreen() {
   return (
     <div className="min-h-[82vh]">
       <section className="px-8 md:px-20 py-12 bg-white">
-        <div className="bg-[#2C4692] text-white py-3 mb-10 text-center text-xl">
+        <div className="bg-primary-500 text-white py-3 mb-10 text-center text-xl">
           Sobre Nosotros
         </div>
 
         <div className="flex flex-col-reverse md:flex-row items-center gap-10">
           <div className="flex-1">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#2C4692] mb-4 pb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-4 pb-4">
               Impulsamos <br /> emprendimientos <br /> locales
             </h2>
             <p className="text-gray-700 mb-6">
@@ -18,7 +18,7 @@ export default function HomeScreen() {
               una plataforma que te ayuda a mostrar tu trabajo y llegar más lejos.
             </p>
 
-            <h3 className="text-2xl md:text-2xl font-bold text-[#2C4692] mb-2">
+            <h3 className="text-2xl md:text-2xl font-bold text-primary-500 mb-2">
               Nuestra misión
             </h3>
             <p className="text-gray-700">
@@ -39,7 +39,7 @@ export default function HomeScreen() {
         </div>
 
         <div className="mt-16">
-          <h3 className="text-2xl md:text-2xl font-bold text-[#2C4692] mb-2">El equipo</h3>
+          <h3 className="text-2xl md:text-2xl font-bold text-primary-500 mb-2">El equipo</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 justify-items-center">
             <div className="flex flex-col items-center">
               <img
@@ -47,7 +47,7 @@ export default function HomeScreen() {
                 alt="Logo Laura"
                 className="w-37 h-37"
               />
-              <p className="mt-2 text-center text-[#2C4692] font-medium">
+              <p className="mt-2 text-center text-primary-500 font-medium">
                 Gauto Laura
               </p>
             </div>
@@ -57,7 +57,7 @@ export default function HomeScreen() {
                 alt="Logo Lucrecia"
                 className="w-37 h-37"
               />
-              <p className="mt-2 text-center text-[#2C4692] font-medium">
+              <p className="mt-2 text-center text-primary-500 font-medium">
                 Galarza Lucrecia
               </p>
             </div>
@@ -67,7 +67,7 @@ export default function HomeScreen() {
                 alt="Logo Guillermo"
                 className="w-37 h-37"
               />
-              <p className="mt-2 text-center text-[#2C4692] font-medium">
+              <p className="mt-2 text-center text-primary-500 font-medium">
                 Viera Guillermo
               </p>
             </div>
@@ -77,7 +77,7 @@ export default function HomeScreen() {
                 alt="Logo Francisco"
                 className="w-37 h-37"
               />
-              <p className="mt-2 text-center text-[#2C4692] font-medium">
+              <p className="mt-2 text-center text-primary-500 font-medium">
                 Galarza Francisco
               </p>
             </div>
@@ -97,7 +97,7 @@ export default function HomeScreen() {
               Si nuestra visión de impulsar el talento local y nuestro compromiso con el desarrollo de Misiones coinciden con tus valores,
               y considerás que tu emprendimiento merece un espacio para crecer y alcanzar a más personas…
             </p>
-            <h3 className="text-xl font-semibold text-center text-[#2C4692] mb-6">
+            <h3 className="text-xl font-semibold text-center text-primary-500 mb-6">
               ¡Es el momento de dar el paso!
             </h3>
             <Link to="/auth/register">

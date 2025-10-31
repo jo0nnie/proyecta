@@ -57,8 +57,8 @@ const PerfilEmprendimiento = ({ emprendimiento }) => {
             </div>
 
             {/* Sección de descripción */}
-            <div className="mt-6 border-t border-[#2B4590] pt-4">
-                <h2 className="text-[#2B4590] font-bold mb-4">Descripción</h2>
+            <div className="mt-6 border-t border-primary-500 pt-4">
+                <h2 className="text-primary-500 font-bold mb-4">Descripción</h2>
                 <p className="text-gray-700 whitespace-pre-line mb-6">{descripcion}</p>
 
                 {/* Imagen debajo de la descripción */}

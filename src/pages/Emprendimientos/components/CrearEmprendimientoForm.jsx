@@ -90,7 +90,7 @@ const CrearEmprendimientoForm = () => {
       <div>
         <label
           htmlFor="nombre"
-          className="block font-medium mb-1 text-[#2B4590]"
+          className="block font-medium mb-1 text-primary-500"
         >
           Nombre del emprendimiento *
         </label>
@@ -108,7 +108,7 @@ const CrearEmprendimientoForm = () => {
       <div>
         <label
           htmlFor="descripcion"
-          className="block font-medium mb-1 text-[#2B4590]"
+          className="block font-medium mb-1 text-primary-500"
         >
           Descripción *
         </label>
@@ -125,7 +125,7 @@ const CrearEmprendimientoForm = () => {
       <div>
         <label
           htmlFor="categoriaId"
-          className="block font-medium mb-1 text-[#2B4590]"
+          className="block font-medium mb-1 text-primary-500"
         >
           Categoría *
         </label>
@@ -146,7 +146,7 @@ const CrearEmprendimientoForm = () => {
       </div>
 
       <div>
-        <label className="block font-medium mb-1 text-[#2B4590]">
+        <label className="block font-medium mb-1 text-primary-500">
           Imagen del emprendimiento
         </label>
         <div className="flex items-center gap-2">
@@ -163,7 +163,7 @@ const CrearEmprendimientoForm = () => {
           <button
             type="button"
             onClick={handleFileClick}
-            className="px-4 py-2 bg-[#2B4590] text-white rounded hover:bg-[#1f3266]"
+            className="px-4 py-2 bg-primary-500 text-white rounded hover:bg-primary-600"
           >
             Seleccionar archivo
           </button>
@@ -182,7 +182,7 @@ const CrearEmprendimientoForm = () => {
       <button
         type="submit"
         disabled={!isFormValid() || enviando}
-        className="w-full py-2 bg-[#2B4590] text-white rounded hover:bg-[#1f3266] disabled:opacity-50"
+        className="w-full py-2 bg-primary-500 text-white rounded hover:bg-primary-600 disabled:opacity-50"
       >
         {enviando ? "Enviando" : "Crear"}
       </button>

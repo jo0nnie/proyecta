@@ -38,7 +38,7 @@ export default function SideBar({ isOpen, onClose }) {
   return (
     <div
       ref={sidebarRef}
-      className={`fixed top-0 left-0 h-full w-64 bg-[#2C4391] text-white transform ${
+      className={`fixed top-0 left-0 h-full w-64 bg-primary-500 text-white transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out z-40 shadow-lg flex flex-col`}
     >
@@ -79,7 +79,7 @@ export default function SideBar({ isOpen, onClose }) {
         {token && (
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-2 rounded hover:bg-[#3c56a5] transition-colors w-full text-left"
+            className="flex items-center gap-3 px-4 py-2 rounded hover:bg-primary-500 transition-colors w-full text-left"
           >
             <span>Cerrar Sesión</span>
           </button>
