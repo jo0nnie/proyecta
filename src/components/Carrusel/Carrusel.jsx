@@ -2,20 +2,45 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import "./Carrusel.css"
+import "./Carrusel.css";
 import { Link } from "react-router";
-import { FaDesktop, FaGift, FaHome, FaTshirt, FaUtensils } from "react-icons/fa";
+import {
+  FaDesktop,
+  FaGift,
+  FaHome,
+  FaTshirt,
+  FaUtensils,
+} from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
 
 // TODO esto ya no deberia estar mockeado... usar categorias existentes en la BD
 const categories = [
-  { icon: FaDesktop, label: "Tecnología", path: "/categorias#tecnologia", color: "#2C4692" },
+  {
+    icon: FaDesktop,
+    label: "Tecnología",
+    path: "/categorias#tecnologia",
+    color: "#2C4692",
+  },
   { icon: FaTshirt, label: "Moda", path: "/categorias#moda", color: "#2C4692" },
   { icon: FaHome, label: "Hogar", path: "/categorias#hogar", color: "#2C4692" },
-  { icon: FaUtensils, label: "Gastronomía", path: "/categorias#gastronomia", color: "#2C4692" },
-  { icon: MdFavorite, label: "Salud y Bienestar", path: "/categorias#salud-y-bienestar", color: "#2C4692" },
-  { icon: FaGift, label: "Diseños y regalos", path: "/categorias#disenos-y-regalos", color: "#2C4692" },
-
+  {
+    icon: FaUtensils,
+    label: "Gastronomía",
+    path: "/categorias#gastronomia",
+    color: "#2C4692",
+  },
+  {
+    icon: MdFavorite,
+    label: "Salud y Bienestar",
+    path: "/categorias#salud-y-bienestar",
+    color: "#2C4692",
+  },
+  {
+    icon: FaGift,
+    label: "Diseños y regalos",
+    path: "/categorias#disenos-y-regalos",
+    color: "#2C4692",
+  },
 ];
 
 export default function Carrusel() {

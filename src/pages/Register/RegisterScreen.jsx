@@ -49,7 +49,7 @@ const RegisterScreen = () => {
     <div className="flex h-screen justify-between">
       <div className="w-[1110px] bg-primary-500 flex justify-center items-center h-full">
         <img
-          src="/Logo PROYECTA White.svg"
+          src="/Logo_PROYECTA_White.svg"
           alt="Logo Cohete"
           className="h-120 w-auto"
         />

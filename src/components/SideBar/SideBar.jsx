@@ -19,10 +19,7 @@ export default function SideBar({ isOpen, onClose }) {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        sidebarRef.current &&
-        !sidebarRef.current.contains(event.target)
-      ) {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         onClose();
       }
     };
@@ -46,7 +43,7 @@ export default function SideBar({ isOpen, onClose }) {
       {/* Header */}
       <div className="p-4 flex justify-between items-center border-b border-white">
         <img
-          src="/Logo Cohete White.svg"
+          src="/Logo_Cohete_White.svg"
           alt="Logo Cohete"
           className="h-10 w-auto"
         />

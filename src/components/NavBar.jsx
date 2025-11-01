@@ -29,7 +29,7 @@ export default function NavBar() {
           </button>
           <a href="/">
             <img
-              src="/Logo Cohete White.svg"
+              src="/Logo_Cohete_White.svg"
               alt="Logo Cohete"
               className="h-12 w-auto"
             />
@@ -47,16 +47,25 @@ export default function NavBar() {
         <div className="flex items-center space-x-4">
           {!token ? (
             <>
-            {/* TODO estos botones deberian ser un componente... 
+              {/* TODO estos botones deberian ser un componente... 
                 TODO estan copiando codigo 5 veces
                 TODO puede ser un componente local en este mismo archivo */}
-              <a href="/auth/login" className="text-white hover:text-primary-300">
+              <a
+                href="/auth/login"
+                className="text-white hover:text-primary-300"
+              >
                 Iniciar Sesión
               </a>
-              <a href="/auth/register" className="text-white hover:text-primary-300">
+              <a
+                href="/auth/register"
+                className="text-white hover:text-primary-300"
+              >
                 Registrarse
               </a>
-              <a href="/emprendimientos" className="text-white hover:text-primary-300">
+              <a
+                href="/emprendimientos"
+                className="text-white hover:text-primary-300"
+              >
                 Emprendimientos
               </a>
             </>
