@@ -22,12 +22,11 @@ const LoginScreen = () => {
             No tienes una cuenta?
             <Link
               to="/auth/register"
-              className="text-[#2C4692] hover:underline"
+              className="ml-2 text-[#2C4692] hover:underline"
             >
-              Regístrate
+              <b>Regístrate</b>
             </Link>
           </p>
-
           {/*aqui luego irian las opciones para loguearse con google y email*/}
         </div>
 

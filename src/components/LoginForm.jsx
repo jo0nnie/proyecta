@@ -3,7 +3,7 @@ import Container from "./Container";
 import TextField from "./TextField";
 import Button from "./Button";
 import { api } from "../api/api.js"; // instancia de Axios
-
+import { toast } from "react-toastify";
 export default function LoginForm({ title }) {
   const navigate = useNavigate();
 
@@ -22,11 +22,11 @@ export default function LoginForm({ title }) {
       localStorage.setItem("user", JSON.stringify(res.data.usuario));
       localStorage.setItem("token", res.data.token);
 
-      alert("Bienvenido");
+      toast.success("Bienvenido");
       navigate("/"); // redirige a la página principal
-    } catch (err) {
-      console.error(err.response?.data || err.message);
-      alert("Usuario y/o contraseña incorrectos");
+    } catch (error) {
+      const mensaje = error.response?.data?.error || "Usuario y/o contraseña incorrectos";
+      toast.error(mensaje);
     }
   };
 

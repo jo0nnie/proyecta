@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { api } from "../../../api/api";
+import { toast } from "react-toastify";
 
 const CrearEmprendimientoForm = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const CrearEmprendimientoForm = () => {
     e.preventDefault();
 
     if (!isFormValid() || enviando) {
-      alert("Por favor completá todos los campos obligatorios.");
+      toast.warn("Por favor completá todos los campos obligatorios.");
       return;
     }
     setEnviando(true);
@@ -58,7 +59,7 @@ const CrearEmprendimientoForm = () => {
         },
       });
       console.log("Respuesta del servidor:", response.data);
-      alert("¡Emprendimiento creado con éxito!");
+      toast.success("¡Emprendimiento creado con éxito!");
       setFormData({
         nombre: "",
         descripcion: "",
@@ -72,7 +73,8 @@ const CrearEmprendimientoForm = () => {
         "Error en el envío:",
         error.response?.data || error.message
       );
-      alert("Hubo un problema al enviar el formulario.");
+      const mensaje = error.response?.data?.error || "Hubo un problema al enviar el formulario.";
+      toast.error(mensaje);
     } finally {
       setEnviando(false);
     }
