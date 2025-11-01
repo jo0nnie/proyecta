@@ -2,26 +2,31 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { configPublic, configPrivate, configDrop } from "./config";
 import { SideBarItem, SideBarDropItem } from "./SideBarItem";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../store/slice/authSlice";
 
 export default function SideBar({ isOpen, onClose }) {
   const sidebarRef = useRef();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+
+  const token = useSelector((state) => state.auth.token);
   const config = token ? configPrivate : configPublic;
 
+
+
+
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    dispatch(logout());
     onClose();
     navigate("/");
   };
 
+
+
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        sidebarRef.current &&
-        !sidebarRef.current.contains(event.target)
-      ) {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         onClose();
       }
     };
@@ -35,12 +40,13 @@ export default function SideBar({ isOpen, onClose }) {
     };
   }, [isOpen, onClose]);
 
+
+
   return (
     <div
       ref={sidebarRef}
-      className={`fixed top-0 left-0 h-full w-64 bg-[#2C4391] text-white transform ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
-      } transition-transform duration-300 ease-in-out z-40 shadow-lg flex flex-col`}
+      className={`fixed top-0 left-0 h-full w-64 bg-[#2C4391] text-white transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out z-40 shadow-lg flex flex-col`}
     >
       {/* Header */}
       <div className="p-4 flex justify-between items-center border-b border-white">

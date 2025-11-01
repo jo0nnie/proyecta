@@ -1,16 +1,14 @@
 import { useState } from "react";
-import SideBar from "./SideBar/SideBar";
-import usuarioMock from "../utils/usuarioMock.json";
-import { PiUserCircleFill } from "react-icons/pi";
 import { useSelector } from "react-redux";
-const usuarioLogueado = usuarioMock[0];
-const fotoUsuario = usuarioLogueado.foto;
+import SideBar from "./SideBar/SideBar";
+import { PiUserCircleFill } from "react-icons/pi";
 
 export default function NavBar() {
   const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
+  const fotoUsuario = user?.foto;
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
 
@@ -43,9 +41,11 @@ export default function NavBar() {
             <>
               <a href="/perfil/miemprendimiento" className="text-white hover:text-[#E9E2EF]">Crear emprendimiento</a>
               <a href="/perfil" className="text-white hover:text-[#E9E2EF]">
-
-                <PiUserCircleFill className="w-12 h-12" />
-
+                {fotoUsuario ? (
+                  <img src={fotoUsuario} alt="Usuario" className="w-12 h-12 rounded-full object-cover" />
+                ) : (
+                  <PiUserCircleFill className="w-12 h-12" />
+                )}
               </a>
             </>
           )}
@@ -55,10 +55,4 @@ export default function NavBar() {
       <SideBar isOpen={sidebarOpen} onClose={closeSidebar} />
     </>
   );
-
 }
-
-
-<a href="/perfil" className="text-white hover:text-[#E9E2EF]">
-  <PiUserCircleFill className="w-12 h-12" />
-</a>

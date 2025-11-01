@@ -2,9 +2,12 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { api } from "../../../api/api";
 import { toast } from "react-toastify";
-
+import { useSelector } from "react-redux";
+import { useCategorias } from "../../../hooks/useCategorias";
 const CrearEmprendimientoForm = () => {
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
+  const { categorias, loading } = useCategorias();
   const [enviando, setEnviando] = useState(false);
   const [formData, setFormData] = useState({
     nombre: "",
@@ -12,9 +15,7 @@ const CrearEmprendimientoForm = () => {
     categoriaId: "",
     imagen: null,
   });
-
   const fileInputRef = useRef(null);
-
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "imagen") {
@@ -42,8 +43,7 @@ const CrearEmprendimientoForm = () => {
     setEnviando(true);
 
     const data = new FormData();
-    const token = localStorage.getItem("token");
-    console.log(token)
+
     data.append("nombre", formData.nombre.trim());
     data.append("descripcion", formData.descripcion.trim());
     data.append("categoriaId", Number(formData.categoriaId));
@@ -125,10 +125,7 @@ const CrearEmprendimientoForm = () => {
       </div>
 
       <div>
-        <label
-          htmlFor="categoriaId"
-          className="block font-medium mb-1 text-[#2B4590]"
-        >
+        <label htmlFor="categoriaId" className="block font-medium mb-1 text-[#2B4590]">
           Categoría *
         </label>
         <select
@@ -140,13 +137,17 @@ const CrearEmprendimientoForm = () => {
           required
         >
           <option value="">Seleccionar categoría</option>
-          <option value="1">Tecnología</option>
-          <option value="2">Arte</option>
-          <option value="3">Moda</option>
-          <option value="4">Gastronomía</option>
+          {loading ? (
+            <option disabled>Cargando categorías...</option>
+          ) : (
+            categorias.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.nombre}
+              </option>
+            ))
+          )}
         </select>
       </div>
-
       <div>
         <label className="block font-medium mb-1 text-[#2B4590]">
           Imagen del emprendimiento
