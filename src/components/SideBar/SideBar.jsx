@@ -84,7 +84,7 @@ export default function SideBar({ isOpen, onClose }) {
           <SideBarDropItem
             text="Ajustes"
             items={configDrop}
-            onClose={onClose} // ✅ corregido
+            onClose={onClose} 
           />
         )}
 

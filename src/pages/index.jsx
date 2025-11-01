@@ -14,6 +14,7 @@ import CrearEmprendimientoScreen from "./Emprendimientos/CrearEmprendimientoScre
 import MetodosdePagoScreen from "./MetodosdePago/metodosdePagoScreen";
 import PlanesScreen from "./Planes/PlanesScreen";
 import RutasPrivadas from "./RutasPrivadas/RutasPrivadas";
+import VerificarEmailScreen from "./VerificarEmail/VerificarEmailScreen";
 export {
   LoginScreen,
   RegisterScreen,
@@ -30,5 +31,6 @@ export {
   CrearEmprendimientoScreen,
   MetodosdePagoScreen,
   PlanesScreen,
-  RutasPrivadas
+  RutasPrivadas,
+  VerificarEmailScreen
 };

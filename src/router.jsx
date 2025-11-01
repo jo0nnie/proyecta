@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import { RutasPrivadas, AjustesScreen, CategoriasScreen, EmprendimientosScreen, FavoritosScreen, HistorialScreen, HomeScreen, LoginScreen, PagoScreen, PerfilEmprendimientosScreen, PerfilUsuarioScreen, RegisterScreen, CrearEmprendimientoScreen, DashboardScreen, MetodosdePagoScreen, PlanesScreen } from "./pages";
+import { VerificarEmailScreen,RutasPrivadas, AjustesScreen, CategoriasScreen, EmprendimientosScreen, FavoritosScreen, HistorialScreen, HomeScreen, LoginScreen, PagoScreen, PerfilEmprendimientosScreen, PerfilUsuarioScreen, RegisterScreen, CrearEmprendimientoScreen, DashboardScreen, MetodosdePagoScreen, PlanesScreen } from "./pages";
 import AuthLayout from "./components/layouts/AuthLayout";
 import MainLayout from "./components/layouts/MainLayout/MainLayout";
 import EditarPerfil from "./pages/PerfilUsuario/EditarPerfilUsuarioScreen";
@@ -14,6 +14,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "login", element: <LoginScreen /> },
       { path: "register", element: <RegisterScreen /> },
+      { path: "verificar-email", element: <VerificarEmailScreen /> },
     ],
   },
 

@@ -39,10 +39,13 @@ const RegisterScreen = () => {
       toast.success('Usuario registrado con éxito')
       navigate("/auth/login");
       console.log(res.data);
-    } catch (err) {
+    } catch (error) {
       console.log(err);
       console.error(err);
-      toast.error("Error al registrar usuario");
+      const mensaje = error.response?.data?.mensaje || "Ocurrió un error inesperado";
+      toast.error(mensaje);
+
+
     }
   };
   return (
