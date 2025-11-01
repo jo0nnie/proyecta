@@ -36,7 +36,7 @@ const RegisterScreen = () => {
         fechaNacimiento: formData.fechaNacimiento,
       });
 
-      toast.success('Usuario registrado con éxito')
+      toast.success('Usuario registrado con éxito verifica tu correo')
       navigate("/auth/login");
       console.log(res.data);
     } catch (error) {

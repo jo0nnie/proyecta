@@ -46,21 +46,21 @@ export const router = createBrowserRouter([
           {
             path: "/favoritos",
             element:
-              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+              (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO,ROLES.ADMIN]}>
                 <FavoritosScreen />,
               </RutasPrivadas>)
           },
           {
             path: "/historial",
              element:
-              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+              (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO,ROLES.ADMIN]}>
                 <HistorialScreen />,
               </RutasPrivadas>)
           },
           {
             path: "/perfil",
               element:
-              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+              (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO,ROLES.ADMIN]}>
                 <PerfilUsuarioScreen />,
               </RutasPrivadas>),
           },
@@ -71,21 +71,21 @@ export const router = createBrowserRouter([
           {
             path: "/perfil/editar",
               element:
-              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+              (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO,ROLES.ADMIN]}>
                 <EditarPerfil />,
               </RutasPrivadas>),
           },
           {
             path: "/ajustes",
               element:
-              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+              (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO,ROLES.ADMIN]}>
                 <AjustesScreen />,
               </RutasPrivadas>)
           },
           {
             path: "/carrito/:id",
               element:
-              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+              (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO,ROLES.ADMIN]}>
                 <PagoScreen />,
               </RutasPrivadas>),
           },
@@ -96,7 +96,7 @@ export const router = createBrowserRouter([
           {
             path: "/metodosdepago",
               element:
-              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+              (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO,ROLES.ADMIN]}>
                 <MetodosdePagoScreen />,
               </RutasPrivadas>),
           },

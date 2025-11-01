@@ -3,13 +3,13 @@ import { Navigate } from "react-router";
 
 export default function RutasPrivadas({ children, rolesPermitidos }) {
   const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.auth.user);
+  const usuario = useSelector((state) => state.auth.usuario);
 
-  if (!token || !user) {
+  if (!token || !usuario) {
     return <Navigate to="/auth/login" replace />;
   }
 
-  if (!rolesPermitidos.includes(user.rol)) {
+  if (!rolesPermitidos.includes(usuario.rol)) {
     return <Navigate to="/" replace />;
   }
 

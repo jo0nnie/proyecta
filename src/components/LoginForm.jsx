@@ -23,8 +23,9 @@ export default function LoginForm({ title }) {
 
       dispatch(setCredentials({
         token: res.data.token,
-        user: res.data.usuario,
+        usuario: res.data.usuario,
       }));
+
 
 
       toast.success("Bienvenido");

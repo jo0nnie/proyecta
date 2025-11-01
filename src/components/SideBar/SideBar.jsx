@@ -11,12 +11,12 @@ export default function SideBar({ isOpen, onClose }) {
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.auth.user);
+  const usuario = useSelector((state) => state.auth.usuario);
 
   let config = configPublic;
 
-  if (token && user) {
-    config = user.rol === ROLES.ADMIN ? configAdmin : configUser;
+  if (token && usuario) {
+    config = usuario.rol === ROLES.ADMIN ? configAdmin : configUser;
   }
 
 
