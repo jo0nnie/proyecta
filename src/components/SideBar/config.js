@@ -9,7 +9,16 @@ export const configPublic = [
 ];
 
 // si esta logueado
-export const configPrivate = [
+export const configUser = [
+  { title: "Inicio", path: "/" },
+  { title: "Categorías", path: "/categorias" },
+  { title: "Emprendimientos", path: "/emprendimientos" },
+  { title: "Favoritos", path: "/favoritos" },
+  { title: "Historial", path: "/historial" },
+  { title: "Planes", path: "/infoplanes" },
+  { title: "Nosotros", path: "/sobre-nosotros" }
+];
+export const configAdmin = [
   { title: "Inicio", path: "/" },
   { title: "Categorías", path: "/categorias" },
   { title: "Emprendimientos", path: "/emprendimientos" },

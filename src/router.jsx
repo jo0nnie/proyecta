@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router";
-import { AjustesScreen, CategoriasScreen, EmprendimientosScreen, FavoritosScreen, HistorialScreen, HomeScreen, LoginScreen, PagoScreen, PerfilEmprendimientosScreen, PerfilUsuarioScreen, RegisterScreen, CrearEmprendimientoScreen, DashboardScreen, MetodosdePagoScreen, PlanesScreen } from "./pages";
+import { RutasPrivadas, AjustesScreen, CategoriasScreen, EmprendimientosScreen, FavoritosScreen, HistorialScreen, HomeScreen, LoginScreen, PagoScreen, PerfilEmprendimientosScreen, PerfilUsuarioScreen, RegisterScreen, CrearEmprendimientoScreen, DashboardScreen, MetodosdePagoScreen, PlanesScreen } from "./pages";
 import AuthLayout from "./components/layouts/AuthLayout";
 import MainLayout from "./components/layouts/MainLayout/MainLayout";
 import EditarPerfil from "./pages/PerfilUsuario/EditarPerfilUsuarioScreen";
-
+import { ROLES } from './constants/roles'
 
 
 
@@ -20,13 +20,14 @@ export const router = createBrowserRouter([
   {
     element: <MainLayout />,
     children: [
+      // rutas sin auth
       {
         path: "/",
-        element: <EmprendimientosScreen/>,
+        element: <EmprendimientosScreen />,
       },
       {
         path: "/sobre-nosotros",
-        element: <HomeScreen/>,
+        element: <HomeScreen />,
       },
       { path: "/categorias", element: <CategoriasScreen /> },
       {
@@ -38,19 +39,29 @@ export const router = createBrowserRouter([
         element: <PerfilEmprendimientosScreen />,
       },
       {
+        // rutas auth Usuario normal...
         element: <AuthLayout />,
         children: [
           {
             path: "/favoritos",
-            element: <FavoritosScreen />,
+            element:
+              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+                <FavoritosScreen />,
+              </RutasPrivadas>)
           },
           {
             path: "/historial",
-            element: <HistorialScreen />,
+             element:
+              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+                <HistorialScreen />,
+              </RutasPrivadas>)
           },
           {
             path: "/perfil",
-            element: <PerfilUsuarioScreen />,
+              element:
+              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+                <PerfilUsuarioScreen />,
+              </RutasPrivadas>),
           },
           {
             path: "/perfil/miemprendimiento",
@@ -58,19 +69,24 @@ export const router = createBrowserRouter([
           },
           {
             path: "/perfil/editar",
-            element: <EditarPerfil />,
+              element:
+              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+                <EditarPerfil />,
+              </RutasPrivadas>),
           },
           {
             path: "/ajustes",
-            element: <AjustesScreen />,
+              element:
+              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+                <AjustesScreen />,
+              </RutasPrivadas>)
           },
           {
             path: "/carrito/:id",
-            element: <PagoScreen />,
-          },
-          {
-            path: "/dashboard",
-            element: <DashboardScreen />,
+              element:
+              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+                <PagoScreen />,
+              </RutasPrivadas>),
           },
           {
             path: "/infoplanes",
@@ -78,7 +94,17 @@ export const router = createBrowserRouter([
           },
           {
             path: "/metodosdepago",
-            element: <MetodosdePagoScreen />,
+              element:
+              (<RutasPrivadas rolesPermitidos={ROLES.USUARIO}>
+                <MetodosdePagoScreen />,
+              </RutasPrivadas>),
+          },
+          {
+            path: "/dashboard",
+              element:
+              (<RutasPrivadas rolesPermitidos={ROLES.ADMIN}>
+                <DashboardScreen />,
+              </RutasPrivadas>),
           },
 
         ],

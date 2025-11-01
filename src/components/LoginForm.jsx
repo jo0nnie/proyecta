@@ -28,6 +28,7 @@ export default function LoginForm({ title }) {
 
 
       toast.success("Bienvenido");
+      console.log("Usuario logueado:", res.data.usuario);
       navigate("/"); // redirige a la página principal
     } catch (error) {
       const mensaje = error.response?.data?.error || "Usuario y/o contraseña incorrectos";

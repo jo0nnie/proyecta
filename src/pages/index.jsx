@@ -13,6 +13,7 @@ import DashboardScreen from "./Dashboard/DashboardScreen";
 import CrearEmprendimientoScreen from "./Emprendimientos/CrearEmprendimientoScreen";
 import MetodosdePagoScreen from "./MetodosdePago/metodosdePagoScreen";
 import PlanesScreen from "./Planes/PlanesScreen";
+import RutasPrivadas from "./RutasPrivadas/RutasPrivadas";
 export {
   LoginScreen,
   RegisterScreen,
@@ -28,5 +29,6 @@ export {
   DashboardScreen,
   CrearEmprendimientoScreen,
   MetodosdePagoScreen,
-  PlanesScreen
+  PlanesScreen,
+  RutasPrivadas
 };

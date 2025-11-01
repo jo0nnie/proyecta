@@ -1,17 +1,23 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { configPublic, configPrivate, configDrop } from "./config";
+import { configUser, configDrop, configAdmin, configPublic } from "./config";
 import { SideBarItem, SideBarDropItem } from "./SideBarItem";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/slice/authSlice";
-
+import {ROLES} from '../../constants/roles'
 export default function SideBar({ isOpen, onClose }) {
   const sidebarRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.token);
-  const config = token ? configPrivate : configPublic;
+  const user = useSelector((state) => state.auth.user);
+
+  let config = configPublic;
+
+  if (token && user) {
+    config = user.rol === ROLES.ADMIN ? configAdmin : configUser;
+  }
 
 
 
