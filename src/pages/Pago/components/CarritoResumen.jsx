@@ -1,3 +1,4 @@
+import { Button } from "../../../components";
 export default function CarritoResumen({ carrito, onVaciar, onEliminar }) {
     return (
         <div className="border rounded-xl border-primary-500 w-full p-5 shadow-md bg-white">
@@ -30,7 +31,7 @@ export default function CarritoResumen({ carrito, onVaciar, onEliminar }) {
             <p className="font-bold text-right mt-4 text-primary-500">
                 Total: ${carrito.reduce((acc, item) => acc + item.precio, 0)}
             </p>
-
+            {/* <Button onClick={onVaciar} text={'Vaciar Carrito'}/> */}
             <button
                 onClick={onVaciar}
                 className="text-blue-500 text-sm mt-2 underline hover:text-blue-700"
