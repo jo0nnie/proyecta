@@ -7,6 +7,6 @@ export const api = axios.create({
   timeout: 5000,
   // TODO agregar el token que se envia en el header aca ("header: ...")
   headers: {
-    Authorization: `Bearer ${token}`,
+    Authorization: token ? `Bearer ${token}`: "",
   },
 });
