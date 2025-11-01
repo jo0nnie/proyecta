@@ -19,15 +19,16 @@ export default function HistorialScreen() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8 p-6">
         {emprendimientoEjemplo.map((item) => (
-              <CardEmprendimiento
-                key={item.id}
-                id={item.id}
-                nombre={item.nombre}
-                descripcion={item.descripcion}
-                categoria={item.categoria}
-                imagen={item.imagen}
-              />
-            ))}
+          <CardEmprendimiento
+            key={item.id}
+            id={item.id}
+            nombre={item.nombre}
+            descripcion={item.descripcion}
+            categoria={item.categoria}
+            imagen={item.imagen}
+            boosted={item.boosted}
+          />
+        ))}
       </div>
     </>
   );

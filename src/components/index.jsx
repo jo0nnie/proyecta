@@ -2,6 +2,7 @@
 // y dejar mas limpias las importaciones en los archivos donde los utilicemos
 
 // TODO este archivo esta imcompleto, agregar componentes faltantes
+//arreglar importaciones si hace falta y agregar los componentes faltantes
 import Container from "./Container";
 import Button from "./Button";
 import TextField from "./TextField";
@@ -16,5 +17,8 @@ import PlanCard from "./PlanCard";
 import CarritoResumen from '../pages/Pago/components/CarritoResumen';
 import SelectorEmprendimiento from "../pages/Pago/components/SelectorEmprendimiento";
 import DetallePago from "../pages/Pago/components/DetallePago";
-export { LoginForm, Container, Button, TextField, TestForm, CardEmprendimiento, Navbar, SideBar, Carrusel, MetodoPagoCard, PlanCard, CarritoResumen, SelectorEmprendimiento, DetallePago };
+import BadgeBoost from "./BadgeBoost";
+import PerfilUsuario from "./PerfilUsuario";
+
+export { LoginForm, Container, Button, TextField, TestForm, CardEmprendimiento, Navbar, SideBar, Carrusel, MetodoPagoCard, PlanCard, CarritoResumen, SelectorEmprendimiento, DetallePago , BadgeBoost, PerfilUsuario};
 

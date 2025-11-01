@@ -1,12 +1,6 @@
 import { useState } from "react";
 import SideBar from "./SideBar/SideBar";
-import usuarioMock from "../utils/usuarioMock.json";
 import { PiUserCircleFill } from "react-icons/pi";
-
-const usuarioLogueado = usuarioMock[0];
-
-// TODO constante que no se usa se borra
-const fotoUsuario = usuarioLogueado.foto;
 
 export default function NavBar() {
   // TODO cambiar la logica del token guardado en localStorage
@@ -16,11 +10,16 @@ export default function NavBar() {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
 
+  const NavItem = ({ href, children }) => (
+    <a href={href} className="text-white hover:text-primary-300">
+      {children}
+    </a>
+  );
+
   return (
     <>
       <nav className="bg-primary-500 px-6 py-3 flex justify-between items-center shadow-md relative">
         <div className="flex items-center space-x-3">
-          {/* Botón ☰ siempre visible */}
           <button
             onClick={toggleSidebar}
             className="text-white text-2xl focus:outline-none"
@@ -47,45 +46,21 @@ export default function NavBar() {
         <div className="flex items-center space-x-4">
           {!token ? (
             <>
-              {/* TODO estos botones deberian ser un componente... 
-                TODO estan copiando codigo 5 veces
-                TODO puede ser un componente local en este mismo archivo */}
-              <a
-                href="/auth/login"
-                className="text-white hover:text-primary-300"
-              >
-                Iniciar Sesión
-              </a>
-              <a
-                href="/auth/register"
-                className="text-white hover:text-primary-300"
-              >
-                Registrarse
-              </a>
-              <a
-                href="/emprendimientos"
-                className="text-white hover:text-primary-300"
-              >
-                Emprendimientos
-              </a>
+              <NavItem href="/auth/login">Iniciar Sesión</NavItem>
+              <NavItem href="/auth/register">Registrarse</NavItem>
+              <NavItem href="/emprendimientos">Emprendimientos</NavItem>
             </>
           ) : (
             <>
-              <a
-                href="/perfil/miemprendimiento"
-                className="text-white hover:text-primary-300"
-              >
-                Crear emprendimiento
-              </a>
-              <a href="/perfil" className="text-white hover:text-primary-300">
+              <NavItem href="/perfil/miemprendimiento">Crear emprendimiento</NavItem>
+              <NavItem href="/perfil">
                 <PiUserCircleFill className="w-12 h-12" />
-              </a>
+              </NavItem>
             </>
           )}
         </div>
       </nav>
 
-      {/* Sidebar siempre visible */}
       <SideBar isOpen={sidebarOpen} onClose={closeSidebar} />
     </>
   );

@@ -3,6 +3,7 @@ import Container from "./Container";
 import TextField from "./TextField";
 import Button from "./Button";
 import { api } from "../api/api.js"; // instancia de Axios
+import { toast } from 'react-toastify';
 
 export default function LoginForm({ title }) {
   const navigate = useNavigate();
@@ -23,13 +24,19 @@ export default function LoginForm({ title }) {
       localStorage.setItem("user", JSON.stringify(res.data.usuario));
       localStorage.setItem("token", res.data.token);
 
-      // TODO usar alert esta bastante feo y poco profesional a la vista del usuario
-      // TODO usar notificaciones toastif, react-toastify (npm i react-toastify)
-      alert("Bienvenido");
-      navigate("/"); // redirige a la página principal
+      toast.success("Bienvenid@", {
+        position: "top-center",
+        autoClose: 3000,
+        theme: "colored",
+      });
+      navigate("/");
     } catch (err) {
       console.error(err.response?.data || err.message);
-      alert("Usuario y/o contraseña incorrectos");
+      toast.error("Usuario y/o contraseña incorrectos", {
+        position: "top-center",
+        autoClose: 3000,
+        theme: "colored",
+      });
     }
   };
 

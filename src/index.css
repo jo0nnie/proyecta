@@ -4,36 +4,66 @@ utilizar temas personalizados. */
 /* http://tailwindcss.com/docs/theme */
 
 @theme {
- /* colores base */
-  --color-primary: oklch(78.46% 0.084 275.25); /* #A9B5EF */
-  --color-primary-400: oklch(55.34% 0.185 267.01); /* #4267DD */
-  --color-primary-500: oklch(34.55% 0.1 267.01); /* #2C4692 */
+  /* colores base */
+  --color-primary: oklch(78.46% 0.084 275.25);
+  /* #A9B5EF */
+  --color-primary-400: oklch(55.34% 0.185 267.01);
+  /* #4267DD */
+  --color-primary-500: oklch(34.55% 0.1 267.01);
+  /* #2C4692 */
 
-/* modo claro */
-  --color-light-background: oklch(78.46% 0.084 275.25); /* #A9B5EF */
-  --color-light-acceptbutton: oklch(55.34% 0.185 267.01); /* #4267DD */
-  --color-light-cancelbutton: oklch(34.55% 0.1 267.01); /* #2C4692 */
-  --color-light-logo: oklch(0% 0 0); /* #000000 */
-  --color-light-text: oklch(0% 0 0); /* #000000 */
+  /* modo claro */
+  --color-light-background: oklch(78.46% 0.084 275.25);
+  /* #A9B5EF */
+  --color-light-acceptbutton: oklch(55.34% 0.185 267.01);
+  /* #4267DD */
+  --color-light-cancelbutton: oklch(34.55% 0.1 267.01);
+  /* #2C4692 */
+  --color-light-logo: oklch(0% 0 0);
+  /* #000000 */
+  --color-light-text: oklch(0% 0 0);
+  /* #000000 */
 
-    /* modo oscuro */
-  --color-dark-background: oklch(55.34% 0.185 267.01); /* #4267DD */
-  --color-dark-acceptbutton: oklch(78.46% 0.084 275.25); /* #A9B5EF */
-  --color-dark-cancelbutton: oklch(27.41% 0.108 267.01); /* #1A267D */
-  --color-dark-logo: oklch(92.53% 0.034 273.48); /* #DADEF9 */
-  --color-dark-text: oklch(100% 0 0); /* #FFFFFF */
+  /* modo oscuro */
+  --color-dark-background: oklch(55.34% 0.185 267.01);
+  /* #4267DD */
+  --color-dark-acceptbutton: oklch(78.46% 0.084 275.25);
+  /* #A9B5EF */
+  --color-dark-cancelbutton: oklch(27.41% 0.108 267.01);
+  /* #1A267D */
+  --color-dark-logo: oklch(92.53% 0.034 273.48);
+  /* #DADEF9 */
+  --color-dark-text: oklch(100% 0 0);
+  /* #FFFFFF */
 
-/* tipografia de letra */
+  /* tipografia de letra */
   --font-family-inter: 'Inter', sans-serif;
 
-/* espaciados */
+  /* espaciados */
   --spacing-0: 0rem;
   --spacing-espaciado-sm: 0.5rem;
   --spacing-espaciado-md: 1rem;
   --spacing-espaciado-lg: 2rem;
 
-/* tamaño de fuente */
+  /* tamaño de fuente */
   --text-size-sm: 0.75rem;
   --text-size-base: 1rem;
   --text-size-xl: 1.5rem;
+
+  /* carrusel */
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 16px;
+    color: #2C4692;
+    font-weight: bold;
+  }
+
 }

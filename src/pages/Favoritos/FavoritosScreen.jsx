@@ -37,6 +37,7 @@ export default function FavoritosScreen() {
                 descripcion={item.descripcion}
                 categoria={item.categoria}
                 imagen={item.imagen}
+                boosted={item.boosted}
               />
             ))}
           </div>

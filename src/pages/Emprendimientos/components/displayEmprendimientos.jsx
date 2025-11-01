@@ -44,6 +44,7 @@ export default function DisplayEmprendimientos() {
             descripcion={item.descripcion}
             categoria={item.Categorias?.nombre || "Sin categoría"}
             imagen={item.imagen}
+            boosted={item.boosted}
           />
         ))}
       </div>

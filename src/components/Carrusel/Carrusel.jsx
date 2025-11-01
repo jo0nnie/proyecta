@@ -2,8 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import "./Carrusel.css";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import {
   FaDesktop,
   FaGift,
@@ -47,8 +46,7 @@ export default function Carrusel() {
   return (
     <div className="w-full mx-auto relative px-6">
       <Swiper
-        // TODO: Es necesario usar un css para este estilo? si no lo es borrarlo y usar tailwind
-        className="carrusel-container"
+        className="h-[120px] relative overflow-hidden"
         slidesPerView={5}
         navigation={true}
         modules={[Navigation]}
@@ -59,14 +57,12 @@ export default function Carrusel() {
             <SwiperSlide key={index}>
               <Link
                 to={cat.path}
-                className="flex flex-col items-center justify-center hover:scale-101 transition-transform"
+                className="flex flex-col items-center justify-center hover:scale-105 transition-transform duration-200"
               >
                 <Icon size={50} color={cat.color} />
-                <div>
-                  <span className="text-center mt-2 whitespace-pre-line text-black font-semibold">
-                    {cat.label}
-                  </span>
-                </div>
+                <span className="text-center mt-2 whitespace-pre-line text-black font-semibold">
+                  {cat.label}
+                </span>
               </Link>
             </SwiperSlide>
           );

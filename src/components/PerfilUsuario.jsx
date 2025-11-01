@@ -2,17 +2,13 @@ import { PiUserCircleFill } from "react-icons/pi";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import CardEmprendimiento from "./CardEmprendimiento";
-import BadgeBoost from "./BadgeBoost";
 
-// TODO hay props del usuario que no se estan usando
 const PerfilUsuario = ({ usuario }) => {
   const {
-    id,
     nombre = "",
     apellido = "",
     email,
     fechaNacimiento,
-    estado,
     emprendimiento = [],
   } = usuario;
   console.log(usuario)
@@ -70,14 +66,8 @@ const PerfilUsuario = ({ usuario }) => {
                   descripcion={emp.descripcion || "Sin descripción"}
                   categoria={emp.Categorias?.nombre || "Sin categoría"} 
                   imagen={emp.imagen}
+                  boosted={emp.boosted}
                 />
-
-                // TODO y esto?????
-                {emp.id === 998 && (
-                  <div className="absolute top-3 left-3">
-                    <BadgeBoost isBoosted={true} />
-                  </div>
-                )}
               </div>
             ))}
           </div>
