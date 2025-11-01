@@ -4,7 +4,10 @@ import TextField from "./TextField";
 import Button from "./Button";
 import { api } from "../api/api.js"; // instancia de Axios
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../store/slice/authSlice.js"
 export default function LoginForm({ title }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (evento) => {
@@ -18,9 +21,11 @@ export default function LoginForm({ title }) {
     try {
       const res = await api.post("/usuarios/login", data);
 
-      // Guardamos usuario y token en localStorage
-      localStorage.setItem("user", JSON.stringify(res.data.usuario));
-      localStorage.setItem("token", res.data.token);
+      dispatch(setCredentials({
+        token: res.data.token,
+        user: res.data.usuario,
+      }));
+
 
       toast.success("Bienvenido");
       navigate("/"); // redirige a la página principal
