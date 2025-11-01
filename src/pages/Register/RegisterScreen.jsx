@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, TextField } from "../../components";
 import { useNavigate } from "react-router";
 import { api } from "../../api/api.js";
-
+import { toast } from "react-toastify";
 const RegisterScreen = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -23,7 +23,7 @@ const RegisterScreen = () => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Las contraseñas no coinciden");
+      toast.warn('Las contraseñas no coinciden')
       return;
     }
 
@@ -36,13 +36,16 @@ const RegisterScreen = () => {
         fechaNacimiento: formData.fechaNacimiento,
       });
 
-      alert("Usuario registrado correctamente");
+      toast.success('Usuario registrado con éxito verifica tu correo')
       navigate("/auth/login");
       console.log(res.data);
-    } catch (err) {
+    } catch (error) {
       console.log(err);
       console.error(err);
-      alert("Error al registrar usuario");
+      const mensaje = error.response?.data?.mensaje || "Ocurrió un error inesperado";
+      toast.error(mensaje);
+
+
     }
   };
   return (
