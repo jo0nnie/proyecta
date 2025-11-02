@@ -24,7 +24,7 @@ export default function CategoriasScreen() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gray-100 px-6 py-8">
+    <main className="min-h-screen px-6 py-8">
       <h1 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-1 -mt-2 p-2 text-center">
         Categorías
       </h1>
