@@ -1,16 +1,11 @@
-import { useState, useEffect } from "react";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { Badge } from "./Badge";
 import { Link } from "react-router-dom";
 import { api } from "../api/api";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { toggleFavorito } from "../store/slice/favoritosSlice";
 
-/**
- * Renderiza:
- * - img, botón guardar, nombre, descripción, categoría
- * Props:
- * - nombre, descripcion, categoria, imagen, id
- */
 export default function CardEmprendimiento({
   nombre,
   descripcion,
@@ -18,40 +13,71 @@ export default function CardEmprendimiento({
   imagen,
   id,
 }) {
-  const [guardado, setGuardado] = useState(false);
-  const [favoritoId, setFavoritoId] = useState([]);
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    setGuardado(favorites.includes(id));
-  }, [id]);
+  const favoritos = useSelector((state) => state.favoritos.lista);
+  const favoritosSeguros = Array.isArray(favoritos) ? favoritos : [];
+  const guardado = favoritosSeguros.some(
+    (item) => item.emprendimientoId === id || item.emprendimiento?.id === id
+  );
 
-  const toggleGuardado = (e) => {
+  const handleToggleFavorito = async (e) => {
     e.preventDefault();
-
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    if (guardado) {
-      favorites = favorites.filter((favId) => favId !== id);
-    } else {
-      favorites.push(id);
+    if (!token) {
+      toast.error("Debes iniciar sesión para guardar favoritos");
+      return;
     }
 
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-    setGuardado(!guardado);
-  };
-
-  const toggleHistorial = async (e) => {
     try {
-      await api.post("/historial", { emprendimientoId: id });
+      const res = await api.post(
+        "/favoritos/toggle",
+        { emprendimientoId: id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (res.data.favorito) {
+        dispatch(toggleFavorito(res.data.favorito));
+      } else {
+        dispatch(toggleFavorito({ emprendimientoId: id }));
+      }
+
+      toast.success(
+        res.data.agregado ? "Agregado a favoritos" : "Quitado de favoritos"
+      );
     } catch (err) {
-      console.error(err);
+      console.error("Error al alternar favorito:", err);
+      toast.error("No se pudo actualizar el favorito");
     }
   };
+
+  // 🔒 Historial desactivado temporalmente
+  /*
+  const toggleHistorial = async () => {
+    if (!token) return;
+    try {
+      await api.post(
+        "/historial",
+        { emprendimientoId: id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (err) {
+      console.error("Error al registrar historial:", err);
+    }
+  };
+  */
 
   return (
     <Link
       to={`/emprendimientos/${id}`}
-      onClick={toggleHistorial}
+      // onClick={toggleHistorial} // ← desactivado por ahora
       className="block"
     >
       <div className="relative bg-white rounded-2xl shadow-md overflow-hidden w-full max-w-[360px] h-[360px] flex flex-col transform transition duration-300 ease-in-out hover:scale-101 hover:shadow-lg mb-3">
@@ -63,7 +89,7 @@ export default function CardEmprendimiento({
             className="object-cover h-full w-full"
           />
           <button
-            onClick={toggleGuardado}
+            onClick={handleToggleFavorito}
             className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
             aria-label={guardado ? "Quitar de favoritos" : "Añadir a favoritos"}
           >

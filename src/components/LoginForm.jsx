@@ -6,6 +6,7 @@ import { api, setAuthToken } from "../api/api.js"; // instancia de Axios
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/slice/authSlice.js"
+import { setFavoritos } from "../store/slice/favoritosSlice.js";
 export default function LoginForm({ title }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,26 +16,32 @@ export default function LoginForm({ title }) {
     const formData = new FormData(evento.target);
     const data = {
       email: formData.get("email"),
-      contrasena: formData.get("password"), // backend espera 'contrasena'
+      contrasena: formData.get("password"),
     };
 
     try {
       const res = await api.post("/usuarios/login", data);
-      dispatch(setCredentials({
-        token: res.data.token,
-        usuario: res.data.usuario,
-      }));
-      setAuthToken(res.data.token)
+      const { token, usuario } = res.data;
 
+      dispatch(setCredentials({ token, usuario }));
+      setAuthToken(token);
+
+      // 🔁 Sincronizar favoritos desde backend
+      const resFavoritos = await api.get("/favoritos", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(setFavoritos(resFavoritos.data));
 
       toast.success("Bienvenido");
-      console.log("Usuario logueado:", res.data.usuario);
-      navigate("/"); // redirige a la página principal
+      console.log("Usuario logueado:", usuario);
+      navigate("/");
     } catch (error) {
       const mensaje = error.response?.data?.error || "Usuario y/o contraseña incorrectos";
       toast.error(mensaje);
     }
   };
+
+
 
   return (
     <Container>
