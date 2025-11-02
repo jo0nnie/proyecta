@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { CardEmprendimiento } from "../../components";
 import { api } from "../../api/api";
-
+import { useSelector } from "react-redux";
 export default function FavoritosScreen() {
   const [favoritos, setFavoritos] = useState([]);
-  const token = localStorage.getItem("token");
-
+  const token = useSelector((state) => state.auth.token);
   useEffect(() => {
     api
       .get("/favoritos", {
@@ -57,8 +56,8 @@ export default function FavoritosScreen() {
           <p className="text-gray-600 text-center">
             Aún no tienes emprendimientos marcados como favoritos. Explora la página principal y añádelos!
           </p>
-        </div>        
-        )}
-    </>    
+        </div>
+      )}
+    </>
   );
 }

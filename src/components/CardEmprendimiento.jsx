@@ -3,6 +3,7 @@ import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { Badge } from "./Badge";
 import { Link } from "react-router-dom";
 import { api } from "../api/api";
+import { useSelector } from "react-redux";
 
 /**
  * Renderiza:
@@ -19,8 +20,7 @@ export default function CardEmprendimiento({
 }) {
   const [guardado, setGuardado] = useState(false);
   const [favoritoId, setFavoritoId] = useState([]);
-  const token = localStorage.getItem("token");
-
+  const token = useSelector((state) => state.auth.token);
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setGuardado(favorites.includes(id));
