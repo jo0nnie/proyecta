@@ -63,7 +63,7 @@ export const router = createBrowserRouter([
             element: <AjustesScreen />,
           },
           {
-            path: "/carrito/:id",
+            path: "/carrito",
             element: <PagoScreen />,
           },
           {
