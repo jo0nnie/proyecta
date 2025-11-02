@@ -74,7 +74,7 @@ const CrearEmprendimientoForm = () => {
         "Error en el envío:",
         error.response?.data || error.message
       );
-      const mensaje =error.response?.data?.msg ||error.response?.data?.error ||"Hubo un problema al enviar el formulario.";
+      const mensaje = error.response?.data?.msg || error.response?.data?.error || "Hubo un problema al enviar el formulario.";
       toast.error(mensaje);
     } finally {
       setEnviando(false);

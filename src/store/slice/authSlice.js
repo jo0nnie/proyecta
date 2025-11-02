@@ -39,7 +39,7 @@ export const {
   setUsuario,
   logout,
   actualizarUsuario,
-  setCredentials, // ✅ ahora sí podés importarlo
+  setCredentials, 
 } = authSlice.actions;
 
 export default authSlice.reducer;
