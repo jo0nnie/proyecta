@@ -25,8 +25,7 @@ export default function LoginForm({ title }) {
 
       dispatch(setCredentials({ token, usuario }));
       setAuthToken(token);
-
-      // 🔁 Sincronizar favoritos desde backend
+      // para restaurar favs
       const resFavoritos = await api.get("/favoritos", {
         headers: { Authorization: `Bearer ${token}` },
       });

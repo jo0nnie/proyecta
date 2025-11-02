@@ -1,11 +1,11 @@
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { Badge } from "./Badge";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { api } from "../api/api";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { toggleFavorito } from "../store/slice/favoritosSlice";
-
+import { useHistorial } from "../hooks/useHistorial";
 export default function CardEmprendimiento({
   nombre,
   descripcion,
@@ -16,13 +16,16 @@ export default function CardEmprendimiento({
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const favoritos = useSelector((state) => state.favoritos.lista);
+  const navigate = useNavigate()
+  const { registrarVisita } = useHistorial();
   const favoritosSeguros = Array.isArray(favoritos) ? favoritos : [];
   const guardado = favoritosSeguros.some(
     (item) => item.emprendimientoId === id || item.emprendimiento?.id === id
   );
 
   const handleToggleFavorito = async (e) => {
-    e.preventDefault();
+    e.stopPropagation();
+
     if (!token) {
       toast.error("Debes iniciar sesión para guardar favoritos");
       return;
@@ -45,17 +48,16 @@ export default function CardEmprendimiento({
         dispatch(toggleFavorito({ emprendimientoId: id }));
       }
 
-      toast.success(
-        res.data.agregado ? "Agregado a favoritos" : "Quitado de favoritos"
-      );
     } catch (err) {
       console.error("Error al alternar favorito:", err);
       toast.error("No se pudo actualizar el favorito");
     }
   };
-
-  // 🔒 Historial desactivado temporalmente
-  /*
+  const handleClickCard = async () => {
+    console.log("Click en card:", id);
+    if (token) await registrarVisita(id);
+    navigate(`/emprendimientos/${id}`);
+  };
   const toggleHistorial = async () => {
     if (!token) return;
     try {
@@ -72,13 +74,11 @@ export default function CardEmprendimiento({
       console.error("Error al registrar historial:", err);
     }
   };
-  */
 
   return (
-    <Link
-      to={`/emprendimientos/${id}`}
-      // onClick={toggleHistorial} // ← desactivado por ahora
-      className="block"
+    <div
+      onClick={handleClickCard}
+      className="block cursor-pointer"
     >
       <div className="relative bg-white rounded-2xl shadow-md overflow-hidden w-full max-w-[360px] h-[360px] flex flex-col transform transition duration-300 ease-in-out hover:scale-101 hover:shadow-lg mb-3">
         {/* Imagen */}
@@ -108,6 +108,6 @@ export default function CardEmprendimiento({
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
