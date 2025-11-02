@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Container from "./Container";
 import TextField from "./TextField";
 import Button from "./Button";
-import { api } from "../api/api.js"; // instancia de Axios
+import { api, setAuthToken } from "../api/api.js"; // instancia de Axios
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/slice/authSlice.js"
@@ -20,12 +20,11 @@ export default function LoginForm({ title }) {
 
     try {
       const res = await api.post("/usuarios/login", data);
-
       dispatch(setCredentials({
         token: res.data.token,
         usuario: res.data.usuario,
       }));
-
+      setAuthToken(res.data.token)
 
 
       toast.success("Bienvenido");

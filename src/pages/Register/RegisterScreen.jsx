@@ -40,8 +40,8 @@ const RegisterScreen = () => {
       navigate("/auth/login");
       console.log(res.data);
     } catch (error) {
-      console.log(err);
-      console.error(err);
+      console.log(error);
+      console.error(error);
       const mensaje = error.response?.data?.mensaje || "Ocurrió un error inesperado";
       toast.error(mensaje);
 
