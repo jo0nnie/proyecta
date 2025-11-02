@@ -3,8 +3,11 @@ import Container from "./Container";
 import TextField from "./TextField";
 import Button from "./Button";
 import { api } from "../api/api.js"; // instancia de Axios
-
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../store/slice/authSlice.js"
 export default function LoginForm({ title }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (evento) => {
@@ -18,15 +21,19 @@ export default function LoginForm({ title }) {
     try {
       const res = await api.post("/usuarios/login", data);
 
-      // Guardamos usuario y token en localStorage
-      localStorage.setItem("user", JSON.stringify(res.data.usuario));
-      localStorage.setItem("token", res.data.token);
+      dispatch(setCredentials({
+        token: res.data.token,
+        usuario: res.data.usuario,
+      }));
 
-      alert("Bienvenido");
+
+
+      toast.success("Bienvenido");
+      console.log("Usuario logueado:", res.data.usuario);
       navigate("/"); // redirige a la página principal
-    } catch (err) {
-      console.error(err.response?.data || err.message);
-      alert("Usuario y/o contraseña incorrectos");
+    } catch (error) {
+      const mensaje = error.response?.data?.error || "Usuario y/o contraseña incorrectos";
+      toast.error(mensaje);
     }
   };
 

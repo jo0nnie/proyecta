@@ -1,9 +1,14 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { api } from "../../../api/api";
-
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { useCategorias } from "../../../hooks/useCategorias";
+import { TextField, Button } from "../../../components";
 const CrearEmprendimientoForm = () => {
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
+  const { categorias, loading } = useCategorias();
   const [enviando, setEnviando] = useState(false);
   const [formData, setFormData] = useState({
     nombre: "",
@@ -11,9 +16,7 @@ const CrearEmprendimientoForm = () => {
     categoriaId: "",
     imagen: null,
   });
-
   const fileInputRef = useRef(null);
-
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "imagen") {
@@ -35,14 +38,13 @@ const CrearEmprendimientoForm = () => {
     e.preventDefault();
 
     if (!isFormValid() || enviando) {
-      alert("Por favor completá todos los campos obligatorios.");
+      toast.warn("Por favor completá todos los campos obligatorios.");
       return;
     }
     setEnviando(true);
 
     const data = new FormData();
-    const token = localStorage.getItem("token");
-    console.log(token)
+
     data.append("nombre", formData.nombre.trim());
     data.append("descripcion", formData.descripcion.trim());
     data.append("categoriaId", Number(formData.categoriaId));
@@ -58,7 +60,7 @@ const CrearEmprendimientoForm = () => {
         },
       });
       console.log("Respuesta del servidor:", response.data);
-      alert("¡Emprendimiento creado con éxito!");
+      toast.success("¡Emprendimiento creado con éxito!");
       setFormData({
         nombre: "",
         descripcion: "",
@@ -72,7 +74,8 @@ const CrearEmprendimientoForm = () => {
         "Error en el envío:",
         error.response?.data || error.message
       );
-      alert("Hubo un problema al enviar el formulario.");
+      const mensaje =error.response?.data?.msg ||error.response?.data?.error ||"Hubo un problema al enviar el formulario.";
+      toast.error(mensaje);
     } finally {
       setEnviando(false);
     }
@@ -86,29 +89,21 @@ const CrearEmprendimientoForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label
-          htmlFor="nombre"
-          className="block font-medium mb-1 text-[#2B4590]"
-        >
-          Nombre del emprendimiento *
-        </label>
-        <input
-          id="nombre"
-          type="text"
-          name="nombre"
-          value={formData.nombre}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
-          required
-        />
-      </div>
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
+      <TextField
+        label="Nombre del emprendimiento *"
+        type="text"
+        name="nombre"
+        placeholder="Nombre del emprendimiento"
+        value={formData.nombre}
+        onChange={handleChange}
+        required={true}
+      />
 
-      <div>
+      <div className="flex flex-col gap-2">
         <label
           htmlFor="descripcion"
-          className="block font-medium mb-1 text-[#2B4590]"
+          className="text-primary-500 text-size-base font-medium"
         >
           Descripción *
         </label>
@@ -117,15 +112,16 @@ const CrearEmprendimientoForm = () => {
           name="descripcion"
           value={formData.descripcion}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          placeholder="Describe tu emprendimiento"
+          className="border-2 border-primary-500 rounded-[10px] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#2C4692]"
           required
         />
       </div>
 
-      <div>
+      <div className="flex flex-col gap-2">
         <label
           htmlFor="categoriaId"
-          className="block font-medium mb-1 text-[#2B4590]"
+          className="text-primary-500 text-size-base font-medium"
         >
           Categoría *
         </label>
@@ -134,19 +130,24 @@ const CrearEmprendimientoForm = () => {
           name="categoriaId"
           value={formData.categoriaId}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="border-2 border-primary-500 rounded-[10px] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#2C4692]"
           required
         >
           <option value="">Seleccionar categoría</option>
-          <option value="1">Tecnología</option>
-          <option value="2">Arte</option>
-          <option value="3">Moda</option>
-          <option value="4">Gastronomía</option>
+          {loading ? (
+            <option disabled>Cargando categorías...</option>
+          ) : (
+            categorias.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.nombre}
+              </option>
+            ))
+          )}
         </select>
       </div>
 
-      <div>
-        <label className="block font-medium mb-1 text-[#2B4590]">
+      <div className="flex flex-col gap-2">
+        <label className="text-primary-500 text-size-base font-medium">
           Imagen del emprendimiento
         </label>
         <div className="flex items-center gap-2">
@@ -158,15 +159,13 @@ const CrearEmprendimientoForm = () => {
                 ? formData.imagen.name
                 : "Sin archivos seleccionados"
             }
-            className="flex-grow p-2 border border-gray-300 rounded bg-gray-100 text-sm text-gray-700"
+            className="flex-grow border-2 border-primary-500 rounded-[10px] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#2C4692] bg-gray-100 text-sm text-gray-700"
           />
-          <button
+          <Button
             type="button"
+            text="Seleccionar imagen"
             onClick={handleFileClick}
-            className="px-4 py-2 bg-[#2B4590] text-white rounded hover:bg-[#1f3266]"
-          >
-            Seleccionar archivo
-          </button>
+          />
           <input
             ref={fileInputRef}
             id="imagen"
@@ -179,13 +178,11 @@ const CrearEmprendimientoForm = () => {
         </div>
       </div>
 
-      <button
+      <Button
         type="submit"
+        text={enviando ? "Enviando" : "Crear"}
         disabled={!isFormValid() || enviando}
-        className="w-full py-2 bg-[#2B4590] text-white rounded hover:bg-[#1f3266] disabled:opacity-50"
-      >
-        {enviando ? "Enviando" : "Crear"}
-      </button>
+      />
     </form>
   );
 };

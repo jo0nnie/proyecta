@@ -1,3 +1,4 @@
+//usuario
 import LoginScreen from "./PerfilUsuario/Login/LoginScreen";
 import RegisterScreen from "./Register/RegisterScreen";
 import AjustesScreen from "./Ajustes/AjustesScreen";
@@ -9,10 +10,13 @@ import HomeScreen from "./Home/HomeScreen";
 import PagoScreen from "./Pago/PagoScreen";
 import PerfilEmprendimientosScreen from "./PerfilEmprendimiento/PerfilEmprendimientosScreen";
 import PerfilUsuarioScreen from "./PerfilUsuario/PerfilUsuarioScreen";
-import DashboardScreen from "./Dashboard/DashboardScreen";
 import CrearEmprendimientoScreen from "./Emprendimientos/CrearEmprendimientoScreen";
 import MetodosdePagoScreen from "./MetodosdePago/metodosdePagoScreen";
 import PlanesScreen from "./Planes/PlanesScreen";
+import RutasPrivadas from "./RutasPrivadas/RutasPrivadas";
+import VerificarEmailScreen from "./VerificarEmail/VerificarEmailScreen";
+//admin
+import DashboardScreen from "./Admin/Dashboard/DashboardScreen";
 export {
   LoginScreen,
   RegisterScreen,
@@ -28,5 +32,7 @@ export {
   DashboardScreen,
   CrearEmprendimientoScreen,
   MetodosdePagoScreen,
-  PlanesScreen
+  PlanesScreen,
+  RutasPrivadas,
+  VerificarEmailScreen
 };
