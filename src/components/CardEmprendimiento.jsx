@@ -18,6 +18,8 @@ export default function CardEmprendimiento({
   id,
 }) {
   const [guardado, setGuardado] = useState(false);
+  const [favoritoId, setFavoritoId] = useState([]);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
