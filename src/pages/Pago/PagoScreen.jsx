@@ -19,58 +19,118 @@ export default function PagoScreen() {
   const [loading, setLoading] = useState(true);
   const [emprendimientoActivoId, setEmprendimientoActivoId] = useState(null);
   const [boostearTodos, setBoostearTodos] = useState(false);
+
   const emprendimientosDelPerfil = usuario?.emprendimiento || [];
   const carritoItems = usuario?.carrito?.idCarritosItems || [];
   const carritosId = usuario?.carrito?.id;
 
+  const recargarUsuario = async () => {
+    try {
+      const res = await api.get("/usuarios/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUsuario(res.data.usuario || res.data);
+    } catch (err) {
+      console.error("Error al recargar usuario:", err.response?.data || err.message);
+      alert("Error al actualizar el carrito. Por favor, recarga la página.");
+    }
+  };
+
   useEffect(() => {
-    const cargarUsuarioConCarrito = async () => {
-      try {
-        const res = await api.get("/usuarios/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUsuario(res.data.usuario || res.data);
-
-        const emps = res.data.emprendimiento || [];
-        if (emps.length > 0 && !emprendimientoActivoId) {
-          setEmprendimientoActivoId(String(emps[0].id));
-        }
-      } catch (err) {
-        console.error(
-          "Error al cargar datos:",
-          err.response?.data || err.message
-        );
-        alert(
-          "No se pudieron cargar tus datos. Por favor, inicia sesión nuevamente."
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    cargarUsuarioConCarrito();
+    recargarUsuario();
   }, [token]);
 
-  if (loading) {
-    return <div className="text-center p-8">Cargando tu carrito...</div>;
-  }
+  useEffect(() => {
+    if (usuario && !emprendimientoActivoId) {
+      const emps = usuario.emprendimiento || [];
+      if (emps.length > 0) {
+        setEmprendimientoActivoId(String(emps[0].id));
+      }
+    }
+  }, [usuario, emprendimientoActivoId]);
+
+  useEffect(() => {
+    if (usuario) {
+      setLoading(false);
+    }
+  }, [usuario]);
 
   const emprendimientoActivo = emprendimientosDelPerfil.find(
     (e) => String(e.id) === String(emprendimientoActivoId)
   );
 
-  const agregarAlCarrito = (plan) => {
-    alert("Función de agregar al carrito aún no conectada. (Próximo paso)");
-    console.log("Agregar plan:", plan, "al carrito ID:", carritosId);
+  const agregarAlCarrito = async (plan) => {
+    if (!carritosId) {
+      alert("Carrito no disponible. Por favor, recarga la página.");
+      return;
+    }
+
+    const empsParaBoostear = boostearTodos
+      ? emprendimientosDelPerfil.map((e) => e.id)
+      : emprendimientoActivo
+        ? [emprendimientoActivo.id]
+        : [];
+
+    if (empsParaBoostear.length === 0) {
+      alert("Selecciona un emprendimiento primero.");
+      return;
+    }
+
+    try {
+      for (const empId of empsParaBoostear) {
+        const yaExiste = carritoItems.some(
+          (item) =>
+            item.planesId === plan.id &&
+            item.emprendimientos.some((e) => e.id === empId)
+        );
+
+        if (!yaExiste) {
+          await api.post("/carritos-items", {
+            carritosId,
+            planesId: plan.id,
+            emprendimientosIds: [empId],
+          });
+        }
+      }
+
+      await recargarUsuario();
+    } catch (err) {
+      console.error("Error al agregar al carrito:", err.response?.data || err.message);
+      alert("Error al agregar al carrito: " + (err.response?.data?.detalle || "intenta nuevamente"));
+    }
   };
 
-  const vaciarCarrito = () => {
-    alert("Vaciar carrito aún no implementado.");
+  const eliminarDelCarrito = async (index) => {
+    const item = carritoItems[index];
+    if (!item) return;
+
+    try {
+      await api.delete(`/carritos-items/${item.id}`);
+      await recargarUsuario();
+    } catch (err) {
+      console.error("Error al eliminar:", err.response?.data || err.message);
+      alert("Error al eliminar del carrito: " + (err.response?.data?.detalle || "intenta nuevamente"));
+    }
   };
 
-  const eliminarDelCarrito = (index) => {
-    alert("Eliminar item aún no implementado.");
+  const vaciarCarrito = async () => {
+    if (carritoItems.length === 0) return;
+    if (!window.confirm("¿Seguro que deseas vaciar todo el carrito?")) return;
+
+    try {
+      await Promise.all(
+        carritoItems.map((item) => api.delete(`/carritos-items/${item.id}`))
+      );
+      await recargarUsuario();
+    } catch (err) {
+      console.error("Error al vaciar carrito:", err.response?.data || err.message);
+      alert("Error al vaciar el carrito. Algunos items pueden haberse eliminado.");
+    }
   };
+
+  if (loading) {
+    return <div className="text-center p-8">Cargando tu carrito...</div>;
+  }
 
   return (
     <div>
@@ -137,11 +197,11 @@ export default function PagoScreen() {
           }`}
         >
           <nav className="border rounded-xl border-[#2B4590] w-full">
-            <p className="border-b border-[#2B4590] p-5">
+            <div className="border-b border-[#2B4590] p-5">
               <h1 className="flex justify-center font-bold">
                 Escoge tu Medio de Pago
               </h1>
-            </p>
+            </div>
             <ul className="flex flex-col m-5 items-center">
               <MetodoPagoCard />
             </ul>
