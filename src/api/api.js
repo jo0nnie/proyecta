@@ -3,6 +3,8 @@ import envConstant from "../utils/envConstant";
 import { useSelector } from "react-redux";
 
 
+const token = localStorage.getItem("token");
+
 export const api = axios.create({
   baseURL: envConstant.API_URL,
   timeout: 5000,
