@@ -39,9 +39,9 @@ export default function FavoritosScreen() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8 p-6">
-        {favoritos.length > 0 ? (
-          favoritos.map((item) => (
+      {favoritos.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8 p-6">
+          {favoritos.map((item) => (
             <CardEmprendimiento
               key={item.emprendimiento.id}
               id={item.emprendimiento.id}
@@ -50,13 +50,15 @@ export default function FavoritosScreen() {
               categoria={item.emprendimiento.Categorias.nombre}
               imagen={item.emprendimiento.imagen}
             />
-          ))
-        ) : (
-          <p className=" text-gray-600 text-center">
+          ))}
+        </div>
+      ) : (
+        <div className="w-full flex justify-center items-center p-6">
+          <p className="text-gray-600 text-center">
             Aún no tienes emprendimientos marcados como favoritos. Explora la página principal y añádelos!
           </p>
+        </div>        
         )}
-      </div>
-    </>
+    </>    
   );
 }
