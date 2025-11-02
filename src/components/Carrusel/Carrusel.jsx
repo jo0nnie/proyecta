@@ -7,42 +7,38 @@ import {
   FaDesktop,
   FaGift,
   FaHome,
+  FaPaintBrush,
   FaTshirt,
   FaUtensils,
 } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
-
-// TODO esto ya no deberia estar mockeado... usar categorias existentes en la BD
-const categories = [
-  {
-    icon: FaDesktop,
-    label: "Tecnología",
-    path: "/categorias#tecnologia",
-    color: "#2C4692",
-  },
-  { icon: FaTshirt, label: "Moda", path: "/categorias#moda", color: "#2C4692" },
-  { icon: FaHome, label: "Hogar", path: "/categorias#hogar", color: "#2C4692" },
-  {
-    icon: FaUtensils,
-    label: "Gastronomía",
-    path: "/categorias#gastronomia",
-    color: "#2C4692",
-  },
-  {
-    icon: MdFavorite,
-    label: "Salud y Bienestar",
-    path: "/categorias#salud-y-bienestar",
-    color: "#2C4692",
-  },
-  {
-    icon: FaGift,
-    label: "Diseños y regalos",
-    path: "/categorias#disenos-y-regalos",
-    color: "#2C4692",
-  },
-];
+import { useEffect, useState } from "react";
+import { api } from "../../api/api";
 
 export default function Carrusel() {
+  const [categorias, setCategorias] = useState([]);
+  const categoriaIcon = {
+    Tecnología: FaDesktop,
+    Arte: FaPaintBrush,
+    Moda: FaTshirt,
+    Gastronomía: FaUtensils,
+    Hogar: FaHome,
+    "Salud y Bienestar": MdFavorite,
+    Regalos: FaGift,
+  };
+
+  useEffect(() => {
+    api.get("/categorias").then((res) => {
+      const data = res.data.categorias.map((cat) => ({
+        icon: categoriaIcon[cat.nombre] || FaGift,
+        label: cat.nombre,
+        path: `/categorias#${cat.nombre?.toLowerCase().replace(/\s+/g, "-")}`,
+        color: "#2C4692",
+      }));
+      setCategorias(data);
+    });
+  }, []);
+
   return (
     <div className="w-full mx-auto relative px-6">
       <Swiper
@@ -51,7 +47,7 @@ export default function Carrusel() {
         navigation={true}
         modules={[Navigation]}
       >
-        {categories.map((cat, index) => {
+        {categorias.map((cat, index) => {
           const Icon = cat.icon;
           return (
             <SwiperSlide key={index}>
