@@ -22,56 +22,38 @@ export default function CardEmprendimiento({
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    api
-      .get("/favoritos", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        console.log("Favoritos recibidos:", res.data);
-        if (Array.isArray(res.data)) {
-          const favorito = res.data.find((fav) => fav.emprendimiento.id === id);
-          if (favorito) {
-            setGuardado(true);
-            setFavoritoId(favorito.id); // ← nuevo estado
-          }
-        }
-      })
-      .catch((err) => {
-        console.error("Error al obtener favoritos: ", err);
-      });
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setGuardado(favorites.includes(id));
   }, [id]);
 
-  const toggleGuardado = async (e) => {
+  const toggleGuardado = (e) => {
     e.preventDefault();
 
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    if (guardado) {
+      favorites = favorites.filter((favId) => favId !== id);
+    } else {
+      favorites.push(id);
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    setGuardado(!guardado);
+  };
+
+  const toggleHistorial = async (e) => {
     try {
-      if (guardado) {
-        await api.delete(`/favoritos/${favoritoId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      } else {
-        await api.post(
-          "/favoritos",
-          { emprendimientoId: id },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-      }
-      setGuardado(!guardado);
+      await api.post("/historial", { emprendimientoId: id });
     } catch (err) {
-      console.error("Error al actualizar favorito: ", err);
+      console.error(err);
     }
   };
 
   return (
-    <Link to={`/emprendimientos/${id}`} className="block">
+    <Link
+      to={`/emprendimientos/${id}`}
+      onClick={toggleHistorial}
+      className="block"
+    >
       <div className="relative bg-white rounded-2xl shadow-md overflow-hidden w-full max-w-[360px] h-[360px] flex flex-col transform transition duration-300 ease-in-out hover:scale-101 hover:shadow-lg mb-3">
         {/* Imagen */}
         <div className="relative h-48 w-full shrink-0">
