@@ -4,6 +4,7 @@ import AuthLayout from "./components/layouts/AuthLayout";
 import MainLayout from "./components/layouts/MainLayout/MainLayout";
 import EditarPerfil from "./pages/PerfilUsuario/EditarPerfilUsuarioScreen";
 import { ROLES } from './constants/roles'
+import CrearPlan from "./pages/Admin/CrearPlan/CrearPlan";
 
 
 
@@ -107,7 +108,14 @@ export const router = createBrowserRouter([
                 <DashboardScreen />,
               </RutasPrivadas>),
           },
-
+          {
+            path: "/crear-plan",
+              element:
+              (<RutasPrivadas rolesPermitidos={ROLES.ADMIN}>
+                <CrearPlan />,
+              </RutasPrivadas>),
+          },
+          
         ],
       },
     ],

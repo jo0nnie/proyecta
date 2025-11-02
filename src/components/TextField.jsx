@@ -9,7 +9,7 @@
  * Envia un console.log de los datos ingresados en los inputs
  */
 
-export default function TextField({ label, type, name, placeholder, value, onChange, onInput, maxLength  }) {
+export default function TextField({ label, type, name, placeholder, value, onChange, onInput, maxLength, required  }) {
     return (
         <div className="flex flex-col gap-2">
             <label
@@ -18,7 +18,7 @@ export default function TextField({ label, type, name, placeholder, value, onCha
             >
                 {label}
             </label>
-            <input type={type} name={name} placeholder={placeholder} maxLength= {maxLength} onInput={onInput} value={value} onChange={onChange}
+            <input type={type} name={name} placeholder={placeholder} maxLength= {maxLength} onInput={onInput} value={value} onChange={onChange} required={required}
                 className="border-2 border-primary-500 rounded-[10px] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#2C4692]"
             />
         </div>

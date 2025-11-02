@@ -1,6 +1,6 @@
 export default function Button({ type, text, onClick, variante = "dark", disabled = false }) {
-  const VariantedeColor =
-    variante === "dark" ? "bg-primary-500" : "bg-primary-400";
+  const VariantedeColor = disabled
+    ? "bg-gray-400 cursor-not-allowed": variante === "dark" ? "bg-primary-500" : "bg-primary-400";
 
   return (
     <div>

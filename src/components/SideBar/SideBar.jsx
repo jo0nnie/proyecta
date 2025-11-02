@@ -4,7 +4,8 @@ import { configUser, configDrop, configAdmin, configPublic } from "./config";
 import { SideBarItem, SideBarDropItem } from "./SideBarItem";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/slice/authSlice";
-import {ROLES} from '../../constants/roles'
+import { ROLES } from '../../constants/roles'
+import { api } from "../../api/api";
 export default function SideBar({ isOpen, onClose }) {
   const sidebarRef = useRef();
   const navigate = useNavigate();
@@ -22,12 +23,20 @@ export default function SideBar({ isOpen, onClose }) {
 
 
 
-  const handleLogout = () => {
-    dispatch(logout());
-    onClose();
-    navigate("/");
-  };
+  const handleLogout = async () => {
+    try {
+      await api.post("/usuarios/logout", {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
+      dispatch(logout());
+      navigate("/");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  };
 
 
   useEffect(() => {
@@ -84,7 +93,7 @@ export default function SideBar({ isOpen, onClose }) {
           <SideBarDropItem
             text="Ajustes"
             items={configDrop}
-            onClose={onClose} 
+            onClose={onClose}
           />
         )}
 

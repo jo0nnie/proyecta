@@ -25,6 +25,7 @@ export const configAdmin = [
   { title: "Favoritos", path: "/favoritos" },
   { title: "Historial", path: "/historial" },
   { title: "Dashboard", path: "/dashboard" },
+  { title: "Crear Plan", path: "/crear-plan" },
   { title: "Planes", path: "/infoplanes" },
   { title: "Nosotros", path: "/sobre-nosotros" }
 ];
