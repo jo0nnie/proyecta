@@ -11,7 +11,7 @@ import PerfilEmprendimientosScreen from "./PerfilEmprendimiento/PerfilEmprendimi
 import PerfilUsuarioScreen from "./PerfilUsuario/PerfilUsuarioScreen";
 import DashboardScreen from "./Dashboard/DashboardScreen";
 import CrearEmprendimientoScreen from "./Emprendimientos/CrearEmprendimientoScreen";
-import MetodosdePagoScreen from "./MetodosdePago/metodosdePagoScreen";
+import MetodosdePagoScreen from "./MetodosdePago/MetodosdePagoScreen";
 import PlanesScreen from "./Planes/PlanesScreen";
 export {
   LoginScreen,

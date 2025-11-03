@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import {
   PlanCard,
-  MetodoPagoCard,
   CarritoResumen,
-  SelectorEmprendimiento,
+  SelectorMetodoPago,
   DetallePago,
 } from "../../components";
 import planes from "../../utils/planesMock";
@@ -31,7 +30,10 @@ export default function PagoScreen() {
       });
       setUsuario(res.data.usuario || res.data);
     } catch (err) {
-      console.error("Error al recargar usuario:", err.response?.data || err.message);
+      console.error(
+        "Error al recargar usuario:",
+        err.response?.data || err.message
+      );
       alert("Error al actualizar el carrito. Por favor, recarga la página.");
     }
   };
@@ -68,8 +70,8 @@ export default function PagoScreen() {
     const empsParaBoostear = boostearTodos
       ? emprendimientosDelPerfil.map((e) => e.id)
       : emprendimientoActivo
-        ? [emprendimientoActivo.id]
-        : [];
+      ? [emprendimientoActivo.id]
+      : [];
 
     if (empsParaBoostear.length === 0) {
       alert("Selecciona un emprendimiento primero.");
@@ -85,7 +87,7 @@ export default function PagoScreen() {
         );
 
         if (!yaExiste) {
-          await api.post("/carritos-items", {
+          await api.post("/items", {
             carritosId,
             planesId: plan.id,
             emprendimientosIds: [empId],
@@ -95,8 +97,14 @@ export default function PagoScreen() {
 
       await recargarUsuario();
     } catch (err) {
-      console.error("Error al agregar al carrito:", err.response?.data || err.message);
-      alert("Error al agregar al carrito: " + (err.response?.data?.detalle || "intenta nuevamente"));
+      console.error(
+        "Error al agregar al carrito:",
+        err.response?.data || err.message
+      );
+      alert(
+        "Error al agregar al carrito: " +
+          (err.response?.data?.detalle || "intenta nuevamente")
+      );
     }
   };
 
@@ -105,11 +113,14 @@ export default function PagoScreen() {
     if (!item) return;
 
     try {
-      await api.delete(`/carritos-items/${item.id}`);
+      await api.delete(`/items/${item.id}`);
       await recargarUsuario();
     } catch (err) {
       console.error("Error al eliminar:", err.response?.data || err.message);
-      alert("Error al eliminar del carrito: " + (err.response?.data?.detalle || "intenta nuevamente"));
+      alert(
+        "Error al eliminar del carrito: " +
+          (err.response?.data?.detalle || "intenta nuevamente")
+      );
     }
   };
 
@@ -123,8 +134,13 @@ export default function PagoScreen() {
       );
       await recargarUsuario();
     } catch (err) {
-      console.error("Error al vaciar carrito:", err.response?.data || err.message);
-      alert("Error al vaciar el carrito. Algunos items pueden haberse eliminado.");
+      console.error(
+        "Error al vaciar carrito:",
+        err.response?.data || err.message
+      );
+      alert(
+        "Error al vaciar el carrito. Algunos items pueden haberse eliminado."
+      );
     }
   };
 
@@ -203,7 +219,12 @@ export default function PagoScreen() {
               </h1>
             </div>
             <ul className="flex flex-col m-5 items-center">
-              <MetodoPagoCard />
+              <SelectorMetodoPago
+                token={token}
+                onSelect={(idMetodo) =>
+                  console.log("Seleccionaste método:", idMetodo)
+                }
+              />
             </ul>
           </nav>
           <DetallePago />
