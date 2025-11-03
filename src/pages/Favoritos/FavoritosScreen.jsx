@@ -1,22 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
 import { CardEmprendimiento } from "../../components";
-import emprendimientos from "../../utils/emprendimientoMock.json";
 
 export default function FavoritosScreen() {
-  const [favoriteEmprendimientos, setFavoriteEmprendimientos] = useState([]);
-
-  useEffect(() => {
-    // obtiene los IDs de los favoritos desde localStorage
-    const favoriteIds = JSON.parse(localStorage.getItem('favorites')) || [];
-
-    // filtra la lista completa de emprendimientos para obtener solo los favoritos
-    const filteredEmprendimientos = emprendimientos.filter(item =>
-      favoriteIds.includes(item.id) // usamos el 'id' para filtrar
-    );
-
-    setFavoriteEmprendimientos(filteredEmprendimientos);
-
-  }, []);
+  const favoritos = useSelector((state) => state.favoritos.lista || []);
 
   return (
     <div className="flex flex-col flex-1 min-h-full">
@@ -27,18 +13,21 @@ export default function FavoritosScreen() {
 
       {/* Contenido */}
       <div className="flex-1 flex flex-col items-center">
-        {favoriteEmprendimientos.length > 0 ? (
+        {favoritos.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 md:px-6 lg:px-8 py-6 w-full">
-            {favoriteEmprendimientos.map((item) => (
-              <CardEmprendimiento
-                key={item.id}
-                id={item.id}
-                nombre={item.nombre}
-                descripcion={item.descripcion}
-                categoria={item.categoria}
-                imagen={item.imagen}
-              />
-            ))}
+            {favoritos.map((item) => {
+              const emp = item.emprendimiento || item; // por si guardás solo el objeto o { emprendimiento }
+              return (
+                <CardEmprendimiento
+                  key={emp.id}
+                  id={emp.id}
+                  nombre={emp.nombre}
+                  descripcion={emp.descripcion}
+                  categoria={emp.categoria}
+                  imagen={emp.imagen}
+                />
+              );
+            })}
           </div>
         ) : (
           <p className="p-6 text-gray-600 text-center">

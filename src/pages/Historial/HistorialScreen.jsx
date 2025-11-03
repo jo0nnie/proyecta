@@ -1,35 +1,77 @@
-import { CardEmprendimiento } from "../../components";
-import emprendimientos from "../../utils/emprendimientoMock.json";
-
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { CardEmprendimiento, Button } from "../../components";
+import { api } from "../../api/api";
+import { toast } from "react-toastify";
 export default function HistorialScreen() {
+  const token = useSelector((state) => state.auth.token);
+  const [historial, setHistorial] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  //cree una variable para mostrar, a modo de ejemplo, un solo emprendimiento en la pagina del historial
-  const emprendimientoEjemplo = emprendimientos.filter(item => item.id > "5");
+  const fetchHistorial = async () => {
+    if (!token) return;
+    setLoading(true);
+    try {
+      const res = await api.get("/historial", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setHistorial(res.data);
+    } catch (err) {
+      console.error("Error al obtener historial:", err);
+      toast.error("No se pudo cargar el historial");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const limpiarHistorial = async () => {
+    if (!token) return;
+    try {
+      await api.delete("/historial", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setHistorial([]);
+      toast.success("Historial limpiado");
+    } catch (err) {
+      console.error("Error al limpiar historial:", err);
+      toast.error("No se pudo limpiar el historial");
+    }
+  };
+
+  useEffect(() => {
+    fetchHistorial();
+  }, [token]);
+
   return (
     <>
-      <div>
-        <h1 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-2 p-2 text-center">Historial</h1>
-        <div className="ml-7 mr-7 mb-6">
-          <p className=" text-gray-600 text-center">
-            Emprendimientos que has visitado recientemente.
-          </p>
-          <div className="absolute left-0 right-0 border-b border-[#2C4692] pt-4"></div>
-        </div>
+      <h1 className="text-3xl font-bold text-[#2C4692] text-center mt-4">Historial</h1>
+      <p className="text-gray-600 text-center mb-4">Emprendimientos que visitaste.</p>
+
+      <div className="flex justify-center mb-6">
+        <Button text="Limpiar historial" onClick={limpiarHistorial} />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8 p-6">
-        {emprendimientoEjemplo.map((item) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 pb-6">
+        {historial.length > 0 ? (
+          historial.map((item) => {
+            const emp = item.emprendimiento;
+            return (
               <CardEmprendimiento
-                key={item.id}
-                id={item.id}
-                nombre={item.nombre}
-                descripcion={item.descripcion}
-                categoria={item.categoria}
-                imagen={item.imagen}
+                key={emp.id}
+                id={emp.id}
+                nombre={emp.nombre}
+                descripcion={emp.descripcion}
+                categoria={emp.Categorias?.nombre}
+                imagen={emp.imagen}
               />
-            ))}
+            );
+          })
+        ) : (
+          <p className="text-center text-gray-500 col-span-full">
+            Aún no has visitado ningún emprendimiento.
+          </p>
+        )}
       </div>
     </>
   );
 }
-
