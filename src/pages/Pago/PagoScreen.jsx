@@ -4,14 +4,17 @@ import {
   CarritoResumen,
   SelectorMetodoPago,
   DetallePago,
+  SelectorEmprendimiento
 } from "../../components";
 import { api } from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
 import { usePlanes } from "../../hooks/usePlanes";
+import { useEmprendimientosUsuario } from "../../hooks/useEmprendimientosUsuario";
 export default function PagoScreen() {
 
   const token = useSelector((state) => state.auth.token);
   const usuario = useSelector((state) => state.auth.usuario);
+  const { emprendimientos, loading, error } = useEmprendimientosUsuario(token);
   const { planes, loading: loadingPlanes, error: errorPlanes } = usePlanes();
 
 

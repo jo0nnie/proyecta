@@ -3,6 +3,8 @@ import Button from "./Button";
 import { Link } from "react-router-dom";
 import CardEmprendimiento from "./CardEmprendimiento";
 import BadgeBoost from "./BadgeBoost";
+import { useSelector } from "react-redux";
+import { useEmprendimientosUsuario } from "../hooks/useEmprendimientosUsuario";
 
 const PerfilUsuario = ({ usuario }) => {
   const {
@@ -12,13 +14,13 @@ const PerfilUsuario = ({ usuario }) => {
     email,
     fechaNacimiento,
     estado,
-    emprendimiento = [],
   } = usuario;
   console.log(usuario)
   const nombreCompleto =
     [nombre, apellido].filter(Boolean).join(" ") || "Usuario";
   const descripcion = "";
-
+  const token = useSelector((state) => state.auth.token);
+  const { emprendimientos, loading, error } = useEmprendimientosUsuario(token);
   const dateRegister = fechaNacimiento
     ? new Date(fechaNacimiento).toLocaleDateString()
     : "No especificada";
@@ -58,16 +60,19 @@ const PerfilUsuario = ({ usuario }) => {
         <p className="font-semibold text-[#2B4590] mb-3 ml-1">
           Mis emprendimientos:
         </p>
-
-        {emprendimiento.length > 0 ? (
+        {loading ? (
+          <p className="text-gray-500 ml-1">Cargando emprendimientos...</p>
+        ) : error ? (
+          <p className="text-red-500 ml-1">{error}</p>
+        ) : emprendimientos.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-1">
-            {emprendimiento.map((emp) => (
+            {emprendimientos.map((emp) => (
               <div key={emp.id} className="relative">
                 <CardEmprendimiento
                   id={emp.id}
                   nombre={emp.nombre}
                   descripcion={emp.descripcion || "Sin descripción"}
-                  categoria={emp.Categorias?.nombre || "Sin categoría"} 
+                  categoria={emp.Categorias?.nombre || "Sin categoría"}
                   imagen={emp.imagen}
                 />
                 {emp.id === 998 && (
