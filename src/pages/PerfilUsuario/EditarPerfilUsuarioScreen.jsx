@@ -3,9 +3,15 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import AjusteItem from "../Ajustes/components/AjusteItem";
 import { api } from "../../api/api";
+import { useSelector, useDispatch } from "react-redux";
+import { actualizarUsuario, logout } from "../../store/slice/authSlice"; 
 
 const EditarPerfil = () => {
   const navegar = useNavigate();
+  const dispatch = useDispatch();
+
+  const token = useSelector((state) => state.auth.token);
+  const usuarioGlobal = useSelector((state) => state.auth.usuario);
 
   const [datosDelUsuario, setDatosDelUsuario] = useState({
     nombre: "",
@@ -19,7 +25,6 @@ const EditarPerfil = () => {
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (!token) {
       alert("Sesión expirada. Por favor, inicia sesión nuevamente.");
       navegar("/auth/login");
@@ -43,10 +48,7 @@ const EditarPerfil = () => {
             : "",
         });
       } catch (error) {
-        console.error(
-          "Error al cargar el perfil:",
-          error.response?.data || error.message
-        );
+        console.error("Error al cargar el perfil:", error.response?.data || error.message);
         alert(error.response?.data?.msg || "Error al cargar el perfil");
         navegar("/perfil");
       } finally {
@@ -55,14 +57,13 @@ const EditarPerfil = () => {
     };
 
     cargarPerfil();
-  }, [navegar]);
+  }, [token, navegar]);
 
   const manejarCambioEnCampo = (campo, valor) => {
     setDatosDelUsuario((prev) => ({ ...prev, [campo]: valor }));
   };
 
   const manejarClickEnGuardar = async (campo) => {
-    const token = localStorage.getItem("token");
     if (!token) {
       alert("Sesión expirada");
       navegar("/auth/login");
@@ -78,9 +79,7 @@ const EditarPerfil = () => {
       }
       datosParaEnviar.contrasena = datosDelUsuario.contrasena;
     } else if (campo === "fechaNacimiento" && datosDelUsuario.fechaNacimiento) {
-      datosParaEnviar.fechaNacimiento = new Date(
-        datosDelUsuario.fechaNacimiento
-      ).toISOString();
+      datosParaEnviar.fechaNacimiento = new Date(datosDelUsuario.fechaNacimiento).toISOString();
     } else {
       datosParaEnviar[campo] = datosDelUsuario[campo];
     }
@@ -92,6 +91,11 @@ const EditarPerfil = () => {
 
       alert(`Campo "${campo}" actualizado correctamente`);
       setCampoEnEdicion(null);
+
+      // Actualizar usuario en el store si corresponde
+      if (campo !== "contrasena") {
+        dispatch(actualizarUsuario({ ...usuarioGlobal, ...datosParaEnviar }));
+      }
     } catch (error) {
       console.error("Error al guardar:", error.response?.data || error.message);
       alert(error.response?.data?.msg || "Error al guardar los cambios");
@@ -101,19 +105,15 @@ const EditarPerfil = () => {
   const manejarClickEnEliminarCuenta = async () => {
     if (!window.confirm("¿Estás seguro? Esta acción es irreversible.")) return;
 
-    const token = localStorage.getItem("token");
     try {
       await api.delete("/usuarios/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Cuenta eliminada correctamente");
-      localStorage.removeItem("token");
+      dispatch(logout()); // limpia token y usuario del store
       navegar("/");
     } catch (error) {
-      console.error(
-        "Error al eliminar cuenta:",
-        error.response?.data || error.message
-      );
+      console.error("Error al eliminar cuenta:", error.response?.data || error.message);
       alert(error.response?.data?.msg || "Error al eliminar la cuenta");
     }
   };
@@ -122,60 +122,50 @@ const EditarPerfil = () => {
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-[#2C4391] text-center mb-4">
-        Editar Perfil
-      </h1>
+      <h1 className="text-2xl font-bold text-[#2C4391] text-center mb-4">Editar Perfil</h1>
 
-      {["nombre", "apellido", "email", "fechaNacimiento", "contrasena"].map(
-        (campo) => (
-          <AjusteItem
-            key={campo}
-            titulo={
-              campo === "fechaNacimiento"
-                ? "Fecha de nacimiento"
-                : campo.charAt(0).toUpperCase() + campo.slice(1)
-            }
-          >
+      {["nombre", "apellido", "email", "fechaNacimiento", "contrasena"].map((campo) => (
+        <AjusteItem
+          key={campo}
+          titulo={
+            campo === "fechaNacimiento"
+              ? "Fecha de nacimiento"
+              : campo.charAt(0).toUpperCase() + campo.slice(1)
+          }
+        >
+          {campoEnEdicion === campo ? (
+            <input
+              type={
+                campo === "contrasena"
+                  ? "password"
+                  : campo === "email"
+                  ? "email"
+                  : campo === "fechaNacimiento"
+                  ? "date"
+                  : "text"
+              }
+              value={datosDelUsuario[campo] || ""}
+              onChange={(e) => manejarCambioEnCampo(campo, e.target.value)}
+              className="border border-gray-300 rounded-md px-2 py-1 w-full"
+            />
+          ) : (
+            <p>
+              {campo === "contrasena"
+                ? "********"
+                : campo === "fechaNacimiento" && datosDelUsuario[campo]
+                ? new Date(datosDelUsuario[campo]).toLocaleDateString()
+                : datosDelUsuario[campo] || "No establecido"}
+            </p>
+          )}
+          <div className="mt-2 flex justify-end">
             {campoEnEdicion === campo ? (
-              <input
-                type={
-                  campo === "contrasena"
-                    ? "password"
-                    : campo === "email"
-                    ? "email"
-                    : campo === "fechaNacimiento"
-                    ? "date"
-                    : "text"
-                }
-                value={datosDelUsuario[campo] || ""}
-                onChange={(e) => manejarCambioEnCampo(campo, e.target.value)}
-                className="border border-gray-300 rounded-md px-2 py-1 w-full"
-              />
+              <Button text="Guardar" onClick={() => manejarClickEnGuardar(campo)} />
             ) : (
-              <p>
-                {campo === "contrasena"
-                  ? "********"
-                  : campo === "fechaNacimiento" && datosDelUsuario[campo]
-                  ? new Date(datosDelUsuario[campo]).toLocaleDateString()
-                  : datosDelUsuario[campo] || "No establecido"}
-              </p>
+              <Button text="Editar" onClick={() => setCampoEnEdicion(campo)} />
             )}
-            <div className="mt-2 flex justify-end">
-              {campoEnEdicion === campo ? (
-                <Button
-                  text="Guardar"
-                  onClick={() => manejarClickEnGuardar(campo)}
-                />
-              ) : (
-                <Button
-                  text="Editar"
-                  onClick={() => setCampoEnEdicion(campo)}
-                />
-              )}
-            </div>
-          </AjusteItem>
-        )
-      )}
+          </div>
+        </AjusteItem>
+      ))}
 
       <AjusteItem
         titulo="Eliminar cuenta"

@@ -2,9 +2,13 @@ import { useNavigate } from "react-router-dom";
 import Container from "./Container";
 import TextField from "./TextField";
 import Button from "./Button";
-import { api } from "../api/api.js"; // instancia de Axios
-
+import { api, setAuthToken } from "../api/api.js"; // instancia de Axios
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../store/slice/authSlice.js"
+import { setFavoritos } from "../store/slice/favoritosSlice.js";
 export default function LoginForm({ title }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (evento) => {
@@ -12,23 +16,31 @@ export default function LoginForm({ title }) {
     const formData = new FormData(evento.target);
     const data = {
       email: formData.get("email"),
-      contrasena: formData.get("password"), // backend espera 'contrasena'
+      contrasena: formData.get("password"),
     };
 
     try {
       const res = await api.post("/usuarios/login", data);
+      const { token, usuario } = res.data;
 
-      // Guardamos usuario y token en localStorage
-      localStorage.setItem("user", JSON.stringify(res.data.usuario));
-      localStorage.setItem("token", res.data.token);
+      dispatch(setCredentials({ token, usuario }));
+      setAuthToken(token);
+      // para restaurar favs
+      const resFavoritos = await api.get("/favoritos", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(setFavoritos(resFavoritos.data));
 
-      alert("Bienvenido");
-      navigate("/"); // redirige a la página principal
-    } catch (err) {
-      console.error(err.response?.data || err.message);
-      alert("Usuario y/o contraseña incorrectos");
+      toast.success("Bienvenido");
+      console.log("Usuario logueado:", usuario);
+      navigate("/");
+    } catch (error) {
+      const mensaje = error.response?.data?.error || "Usuario y/o contraseña incorrectos";
+      toast.error(mensaje);
     }
   };
+
+
 
   return (
     <Container>

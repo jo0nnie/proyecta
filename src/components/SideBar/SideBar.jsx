@@ -1,27 +1,47 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { configPublic, configPrivate, configDrop } from "./config";
+import { configUser, configDrop, configAdmin, configPublic } from "./config";
 import { SideBarItem, SideBarDropItem } from "./SideBarItem";
-
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../store/slice/authSlice";
+import { ROLES } from '../../constants/roles'
+import { api } from "../../api/api";
 export default function SideBar({ isOpen, onClose }) {
   const sidebarRef = useRef();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-  const config = token ? configPrivate : configPublic;
+  const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    onClose();
-    navigate("/");
+  const token = useSelector((state) => state.auth.token);
+  const usuario = useSelector((state) => state.auth.usuario);
+
+  let config = configPublic;
+
+  if (token && usuario) {
+    config = usuario.rol === ROLES.ADMIN ? configAdmin : configUser;
+  }
+
+
+
+
+  const handleLogout = async () => {
+    try {
+      await api.post("/usuarios/logout", {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      dispatch(logout());
+      navigate("/");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
   };
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        sidebarRef.current &&
-        !sidebarRef.current.contains(event.target)
-      ) {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         onClose();
       }
     };
@@ -35,12 +55,13 @@ export default function SideBar({ isOpen, onClose }) {
     };
   }, [isOpen, onClose]);
 
+
+
   return (
     <div
       ref={sidebarRef}
-      className={`fixed top-0 left-0 h-full w-64 bg-[#2C4391] text-white transform ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
-      } transition-transform duration-300 ease-in-out z-40 shadow-lg flex flex-col`}
+      className={`fixed top-0 left-0 h-full w-64 bg-[#2C4391] text-white transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out z-40 shadow-lg flex flex-col`}
     >
       {/* Header */}
       <div className="p-4 flex justify-between items-center border-b border-white">
@@ -72,7 +93,7 @@ export default function SideBar({ isOpen, onClose }) {
           <SideBarDropItem
             text="Ajustes"
             items={configDrop}
-            onClose={onClose} // ✅ corregido
+            onClose={onClose}
           />
         )}
 
