@@ -10,23 +10,19 @@ import { api } from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
 import { usePlanes } from "../../hooks/usePlanes";
 import { useEmprendimientosUsuario } from "../../hooks/useEmprendimientosUsuario";
+import { setUsuario } from "../../store/slice/authSlice";
 export default function PagoScreen() {
-
   const token = useSelector((state) => state.auth.token);
   const usuario = useSelector((state) => state.auth.usuario);
   const { emprendimientos, loading, error } = useEmprendimientosUsuario(token);
+  const emprendimientosDelPerfil = emprendimientos || [];
   const { planes, loading: loadingPlanes, error: errorPlanes } = usePlanes();
 
-
   const dispatch = useDispatch();
-  if (!token) {
-    return <div className="text-center p-8">No estás autenticado.</div>;
-  }
 
   const [emprendimientoActivoId, setEmprendimientoActivoId] = useState(null);
   const [boostearTodos, setBoostearTodos] = useState(false);
 
-  const emprendimientosDelPerfil = usuario?.emprendimiento || [];
   const carritoItems = usuario?.carrito?.idCarritosItems || [];
   const carritosId = usuario?.carrito?.id;
 
@@ -42,21 +38,15 @@ export default function PagoScreen() {
     }
   };
 
-
-
   useEffect(() => {
     recargarUsuario();
   }, [token]);
 
   useEffect(() => {
-    if (usuario && !emprendimientoActivoId) {
-      const emps = usuario.emprendimiento || [];
-      if (emps.length > 0) {
-        setEmprendimientoActivoId(String(emps[0].id));
-      }
+    if (emprendimientosDelPerfil.length > 0 && !emprendimientoActivoId) {
+      setEmprendimientoActivoId(String(emprendimientosDelPerfil[0].id));
     }
-  }, [usuario, emprendimientoActivoId]);
-
+  }, [emprendimientosDelPerfil, emprendimientoActivoId]);
 
   const emprendimientoActivo = emprendimientosDelPerfil.find(
     (e) => String(e.id) === String(emprendimientoActivoId)
@@ -98,14 +88,9 @@ export default function PagoScreen() {
 
       await recargarUsuario();
     } catch (err) {
-      console.error(
-        "Error al agregar al carrito:",
-        err.response?.data || err.message
-      );
-      alert(
-        "Error al agregar al carrito: " +
-        (err.response?.data?.detalle || "intenta nuevamente")
-      );
+      console.error("Error al agregar al carrito:", err.response?.data || err.message);
+      alert("Error al agregar al carrito: " +
+        (err.response?.data?.detalle || "intenta nuevamente"));
     }
   };
 
@@ -118,10 +103,8 @@ export default function PagoScreen() {
       await recargarUsuario();
     } catch (err) {
       console.error("Error al eliminar:", err.response?.data || err.message);
-      alert(
-        "Error al eliminar del carrito: " +
-        (err.response?.data?.detalle || "intenta nuevamente")
-      );
+      alert("Error al eliminar del carrito: " +
+        (err.response?.data?.detalle || "intenta nuevamente"));
     }
   };
 
@@ -135,26 +118,23 @@ export default function PagoScreen() {
       );
       await recargarUsuario();
     } catch (err) {
-      console.error(
-        "Error al vaciar carrito:",
-        err.response?.data || err.message
-      );
-      alert(
-        "Error al vaciar el carrito. Algunos items pueden haberse eliminado."
-      );
+      console.error("Error al vaciar carrito:", err.response?.data || err.message);
+      alert("Error al vaciar el carrito. Algunos items pueden haberse eliminado.");
     }
   };
+
   if (!token) {
     return <div className="text-center p-8">No estás autenticado.</div>;
   }
 
-  if (!usuario || loadingPlanes) {
+  if (!usuario || loadingPlanes || loading) {
     return <div className="text-center p-8">Cargando tu carrito...</div>;
   }
 
-  if (errorPlanes) {
-    return <div className="text-center p-8 text-red-500">{errorPlanes}</div>;
+  if (errorPlanes || error) {
+    return <div className="text-center p-8 text-red-500">{errorPlanes || error}</div>;
   }
+
   return (
     <div>
       <nav className="p-5 border-b border-[#2B4590]">
