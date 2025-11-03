@@ -11,7 +11,7 @@ import PagoScreen from "./Pago/PagoScreen";
 import PerfilEmprendimientosScreen from "./PerfilEmprendimiento/PerfilEmprendimientosScreen";
 import PerfilUsuarioScreen from "./PerfilUsuario/PerfilUsuarioScreen";
 import CrearEmprendimientoScreen from "./Emprendimientos/CrearEmprendimientoScreen";
-import MetodosdePagoScreen from "./MetodosdePago/metodosdePagoScreen";
+import MetodosdePagoScreen from "./MetodosdePago/MetodosdePagoScreen";
 import PlanesScreen from "./Planes/PlanesScreen";
 import RutasPrivadas from "./RutasPrivadas/RutasPrivadas";
 import VerificarEmailScreen from "./VerificarEmail/VerificarEmailScreen";

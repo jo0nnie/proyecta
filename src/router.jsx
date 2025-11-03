@@ -84,11 +84,22 @@ export const router = createBrowserRouter([
               </RutasPrivadas>)
           },
           {
-            path: "/carrito/:id",
-              element:
-              (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO,ROLES.ADMIN]}>
-                <PagoScreen />,
-              </RutasPrivadas>),
+            path: "/carrito",
+            element: (
+              <RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
+              
+              <PagoScreen />,
+              </RutasPrivadas>
+            )
+          },
+          {
+            path: "/dashboard",
+            element: (
+              <RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
+              
+          <DashboardScreen/>,
+              </RutasPrivadas>
+            ),
           },
           {
             path: "/infoplanes",

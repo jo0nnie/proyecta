@@ -1,134 +1,235 @@
-import { useState } from 'react';
-import { PlanCard, MetodoPagoCard, CarritoResumen, SelectorEmprendimiento, DetallePago } from '../../components';
-import planes from '../../utils/planesMock';
-import perfilemprendimientoMock from "../../utils/perfilemprendiemientoMock.json";
+import { useState, useEffect } from "react";
+import {
+  PlanCard,
+  CarritoResumen,
+  SelectorMetodoPago,
+  DetallePago,
+} from "../../components";
+import planes from "../../utils/planesMock";
+import { api } from "../../api/api";
 
 export default function PagoScreen() {
-    const emprendimientosDelPerfil = [
-        { id: "999", nombre: "Tienda EcoPosadas" },
-        { id: "997", nombre: "Panadería La Miga" },
-        { id: "996", nombre: "Estudio Creativo Pixel" },
-        { id: "995", nombre: "Papelería Creativa Mandarina" },
-        { id: "994", nombre: "Estética Vegana Alma" },
-        { id: "993", nombre: "Taller de Cerámica Tierra Roja" }
-    ];
-    //muestra emprendimientos seleccionados
-    const [emprendimientoActivoId, setEmprendimientoActivoId] = useState(emprendimientosDelPerfil[0].id);
-    //para renderizar la lista de emprendimientos (carrito emprendimientos)
-    const [carrito, setCarrito] = useState([]);
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <div className="text-center p-8">No estás autenticado.</div>;
+  }
 
-    const [boostearTodos, setBoostearTodos] = useState(false);
+  const [usuario, setUsuario] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [emprendimientoActivoId, setEmprendimientoActivoId] = useState(null);
+  const [boostearTodos, setBoostearTodos] = useState(false);
 
-    const emprendimientoActivo = perfilemprendimientoMock.find(
-        (e) => String(e.id) === String(emprendimientoActivoId)
-    );
+  const emprendimientosDelPerfil = usuario?.emprendimiento || [];
+  const carritoItems = usuario?.carrito?.idCarritosItems || [];
+  const carritosId = usuario?.carrito?.id;
 
-    const agregarAlCarrito = (plan) => {
-        if (boostearTodos) {
-            const nuevosItems = emprendimientosDelPerfil.map((e) => {
-                const perfil = perfilemprendimientoMock.find(p => String(p.id) === String(e.id));
-                return {
-                    ...plan,
-                    emprendimientoId: e.id,
-                    nombreEmprendimiento: e.nombre,
-                    imagen: perfil?.imagen || ""
-                };
-            });
-            setCarrito(nuevosItems);
-            return;
-        }
+  const recargarUsuario = async () => {
+    try {
+      const res = await api.get("/usuarios/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUsuario(res.data.usuario || res.data);
+    } catch (err) {
+      console.error(
+        "Error al recargar usuario:",
+        err.response?.data || err.message
+      );
+      alert("Error al actualizar el carrito. Por favor, recarga la página.");
+    }
+  };
 
-        const indexExistente = carrito.findIndex(
-            (p) => p.emprendimientoId === emprendimientoActivo.id
+  useEffect(() => {
+    recargarUsuario();
+  }, [token]);
+
+  useEffect(() => {
+    if (usuario && !emprendimientoActivoId) {
+      const emps = usuario.emprendimiento || [];
+      if (emps.length > 0) {
+        setEmprendimientoActivoId(String(emps[0].id));
+      }
+    }
+  }, [usuario, emprendimientoActivoId]);
+
+  useEffect(() => {
+    if (usuario) {
+      setLoading(false);
+    }
+  }, [usuario]);
+
+  const emprendimientoActivo = emprendimientosDelPerfil.find(
+    (e) => String(e.id) === String(emprendimientoActivoId)
+  );
+
+  const agregarAlCarrito = async (plan) => {
+    if (!carritosId) {
+      alert("Carrito no disponible. Por favor, recarga la página.");
+      return;
+    }
+
+    const empsParaBoostear = boostearTodos
+      ? emprendimientosDelPerfil.map((e) => e.id)
+      : emprendimientoActivo
+      ? [emprendimientoActivo.id]
+      : [];
+
+    if (empsParaBoostear.length === 0) {
+      alert("Selecciona un emprendimiento primero.");
+      return;
+    }
+
+    try {
+      for (const empId of empsParaBoostear) {
+        const yaExiste = carritoItems.some(
+          (item) =>
+            item.planesId === plan.id &&
+            item.emprendimientos.some((e) => e.id === empId)
         );
 
-        const yaSeleccionado = carrito[indexExistente]?.titulo === plan.titulo;
-        const perfilActivo = perfilemprendimientoMock.find(p => String(p.id) === String(emprendimientoActivo.id));
-
-        if (yaSeleccionado) {
-            const nuevoCarrito = [...carrito];
-            nuevoCarrito.splice(indexExistente, 1);
-            setCarrito(nuevoCarrito);
-        } else {
-            const nuevoCarrito = [...carrito];
-            const nuevoItem = {
-                ...plan,
-                emprendimientoId: emprendimientoActivo.id,
-                nombreEmprendimiento: emprendimientoActivo.nombre,
-                imagen: perfilActivo?.imagen || ""
-            };
-
-            if (indexExistente !== -1) {
-                nuevoCarrito[indexExistente] = nuevoItem;
-            } else {
-                nuevoCarrito.push(nuevoItem);
-            }
-
-            setCarrito(nuevoCarrito);
+        if (!yaExiste) {
+          await api.post("/items", {
+            carritosId,
+            planesId: plan.id,
+            emprendimientosIds: [empId],
+          });
         }
-    };
+      }
 
-    const vaciarCarrito = () => setCarrito([]);
-    const eliminarDelCarrito = (index) => {
-        const nuevoCarrito = [...carrito];
-        nuevoCarrito.splice(index, 1);
-        setCarrito(nuevoCarrito);
-    };
+      await recargarUsuario();
+    } catch (err) {
+      console.error(
+        "Error al agregar al carrito:",
+        err.response?.data || err.message
+      );
+      alert(
+        "Error al agregar al carrito: " +
+          (err.response?.data?.detalle || "intenta nuevamente")
+      );
+    }
+  };
 
-    return (
-        <div>
-            <nav className='p-5 border-b border-[#2B4590]'>
-                <h1 className='flex justify-center text-xl font-bold '>Boosteo de Emprendimientos</h1>
-                <h1 className='flex justify-center'>¡Haz que tu emprendimiento llegue a más personas!</h1>
-            </nav>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-4 p-6 border-b w-full border-[#2B4590] bg-[#F9FAFB]">
-                {planes.map((plan, index) => (
-                    <div key={index} className="flex-shrink-0">
-                        <PlanCard
-                            plan={plan}
-                            onObtener={() => agregarAlCarrito(plan)}
-                            isSeleccionado={carrito.some(
-                                (p) => p.titulo === plan.titulo && p.emprendimientoId === emprendimientoActivo?.id
-                            )}
-                        />
-                    </div>
-                ))}
-            </div>
+  const eliminarDelCarrito = async (index) => {
+    const item = carritoItems[index];
+    if (!item) return;
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-10">
-                <div className="flex justify-center items-start">
-                    <SelectorEmprendimiento
-                        emprendimientos={emprendimientosDelPerfil}
-                        selectedId={emprendimientoActivoId}
-                        onSelect={setEmprendimientoActivoId}
-                        boostearTodos={boostearTodos}
-                        setBoostearTodos={setBoostearTodos}
-                    />
-                </div>
+    try {
+      await api.delete(`/items/${item.id}`);
+      await recargarUsuario();
+    } catch (err) {
+      console.error("Error al eliminar:", err.response?.data || err.message);
+      alert(
+        "Error al eliminar del carrito: " +
+          (err.response?.data?.detalle || "intenta nuevamente")
+      );
+    }
+  };
 
-                <div className="flex justify-center items-start">
-                    {carrito.length > 0 && (
-                        <CarritoResumen
-                            carrito={carrito}
-                            onVaciar={vaciarCarrito}
-                            onEliminar={eliminarDelCarrito}
-                        />
-                    )}
-                </div>
+  const vaciarCarrito = async () => {
+    if (carritoItems.length === 0) return;
+    if (!window.confirm("¿Seguro que deseas vaciar todo el carrito?")) return;
 
-                <div className={`flex flex-col items-center gap-10 border-l border-[#2B4590] pl-10 ${carrito.length === 0 ? 'opacity-30 pointer-events-none' : ''}`}>
-                    <nav className='border rounded-xl border-[#2B4590] w-full'>
-                        <p className='border-b border-[#2B4590] p-5'>
-                            <h1 className='flex justify-center font-bold'>Escoge tu Medio de Pago</h1>
-                        </p>
-                        <ul className='flex flex-col m-5 items-center'>
-                            <MetodoPagoCard />
-                        </ul>
-                    </nav>
-                    <DetallePago />
-                </div>
-            </div>
+    try {
+      await Promise.all(
+        carritoItems.map((item) => api.delete(`/carritos-items/${item.id}`))
+      );
+      await recargarUsuario();
+    } catch (err) {
+      console.error(
+        "Error al vaciar carrito:",
+        err.response?.data || err.message
+      );
+      alert(
+        "Error al vaciar el carrito. Algunos items pueden haberse eliminado."
+      );
+    }
+  };
+
+  if (loading) {
+    return <div className="text-center p-8">Cargando tu carrito...</div>;
+  }
+
+  return (
+    <div>
+      <nav className="p-5 border-b border-[#2B4590]">
+        <h1 className="flex justify-center text-xl font-bold">
+          Boosteo de Emprendimientos
+        </h1>
+        <h2 className="flex justify-center">
+          ¡Haz que tu emprendimiento llegue a más personas!
+        </h2>
+      </nav>
+
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-4 p-6 border-b w-full border-[#2B4590] bg-[#F9FAFB]">
+        {planes.map((plan) => (
+          <div key={plan.id} className="flex-shrink-0">
+            <PlanCard
+              plan={plan}
+              onObtener={() => agregarAlCarrito(plan)}
+              isSeleccionado={carritoItems.some(
+                (item) =>
+                  item.planesId === plan.id &&
+                  item.emprendimientos.some(
+                    (e) => String(e.id) === String(emprendimientoActivo?.id)
+                  )
+              )}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-10">
+        <div className="flex justify-center items-start">
+          {emprendimientosDelPerfil.length > 0 && (
+            <SelectorEmprendimiento
+              emprendimientos={emprendimientosDelPerfil}
+              selectedId={emprendimientoActivoId}
+              onSelect={setEmprendimientoActivoId}
+              boostearTodos={boostearTodos}
+              setBoostearTodos={setBoostearTodos}
+            />
+          )}
         </div>
-    );
+
+        <div className="flex justify-center items-start">
+          {carritoItems.length > 0 && (
+            <CarritoResumen
+              carrito={carritoItems.map((item) => ({
+                ...item.planes,
+                emprendimientoId: item.emprendimientos[0]?.id,
+                nombreEmprendimiento:
+                  item.emprendimientos[0]?.nombre || "Sin nombre",
+                imagen: item.emprendimientos[0]?.imagen || "",
+                idCarritoItem: item.id,
+              }))}
+              onVaciar={vaciarCarrito}
+              onEliminar={eliminarDelCarrito}
+            />
+          )}
+        </div>
+
+        <div
+          className={`flex flex-col items-center gap-10 border-l border-[#2B4590] pl-10 ${
+            carritoItems.length === 0 ? "opacity-30 pointer-events-none" : ""
+          }`}
+        >
+          <nav className="border rounded-xl border-[#2B4590] w-full">
+            <div className="border-b border-[#2B4590] p-5">
+              <h1 className="flex justify-center font-bold">
+                Escoge tu Medio de Pago
+              </h1>
+            </div>
+            <ul className="flex flex-col m-5 items-center">
+              <SelectorMetodoPago
+                token={token}
+                onSelect={(idMetodo) =>
+                  console.log("Seleccionaste método:", idMetodo)
+                }
+              />
+            </ul>
+          </nav>
+          <DetallePago />
+        </div>
+      </div>
+    </div>
+  );
 }
