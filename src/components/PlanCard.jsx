@@ -3,9 +3,11 @@ import Button from "./Button";
 export default function PlanCard({ plan, onObtener, isSeleccionado }) {
   const { nombre, descripcion, duracionDias, precio } = plan;
 
-  const descripcionArray = Array.isArray(descripcion)
-    ? descripcion
-    : descripcion.split(";").map((item) => item.trim()).filter(Boolean);
+  const descripcionArray = typeof descripcion === "string"
+    ? descripcion.split(";").map((item) => item.trim()).filter(Boolean)
+    : Array.isArray(descripcion)
+      ? descripcion
+      : [];
 
   return (
     <div className="flex flex-col justify-between w-[300px] h-[400px] border-2 rounded-xl border-[#2B4590] p-6 shadow-md hover:shadow-xl cursor-pointer bg-white">

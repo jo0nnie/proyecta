@@ -5,17 +5,21 @@ import {
   SelectorMetodoPago,
   DetallePago,
 } from "../../components";
-import planes from "../../utils/planesMock";
 import { api } from "../../api/api";
-
+import { useDispatch, useSelector } from "react-redux";
+import { usePlanes } from "../../hooks/usePlanes";
 export default function PagoScreen() {
-  const token = localStorage.getItem("token");
+
+  const token = useSelector((state) => state.auth.token);
+  const usuario = useSelector((state) => state.auth.usuario);
+  const { planes, loading: loadingPlanes, error: errorPlanes } = usePlanes();
+
+
+  const dispatch = useDispatch();
   if (!token) {
     return <div className="text-center p-8">No estás autenticado.</div>;
   }
 
-  const [usuario, setUsuario] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [emprendimientoActivoId, setEmprendimientoActivoId] = useState(null);
   const [boostearTodos, setBoostearTodos] = useState(false);
 
@@ -28,15 +32,14 @@ export default function PagoScreen() {
       const res = await api.get("/usuarios/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setUsuario(res.data.usuario || res.data);
+      dispatch(setUsuario(res.data.usuario || res.data));
     } catch (err) {
-      console.error(
-        "Error al recargar usuario:",
-        err.response?.data || err.message
-      );
+      console.error("Error al recargar usuario:", err.response?.data || err.message);
       alert("Error al actualizar el carrito. Por favor, recarga la página.");
     }
   };
+
+
 
   useEffect(() => {
     recargarUsuario();
@@ -51,11 +54,6 @@ export default function PagoScreen() {
     }
   }, [usuario, emprendimientoActivoId]);
 
-  useEffect(() => {
-    if (usuario) {
-      setLoading(false);
-    }
-  }, [usuario]);
 
   const emprendimientoActivo = emprendimientosDelPerfil.find(
     (e) => String(e.id) === String(emprendimientoActivoId)
@@ -70,8 +68,8 @@ export default function PagoScreen() {
     const empsParaBoostear = boostearTodos
       ? emprendimientosDelPerfil.map((e) => e.id)
       : emprendimientoActivo
-      ? [emprendimientoActivo.id]
-      : [];
+        ? [emprendimientoActivo.id]
+        : [];
 
     if (empsParaBoostear.length === 0) {
       alert("Selecciona un emprendimiento primero.");
@@ -103,7 +101,7 @@ export default function PagoScreen() {
       );
       alert(
         "Error al agregar al carrito: " +
-          (err.response?.data?.detalle || "intenta nuevamente")
+        (err.response?.data?.detalle || "intenta nuevamente")
       );
     }
   };
@@ -119,7 +117,7 @@ export default function PagoScreen() {
       console.error("Error al eliminar:", err.response?.data || err.message);
       alert(
         "Error al eliminar del carrito: " +
-          (err.response?.data?.detalle || "intenta nuevamente")
+        (err.response?.data?.detalle || "intenta nuevamente")
       );
     }
   };
@@ -143,11 +141,17 @@ export default function PagoScreen() {
       );
     }
   };
+  if (!token) {
+    return <div className="text-center p-8">No estás autenticado.</div>;
+  }
 
-  if (loading) {
+  if (!usuario || loadingPlanes) {
     return <div className="text-center p-8">Cargando tu carrito...</div>;
   }
 
+  if (errorPlanes) {
+    return <div className="text-center p-8 text-red-500">{errorPlanes}</div>;
+  }
   return (
     <div>
       <nav className="p-5 border-b border-[#2B4590]">
@@ -208,9 +212,8 @@ export default function PagoScreen() {
         </div>
 
         <div
-          className={`flex flex-col items-center gap-10 border-l border-[#2B4590] pl-10 ${
-            carritoItems.length === 0 ? "opacity-30 pointer-events-none" : ""
-          }`}
+          className={`flex flex-col items-center gap-10 border-l border-[#2B4590] pl-10 ${carritoItems.length === 0 ? "opacity-30 pointer-events-none" : ""
+            }`}
         >
           <nav className="border rounded-xl border-[#2B4590] w-full">
             <div className="border-b border-[#2B4590] p-5">

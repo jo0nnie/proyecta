@@ -1,4 +1,3 @@
-import { useState } from "react";
 import AjusteItem from "../Ajustes/components/AjusteItem";
 
 export default function EditarPerfil() {
