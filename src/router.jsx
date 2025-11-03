@@ -85,12 +85,12 @@ export const router = createBrowserRouter([
           },
           {
             path: "/carrito",
-            element: (
+           element: (
               <RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
               
               <PagoScreen />,
               </RutasPrivadas>
-            )
+            ),
           },
           {
             path: "/dashboard",
