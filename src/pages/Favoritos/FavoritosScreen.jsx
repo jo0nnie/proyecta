@@ -23,7 +23,7 @@ export default function FavoritosScreen() {
                   id={emp.id}
                   nombre={emp.nombre}
                   descripcion={emp.descripcion}
-                  categoria={emp.categoria}
+                  categoria={emp.categorias}
                   imagen={emp.imagen}
                 />
               );

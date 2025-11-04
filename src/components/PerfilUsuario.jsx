@@ -7,8 +7,7 @@ import { useSelector } from "react-redux";
 import { useEmprendimientosUsuario } from "../hooks/useEmprendimientosUsuario";
 
 const PerfilUsuario = ({ usuario }) => {
-  const {
-    id,
+  const { 
     nombre = "",
     apellido = "",
     email,
