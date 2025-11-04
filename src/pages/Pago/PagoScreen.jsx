@@ -133,6 +133,7 @@ export default function PagoScreen() {
 
   const vaciarCarrito = async () => {
     if (carritoItems.length === 0) return;
+    //dejo comentado este window.confirm por si no le gusta al profe.
     // if (!window.confirm("¿Seguro que deseas vaciar todo el carrito?")) return;
 
     try {
