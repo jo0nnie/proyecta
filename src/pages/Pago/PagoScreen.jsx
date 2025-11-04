@@ -4,7 +4,7 @@ import {
   CarritoResumen,
   SelectorMetodoPago,
   DetallePago,
-  SelectorEmprendimiento
+  SelectorEmprendimiento,
 } from "../../components";
 import { api, setAuthToken } from "../../api/api";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,8 +12,9 @@ import { usePlanes } from "../../hooks/usePlanes";
 import { useEmprendimientosUsuario } from "../../hooks/useEmprendimientosUsuario";
 import { toast } from "react-toastify";
 import { useCarritoItems } from "../../hooks/useCarritoItems";
-import { useVaciarCarritoItems } from "../../hooks/useVaciarCarritoItems";
 import { setUsuario } from "../../store/slice/authSlice";
+import { vaciarCarritoItems } from "../../hooks/vaciarCarritoItems";
+
 export default function PagoScreen() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -26,7 +27,11 @@ export default function PagoScreen() {
 
   const carritosId = usuario?.carrito?.id;
   const carritoActivo = useCarritoItems(carritosId);
-  const { items: carritoItems, loading: loadingCarrito, refresh: recargarCarrito } = carritoActivo;
+  const {
+    items: carritoItems,
+    loading: loadingCarrito,
+    refresh: recargarCarrito,
+  } = carritoActivo;
 
   const emprendimientosDelPerfil = emprendimientos || [];
   const [emprendimientoActivoIds, setEmprendimientoActivoIds] = useState([]);
@@ -54,11 +59,15 @@ export default function PagoScreen() {
       await recargarCarrito();
       return res.data.id;
     } catch (err) {
-      const yaExiste = err.response?.data?.detalle === "El usuario ya tiene un carrito";
+      const yaExiste =
+        err.response?.data?.detalle === "El usuario ya tiene un carrito";
       if (yaExiste) {
         return err.response?.data?.carritoId || usuario?.carrito?.id || null;
       }
-      console.error("Error al crear carrito:", err.response?.data || err.message);
+      console.error(
+        "Error al crear carrito:",
+        err.response?.data || err.message
+      );
       return null;
     }
   };
@@ -83,9 +92,13 @@ export default function PagoScreen() {
       .filter((item) => item.planesId === plan.id)
       .flatMap((item) => item.emprendimientos?.map((e) => e.id) || []);
 
-    const nuevosIds = emprendimientosIds.filter((id) => !yaExistenIds.includes(id));
+    const nuevosIds = emprendimientosIds.filter(
+      (id) => !yaExistenIds.includes(id)
+    );
     if (nuevosIds.length === 0) {
-      toast.info("Ese plan ya fue agregado a los emprendimientos seleccionados.");
+      toast.info(
+        "Ese plan ya fue agregado a los emprendimientos seleccionados."
+      );
       return;
     }
 
@@ -120,21 +133,25 @@ export default function PagoScreen() {
 
   const vaciarCarrito = async () => {
     if (carritoItems.length === 0) return;
-    if (!window.confirm("¿Seguro que deseas vaciar todo el carrito?")) return;
+    // if (!window.confirm("¿Seguro que deseas vaciar todo el carrito?")) return;
 
     try {
-      await useVaciarCarritoItems(carritosId);
+      await vaciarCarritoItems(carritosId);
       await recargarCarrito();
-      setUltimoPlanAgregado(null);
       toast.success("Carrito vaciado correctamente.");
     } catch (err) {
       toast.error("Error al vaciar el carrito.");
     }
   };
 
-  if (!token) return <div className="text-center p-8">No estás autenticado.</div>;
-  if (loadingPlanes || loading) return <div className="text-center p-8">Cargando tu carrito...</div>;
-  if (errorPlanes || error) return <div className="text-center p-8 text-red-500">{errorPlanes || error}</div>;
+  if (!token)
+    return <div className="text-center p-8">No estás autenticado.</div>;
+  if (loadingPlanes || loading)
+    return <div className="text-center p-8">Cargando tu carrito...</div>;
+  if (errorPlanes || error)
+    return (
+      <div className="text-center p-8 text-red-500">{errorPlanes || error}</div>
+    );
 
   return (
     <div>
@@ -190,15 +207,23 @@ export default function PagoScreen() {
           )}
         </div>
 
-        <div className={`flex flex-col items-center gap-10 border-l border-[#2B4590] pl-10 ${carritoItems.length === 0 ? "opacity-30 pointer-events-none" : ""}`}>
-                    <nav className="border rounded-xl border-[#2B4590] w-full">
+        <div
+          className={`flex flex-col items-center gap-10 border-l border-[#2B4590] pl-10 ${
+            carritoItems.length === 0 ? "opacity-30 pointer-events-none" : ""
+          }`}
+        >
+          <nav className="border rounded-xl border-[#2B4590] w-full">
             <div className="border-b border-[#2B4590] p-5">
-              <h1 className="flex text-[#2C4692] text-xl justify-center font-bold">Escoge tu Medio de Pago</h1>
+              <h1 className="flex text-[#2C4692] text-xl justify-center font-bold">
+                Escoge tu Medio de Pago
+              </h1>
             </div>
             <ul className="flex flex-col m-5 items-center">
               <SelectorMetodoPago
                 token={token}
-                onSelect={(idMetodo) => console.log("Seleccionaste método:", idMetodo)}
+                onSelect={(idMetodo) =>
+                  console.log("Seleccionaste método:", idMetodo)
+                }
               />
             </ul>
           </nav>
