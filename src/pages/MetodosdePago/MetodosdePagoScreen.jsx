@@ -3,6 +3,9 @@ import { Button } from "../../components";
 import MetodoPagoCard from "../../components/MetodoPagoCard";
 import TextField from "../../components/TextField";
 import { api } from "../../api/api";
+import { useSelector } from 'react-redux';
+
+
 
 export default function MetodosdePagoScreen() {
   const [metodos, setMetodos] = useState([]);
@@ -17,8 +20,7 @@ export default function MetodosdePagoScreen() {
     vencimiento: "",
     cvc: "",
   });
-
-  const token = localStorage.getItem("token");
+  const token = useSelector((state) => state.auth.token);
   if (!token) {
     return <div className="text-center p-8">No estás autenticado.</div>;
   }

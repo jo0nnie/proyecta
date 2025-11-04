@@ -1,3 +1,5 @@
+import { RiDeleteBin7Fill } from "react-icons/ri";
+
 export default function CarritoResumen({ carrito, onVaciar, onEliminar }) {
   console.log("🧾 carritoItems:", carrito);
   const total = carrito.reduce((acc, item) => {
@@ -12,7 +14,7 @@ export default function CarritoResumen({ carrito, onVaciar, onEliminar }) {
 
       <ul className="flex flex-col gap-4">
         {carrito.map((item) => {
-          const emprendimiento = item.emprendimientos[0]; 
+          const emprendimiento = item.emprendimientos[0];
           return (
             <li
               key={item.id}
@@ -37,10 +39,10 @@ export default function CarritoResumen({ carrito, onVaciar, onEliminar }) {
               </div>
               <button
                 onClick={() => onEliminar(item.id)}
-                className="text-red-500 text-lg hover:scale-110 transition"
+                className="text-[#2B4590] text-lg hover:scale-110 transition"
                 title="Eliminar ítem"
               >
-                ❌
+                <RiDeleteBin7Fill />
               </button>
             </li>
           );

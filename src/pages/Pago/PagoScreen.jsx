@@ -193,7 +193,7 @@ export default function PagoScreen() {
         <div className={`flex flex-col items-center gap-10 border-l border-[#2B4590] pl-10 ${carritoItems.length === 0 ? "opacity-30 pointer-events-none" : ""}`}>
                     <nav className="border rounded-xl border-[#2B4590] w-full">
             <div className="border-b border-[#2B4590] p-5">
-              <h1 className="flex justify-center font-bold">Escoge tu Medio de Pago</h1>
+              <h1 className="flex text-[#2C4692] text-xl justify-center font-bold">Escoge tu Medio de Pago</h1>
             </div>
             <ul className="flex flex-col m-5 items-center">
               <SelectorMetodoPago

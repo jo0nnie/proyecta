@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { TextField, Button } from '../../../components';
 import { api } from '../../../api/api';
-
-
+import { useSelector } from 'react-redux';
+// import { usePostPagos as handleConfirmarPago } from './../../../hooks/usePostPagos';
 export default function DetallePago() {
   const [titular, setTitular] = useState('');
   const [numero, setNumero] = useState('');
@@ -10,9 +10,8 @@ export default function DetallePago() {
   const [anio, setAnio] = useState('');
   const [cvc, setCvc] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const token = useSelector((state) => state.auth.token);
   const formularioCompleto = titular && numero && mes && anio && cvc;
-
   const handleConfirmarPago = async () => {
     if (!formularioCompleto) return;
 
@@ -23,6 +22,7 @@ export default function DetallePago() {
 
     try {
       const payload = {
+        token,
         titular,
         numero,
         mes,
@@ -50,7 +50,7 @@ export default function DetallePago() {
   return (
     <nav className="border rounded-xl border-[#2B4590] w-full">
       <div className="border-b border-[#2B4590] p-5">
-        <h1 className="flex justify-center font-bold">Detalles de Pago</h1>
+        <h1 className="flex text-[#2C4692] text-xl justify-center font-bold">Detalles de Pago</h1>
       </div>
 
       <ul className="m-5">
