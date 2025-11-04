@@ -15,7 +15,7 @@ const PerfilUsuario = ({ usuario }) => {
     fechaNacimiento,
     estado,
   } = usuario;
-  console.log(usuario)
+  // console.log(usuario)
   const nombreCompleto =
     [nombre, apellido].filter(Boolean).join(" ") || "Usuario";
   const descripcion = "";
