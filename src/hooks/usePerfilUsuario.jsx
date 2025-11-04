@@ -25,8 +25,8 @@ export const usePerfilUsuario = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        setUsuarioLocal(respuesta.data);
-        dispatch(setUsuario(respuesta.data));
+        setUsuarioLocal(respuesta.data.usuario);
+        dispatch(setUsuario(respuesta.data.usuario));
       } catch (err) {
         console.error("Error al cargar el perfil:", err.response?.data || err.message);
         setError(err.response?.data?.msg || "Error al cargar el perfil");

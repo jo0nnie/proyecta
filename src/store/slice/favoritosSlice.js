@@ -9,7 +9,7 @@ const favoritosSlice = createSlice({
     initialState,
     reducers: {
         toggleFavorito: (state, action) => {
-            if (!state.lista) state.lista = []; // ← protección extra
+            if (!state.lista) state.lista = []; 
 
             const favorito = action.payload;
             const id =

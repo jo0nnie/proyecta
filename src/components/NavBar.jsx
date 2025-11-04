@@ -8,7 +8,6 @@ export default function NavBar() {
   const token = useSelector((state) => state.auth.token);
   const usuario = useSelector((state) => state.auth.usuario);
   const fotoUsuario = usuario?.foto;
-  console.log(token, usuario)
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);

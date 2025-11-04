@@ -1,4 +1,3 @@
-// api.js
 import axios from "axios";
 import envConstant from "../utils/envConstant";
 
@@ -14,3 +13,4 @@ export const setAuthToken = (token) => {
     delete api.defaults.headers.common["Authorization"];
   }
 };
+
