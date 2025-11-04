@@ -67,63 +67,63 @@ export const router = createBrowserRouter([
           },
           {
             path: "/perfil/miemprendimiento",
-            element: <CrearEmprendimientoScreen />,
+            element: <CrearEmprendimientoScreen />
           },
-          {
-            path: "/perfil/editar",
-            element:
-              (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
-                <EditarPerfil />,
-              </RutasPrivadas>),
+{
+  path: "/perfil/editar",
+    element:
+  (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
+    <EditarPerfil />,
+  </RutasPrivadas>),
           },
-          {
-            path: "/ajustes",
-            element:
-              (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
-                <AjustesScreen />,
-              </RutasPrivadas>)
+{
+  path: "/ajustes",
+    element:
+  (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
+    <AjustesScreen />,
+  </RutasPrivadas>)
+},
+{
+  path: "/carrito",
+    element: (
+      <RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
+        <PagoScreen />,
+      </RutasPrivadas>
+    ),
           },
-          {
-            path: "/carrito",
-            element: (
-              <RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
-                <PagoScreen />,
-              </RutasPrivadas>
-            ),
-          },
-          {
-            path: "/dashboard",
-            element: (
-              <RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
+{
+  path: "/dashboard",
+    element: (
+      <RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
 
-                <DashboardScreen />,
-              </RutasPrivadas>
-            ),
+        <DashboardScreen />,
+      </RutasPrivadas>
+    ),
           },
-          {
-            path: "/infoplanes",
-            element: <PlanesScreen />,
+{
+  path: "/infoplanes",
+    element: <PlanesScreen />,
           },
-          {
-            path: "/metodosdepago",
-            element:
-              (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
-                <MetodosdePagoScreen />,
-              </RutasPrivadas>),
+{
+  path: "/metodosdepago",
+    element:
+  (<RutasPrivadas rolesPermitidos={[ROLES.USUARIO, ROLES.ADMIN]}>
+    <MetodosdePagoScreen />,
+  </RutasPrivadas>),
           },
-          {
-            path: "/dashboard",
-            element:
-              (<RutasPrivadas rolesPermitidos={ROLES.ADMIN}>
-                <DashboardScreen />,
-              </RutasPrivadas>),
+{
+  path: "/dashboard",
+    element:
+  (<RutasPrivadas rolesPermitidos={ROLES.ADMIN}>
+    <DashboardScreen />,
+  </RutasPrivadas>),
           },
-          {
-            path: "/crear-plan",
-            element:
-              (<RutasPrivadas rolesPermitidos={ROLES.ADMIN}>
-                <CrearPlan />,
-              </RutasPrivadas>),
+{
+  path: "/crear-plan",
+    element:
+  (<RutasPrivadas rolesPermitidos={ROLES.ADMIN}>
+    <CrearPlan />,
+  </RutasPrivadas>),
           },
 
         ],

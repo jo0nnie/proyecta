@@ -88,13 +88,15 @@ export default function CardEmprendimiento({
             alt={nombre}
             className="object-cover h-full w-full"
           />
-          <button
-            onClick={handleToggleFavorito}
-            className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
-            aria-label={guardado ? "Quitar de favoritos" : "Añadir a favoritos"}
-          >
-            {guardado ? <FaBookmark /> : <FaRegBookmark />}
-          </button>
+          {token && (
+            <button
+              onClick={handleToggleFavorito}
+              className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
+              aria-label={guardado ? "Quitar de favoritos" : "Añadir a favoritos"}
+            >
+              {guardado ? <FaBookmark /> : <FaRegBookmark />}
+            </button>
+          )}
         </div>
 
         {/* Contenido */}
