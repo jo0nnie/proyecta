@@ -1,14 +1,13 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { api } from "../api/api";
 
 export const useCarritoItems = (carritosId) => {
-  const [items, setItems] = useState([16]);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchItems = useCallback(async () => {
-    if (!carritosId || typeof carritosId !== "number") {
-      console.warn("❌ carritosId inválido:", carritosId);
+    if (!carritosId || isNaN(carritosId)) {
       setItems([]);
       return;
     }
@@ -18,14 +17,17 @@ export const useCarritoItems = (carritosId) => {
 
     try {
       const res = await api.get(`/carritos/${carritosId}/items`);
-      console.log("📦 Respuesta cruda del backend:", res.data);
+      console.log("response del back", res)
+      const fetchedItems = Array.isArray(res.data?.items)
+        ? res.data.items
+        : [];
 
-      const items = Array.isArray(res.data.items) ? res.data.items : [];
-      setItems(items);
+      setItems(fetchedItems);
     } catch (err) {
       const mensaje = err.response?.data?.error || err.message;
       console.error("❌ Error al obtener ítems del carrito:", mensaje);
       setError(mensaje);
+      setItems([]);
     } finally {
       setLoading(false);
     }
@@ -42,4 +44,3 @@ export const useCarritoItems = (carritosId) => {
     refresh: fetchItems,
   };
 };
-

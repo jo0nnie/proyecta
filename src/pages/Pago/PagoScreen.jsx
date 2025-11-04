@@ -7,29 +7,26 @@ import {
   SelectorEmprendimiento
 } from "../../components";
 import { api, setAuthToken } from "../../api/api";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { usePlanes } from "../../hooks/usePlanes";
 import { useEmprendimientosUsuario } from "../../hooks/useEmprendimientosUsuario";
 import { toast } from "react-toastify";
-import { useCarritoItems} from "../../hooks/useCarritoItems";
+import { useCarritoItems } from "../../hooks/useCarritoItems";
 import { useVaciarCarritoItems } from "../../hooks/useVaciarCarritoItems";
-
+import { setUsuario } from "../../store/slice/authSlice";
 export default function PagoScreen() {
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   if (token) setAuthToken(token);
   const usuario = useSelector((state) => state.auth.usuario);
   const usuarioId = usuario?.id;
-  const { emprendimientos, loading, error } = useEmprendimientosUsuario(token);
 
+  const { emprendimientos, loading, error } = useEmprendimientosUsuario(token);
   const { planes, loading: loadingPlanes, error: errorPlanes } = usePlanes();
 
   const carritosId = usuario?.carrito?.id;
-  console.log("carritosId:", carritosId);
-  const carritoActivo = carritosId
-    ? useCarritoItems(carritosId)
-    : { items: [], loading: false, refresh: () => { } };
-
-  const { items: carritoItems, loading: loadingCarrito, refresh: recargarCarrito } = carritoActivo; console.log("carritoItems:", carritoItems);
+  const carritoActivo = useCarritoItems(carritosId);
+  const { items: carritoItems, loading: loadingCarrito, refresh: recargarCarrito } = carritoActivo;
 
   const emprendimientosDelPerfil = emprendimientos || [];
   const [emprendimientoActivoIds, setEmprendimientoActivoIds] = useState([]);
@@ -41,18 +38,19 @@ export default function PagoScreen() {
       setEmprendimientoActivoIds([emprendimientosDelPerfil[0].id]);
     }
   }, [emprendimientosDelPerfil]);
+
   useEffect(() => {
     if (!usuario?.carrito?.id && usuario?.id) {
       crearCarritoSiNoExiste();
     }
   }, [usuario?.carrito?.id, usuario?.id]);
+
   const crearCarritoSiNoExiste = async () => {
-    if (!usuarioId) {
-      return null;
-    }
+    if (!usuarioId) return null;
 
     try {
       const res = await api.post("/carritos", { usuarioId });
+      dispatch(setUsuario({ ...usuario, carrito: res.data }));
       await recargarCarrito();
       return res.data.id;
     } catch (err) {
@@ -60,7 +58,6 @@ export default function PagoScreen() {
       if (yaExiste) {
         return err.response?.data?.carritoId || usuario?.carrito?.id || null;
       }
-
       console.error("Error al crear carrito:", err.response?.data || err.message);
       return null;
     }
@@ -93,12 +90,6 @@ export default function PagoScreen() {
     }
 
     try {
-      console.log("🔥 POST /items con:", {
-        carritosId: carritoIdFinal,
-        planesId: plan.id,
-        emprendimientosIds: nuevosIds,
-      });
-
       await api.post("/items", {
         carritosId: carritoIdFinal,
         planesId: plan.id,
@@ -108,7 +99,6 @@ export default function PagoScreen() {
       await recargarCarrito();
       setUltimoPlanAgregado(plan);
       toast.success("Plan agregado correctamente.");
-
       setEmprendimientoActivoIds([]);
       setBoostearTodos(false);
     } catch (err) {
@@ -127,6 +117,7 @@ export default function PagoScreen() {
       toast.error("Error al eliminar del carrito.");
     }
   };
+
   const vaciarCarrito = async () => {
     if (carritoItems.length === 0) return;
     if (!window.confirm("¿Seguro que deseas vaciar todo el carrito?")) return;
@@ -140,8 +131,6 @@ export default function PagoScreen() {
       toast.error("Error al vaciar el carrito.");
     }
   };
-
-
 
   if (!token) return <div className="text-center p-8">No estás autenticado.</div>;
   if (loadingPlanes || loading) return <div className="text-center p-8">Cargando tu carrito...</div>;
@@ -197,16 +186,12 @@ export default function PagoScreen() {
                 onVaciar={vaciarCarrito}
                 onEliminar={eliminarDelCarrito}
               />
-              {ultimoPlanAgregado && (
-                <div className="mt-4 text-green-700 font-semibold text-center">
-                </div>
-              )}
             </>
           )}
         </div>
 
         <div className={`flex flex-col items-center gap-10 border-l border-[#2B4590] pl-10 ${carritoItems.length === 0 ? "opacity-30 pointer-events-none" : ""}`}>
-          <nav className="border rounded-xl border-[#2B4590] w-full">
+                    <nav className="border rounded-xl border-[#2B4590] w-full">
             <div className="border-b border-[#2B4590] p-5">
               <h1 className="flex justify-center font-bold">Escoge tu Medio de Pago</h1>
             </div>
