@@ -1,7 +1,9 @@
 export default function CarritoResumen({ carrito, onVaciar, onEliminar }) {
   console.log("🧾 carritoItems:", carrito);
-  const total = carrito.reduce((acc, item) => acc + item.plan.precio, 0);
-
+  const total = carrito.reduce((acc, item) => {
+    const precio = item?.plan?.precio ?? 0;
+    return acc + precio;
+  }, 0);
   return (
     <div className="border rounded-xl border-[#2B4590] w-full p-5 shadow-md bg-white">
       <h1 className="text-center font-bold text-xl mb-4 text-[#2B4590]">
@@ -10,7 +12,7 @@ export default function CarritoResumen({ carrito, onVaciar, onEliminar }) {
 
       <ul className="flex flex-col gap-4">
         {carrito.map((item) => {
-          const emprendimiento = item.emprendimientos[0]; // uno solo por ítem
+          const emprendimiento = item.emprendimientos[0]; 
           return (
             <li
               key={item.id}

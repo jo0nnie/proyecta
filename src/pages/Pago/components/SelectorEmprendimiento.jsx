@@ -18,7 +18,7 @@ export default function SelectorEmprendimiento({
   };
 
   return (
-    <div className="w-full max-w-md h-[400px] overflow-y-auto border-2 border-[#2B4590] rounded-xl p-4 shadow">
+    <div className="border rounded-xl border-[#2B4590] w-full p-5 shadow-md bg-white">
       <h2 className="text-lg font-bold mb-4 text-center text-[#2B4590]">
         Tus emprendimientos
       </h2>
@@ -28,9 +28,8 @@ export default function SelectorEmprendimiento({
         return (
           <div
             key={e.id}
-            className={`flex justify-between items-center p-4 mb-4 rounded-xl border border-[#2B4590] shadow ${
-              seleccionado ? 'ring-2 ring-[#2B4590] bg-blue-50' : ''
-            }`}
+            className={`flex justify-between items-center p-4 mb-4 rounded-xl border border-[#2B4590] shadow ${seleccionado ? 'ring-2 ring-[#2B4590] bg-blue-50' : ''
+              }`}
           >
             <div className="flex items-center gap-3">
               <img
@@ -42,9 +41,8 @@ export default function SelectorEmprendimiento({
             </div>
             <Button
               onClick={() => toggleSeleccion(e.id)}
-              className={`px-3 py-1 rounded text-sm ${
-                seleccionado ? 'bg-[#2B4590] text-white' : 'bg-gray-200 text-gray-700'
-              }`}
+              className={`px-3 py-1 rounded text-sm ${seleccionado ? 'bg-[#2B4590] text-white' : 'bg-gray-200 text-gray-700'
+                }`}
               text={seleccionado ? 'Seleccionado' : 'Seleccionar'}
             />
           </div>

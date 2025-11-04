@@ -11,19 +11,8 @@ import { useSelector } from "react-redux";
 import { usePlanes } from "../../hooks/usePlanes";
 import { useEmprendimientosUsuario } from "../../hooks/useEmprendimientosUsuario";
 import { toast } from "react-toastify";
-import { useCarritoItems } from "../../hooks/useCarritoItems";
-const transformarItems = (items) => {
-  const transformados = items.map((item) => ({
-    idCarritoItem: item.id,
-    nombreEmprendimiento: item.emprendimientos.map(e => e.nombre).join(", "),
-    imagen: item.emprendimientos[0]?.imagen ?? "/placeholder.jpg",
-    titulo: item.plan?.nombre ?? item.planes?.nombre ?? "Sin título",
-    duracion: item.plan?.duracionDias ?? item.planes?.duracionDias ?? 0,
-    precio: item.plan?.precio ?? item.planes?.precio ?? 0
-  }));
-  console.log("Ítems transformados del carrito:", transformados);
-  return transformados;
-};
+import { useCarritoItems} from "../../hooks/useCarritoItems";
+import { useVaciarCarritoItems } from "../../hooks/useVaciarCarritoItems";
 
 export default function PagoScreen() {
   const token = useSelector((state) => state.auth.token);
@@ -31,6 +20,7 @@ export default function PagoScreen() {
   const usuario = useSelector((state) => state.auth.usuario);
   const usuarioId = usuario?.id;
   const { emprendimientos, loading, error } = useEmprendimientosUsuario(token);
+
   const { planes, loading: loadingPlanes, error: errorPlanes } = usePlanes();
 
   const carritosId = usuario?.carrito?.id;
@@ -108,6 +98,7 @@ export default function PagoScreen() {
         planesId: plan.id,
         emprendimientosIds: nuevosIds,
       });
+
       await api.post("/items", {
         carritosId: carritoIdFinal,
         planesId: plan.id,
@@ -117,6 +108,9 @@ export default function PagoScreen() {
       await recargarCarrito();
       setUltimoPlanAgregado(plan);
       toast.success("Plan agregado correctamente.");
+
+      setEmprendimientoActivoIds([]);
+      setBoostearTodos(false);
     } catch (err) {
       toast.error("Error al agregar al carrito.");
       console.error("POST /items falló:", err.response?.data || err.message);
@@ -133,23 +127,21 @@ export default function PagoScreen() {
       toast.error("Error al eliminar del carrito.");
     }
   };
-
   const vaciarCarrito = async () => {
     if (carritoItems.length === 0) return;
     if (!window.confirm("¿Seguro que deseas vaciar todo el carrito?")) return;
 
     try {
-      await Promise.all(
-        carritoItems.map((item) => api.delete(`/carritos-items/${item.id}`))
-      );
+      await useVaciarCarritoItems(carritosId);
       await recargarCarrito();
       setUltimoPlanAgregado(null);
-      toast.success("Carrito vaciado.");
+      toast.success("Carrito vaciado correctamente.");
     } catch (err) {
-      console.error("Error al vaciar carrito:", err.response?.data || err.message);
       toast.error("Error al vaciar el carrito.");
     }
   };
+
+
 
   if (!token) return <div className="text-center p-8">No estás autenticado.</div>;
   if (loadingPlanes || loading) return <div className="text-center p-8">Cargando tu carrito...</div>;
