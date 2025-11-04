@@ -31,13 +31,13 @@ export default function PagoScreen() {
   const emprendimientosDelPerfil = emprendimientos || [];
   const [emprendimientoActivoIds, setEmprendimientoActivoIds] = useState([]);
   const [boostearTodos, setBoostearTodos] = useState(false);
-  const [ultimoPlanAgregado, setUltimoPlanAgregado] = useState(null);
+  // const [ultimoPlanAgregado, setUltimoPlanAgregado] = useState(null);
 
-  useEffect(() => {
-    if (emprendimientosDelPerfil.length > 0 && emprendimientoActivoIds.length === 0) {
-      setEmprendimientoActivoIds([emprendimientosDelPerfil[0].id]);
-    }
-  }, [emprendimientosDelPerfil]);
+  // useEffect(() => {
+  //   if (emprendimientosDelPerfil.length > 0 && emprendimientoActivoIds.length === 0) {
+  //     setEmprendimientoActivoIds([emprendimientosDelPerfil[0].id]);
+  //   }
+  // }, [emprendimientosDelPerfil]);
 
   useEffect(() => {
     if (!usuario?.carrito?.id && usuario?.id) {
@@ -97,7 +97,7 @@ export default function PagoScreen() {
       });
 
       await recargarCarrito();
-      setUltimoPlanAgregado(plan);
+      // setUltimoPlanAgregado(plan);
       toast.success("Plan agregado correctamente.");
       setEmprendimientoActivoIds([]);
       setBoostearTodos(false);
