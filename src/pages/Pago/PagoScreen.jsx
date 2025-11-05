@@ -31,7 +31,6 @@ export default function PagoScreen() {
   const emprendimientosDelPerfil = emprendimientos || [];
   const [emprendimientoActivoIds, setEmprendimientoActivoIds] = useState([]);
   const [boostearTodos, setBoostearTodos] = useState(false);
-  const [ultimoPlanAgregado, setUltimoPlanAgregado] = useState(null);
 
   useEffect(() => {
     if (emprendimientosDelPerfil.length > 0 && emprendimientoActivoIds.length === 0) {
@@ -97,7 +96,6 @@ export default function PagoScreen() {
       });
 
       await recargarCarrito();
-      setUltimoPlanAgregado(plan);
       toast.success("Plan agregado correctamente.");
       setEmprendimientoActivoIds([]);
       setBoostearTodos(false);
@@ -125,7 +123,6 @@ export default function PagoScreen() {
     try {
       await useVaciarCarritoItems(carritosId);
       await recargarCarrito();
-      setUltimoPlanAgregado(null);
       toast.success("Carrito vaciado correctamente.");
     } catch (err) {
       toast.error("Error al vaciar el carrito.");
@@ -191,7 +188,7 @@ export default function PagoScreen() {
         </div>
 
         <div className={`flex flex-col items-center gap-10 border-l border-[#2B4590] pl-10 ${carritoItems.length === 0 ? "opacity-30 pointer-events-none" : ""}`}>
-                    <nav className="border rounded-xl border-[#2B4590] w-full">
+          <nav className="border rounded-xl border-[#2B4590] w-full">
             <div className="border-b border-[#2B4590] p-5">
               <h1 className="flex text-[#2C4692] text-xl justify-center font-bold">Escoge tu Medio de Pago</h1>
             </div>
@@ -202,8 +199,8 @@ export default function PagoScreen() {
               />
             </ul>
           </nav>
-          <DetallePago />
-        </div>
+          <DetallePago onPagoExitoso={recargarCarrito} />       
+           </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
+import { MdRocketLaunch } from "react-icons/md";
 import { Badge } from "./Badge";
 import { useNavigate } from "react-router";
 import { api } from "../api/api";
@@ -12,6 +13,7 @@ export default function CardEmprendimiento({
   categoria,
   imagen,
   id,
+  estaBoosted
 }) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -88,6 +90,11 @@ export default function CardEmprendimiento({
             alt={nombre}
             className="object-cover h-full w-full"
           />
+          {estaBoosted && (
+            <div className="absolute top-2 left-2 bg-yellow-400 p-2 rounded-full shadow-md text-white text-xl" title="Boosteado">
+              <MdRocketLaunch />
+            </div>
+          )}
           {token && (
             <button
               onClick={handleToggleFavorito}

@@ -2,16 +2,28 @@ import { useState } from 'react';
 import { TextField, Button } from '../../../components';
 import { api } from '../../../api/api';
 import { useSelector } from 'react-redux';
-// import { usePostPagos as handleConfirmarPago } from './../../../hooks/usePostPagos';
-export default function DetallePago() {
+import { useDispatch } from 'react-redux';
+import { limpiarCarrito } from '../../../store/slice/carritoSlice';
+import { useCarritoItems } from '../../../hooks/useCarritoItems';
+import { toast } from 'react-toastify';
+export default function DetallePago({ onPagoExitoso }) {
+  const usuario = useSelector((state) => state.auth.usuario);
+  const carritosId = usuario?.carrito?.id;
+  const { refresh: recargarCarrito } = useCarritoItems(carritosId);
+  const dispatch = useDispatch();
   const [titular, setTitular] = useState('');
   const [numero, setNumero] = useState('');
+  const [tipoTarjeta, setTipoTarjeta] = useState('');
   const [mes, setMes] = useState('');
   const [anio, setAnio] = useState('');
   const [cvc, setCvc] = useState('');
   const [loading, setLoading] = useState(false);
+
   const token = useSelector((state) => state.auth.token);
-  const formularioCompleto = titular && numero && mes && anio && cvc;
+
+  const formularioCompleto =
+    titular && numero && tipoTarjeta && mes && anio && cvc;
+
   const handleConfirmarPago = async () => {
     if (!formularioCompleto) return;
 
@@ -21,27 +33,43 @@ export default function DetallePago() {
     setLoading(true);
 
     try {
+      const mesValido = mes.padStart(2, '0');
+      const anioValido = String(anio);
+      if (!/^\d{4}$/.test(anioValido) || !/^\d{2}$/.test(mesValido)) {
+        throw new Error("Mes o año inválido");
+      }
+
+      const vencimiento = `${mesValido}/${anioValido.slice(-2)}`;
       const payload = {
-        token,
-        titular,
-        numero,
-        mes,
-        anio,
-        cvc,
+        tarjetaTemporal: {
+          nombreDelTitular: titular,
+          numero: numero.replace(/\s/g, ''),
+          tipoTarjeta,
+          vencimiento,
+          cvc,
+        },
       };
 
-      const res = await api.post('/pagos', payload);
-      console.log('Pago confirmado:', res.data);
+      await api.post("/pagos", payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      alert('¡Pago realizado con éxito!');
+      toast.success('¡Pago realizado con éxito!');
       setTitular('');
       setNumero('');
+      setTipoTarjeta('');
       setMes('');
       setAnio('');
       setCvc('');
+
+      await recargarCarrito();
+      dispatch(limpiarCarrito());
+      await onPagoExitoso();
+
     } catch (err) {
-      console.error('Error al procesar el pago:', err.response?.data || err.message);
-      alert('Error al procesar el pago. Intenta nuevamente.');
+      const msg = err.response?.data?.msg || err.message;
+      console.error('Error al procesar el pago:', msg);
+      toast.error(`Error al procesar el pago: ${msg}`);
     } finally {
       setLoading(false);
     }
@@ -61,6 +89,17 @@ export default function DetallePago() {
           onChange={(e) => setTitular(e.target.value)}
         />
 
+        <p>Tipo de tarjeta</p>
+        <select
+          className="border rounded p-2 mb-2 w-full"
+          value={tipoTarjeta}
+          onChange={(e) => setTipoTarjeta(e.target.value)}
+        >
+          <option value="">Selecciona una tarjeta</option>
+          <option value="Visa">Visa</option>
+          <option value="MasterCard">MasterCard</option>
+        </select>
+
         <p>Numero de Tarjeta</p>
         <TextField
           placeholder="0000 0000 0000 0000"
@@ -77,7 +116,7 @@ export default function DetallePago() {
           >
             <option value="">Mes</option>
             {[...Array(12)].map((_, i) => (
-              <option key={i} value={i + 1}>
+              <option key={i} value={String(i + 1).padStart(2, '0')}>
                 {String(i + 1).padStart(2, '0')}
               </option>
             ))}
@@ -104,7 +143,8 @@ export default function DetallePago() {
         <TextField
           placeholder="CVC"
           value={cvc}
-          onChange={(e) => setCvc(e.target.value)}
+          onChange={(e) => setCvc(e.target.value.replace(/\D/g, '').slice(0, 3))}
+          maxLength={3}
         />
       </ul>
 
@@ -115,6 +155,7 @@ export default function DetallePago() {
           disabled={!formularioCompleto || loading}
         />
       </div>
+     
     </nav>
   );
 }

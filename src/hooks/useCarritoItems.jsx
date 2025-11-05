@@ -25,7 +25,7 @@ export const useCarritoItems = (carritosId) => {
       setItems(fetchedItems);
     } catch (err) {
       const mensaje = err.response?.data?.error || err.message;
-      console.error("❌ Error al obtener ítems del carrito:", mensaje);
+      console.error("Error al obtener ítems del carrito:", mensaje);
       setError(mensaje);
       setItems([]);
     } finally {

@@ -92,6 +92,11 @@ const PerfilUsuario = ({ usuario }) => {
         <Link to="/perfil/miemprendimiento" className="mt-4 self-start ml-1">
           <Button text="Crear Emprendimiento" />
         </Link>
+        
+        <Link to="/metodosdepago" className="mt-4 self-start ml-1">
+          <Button text="+ Metodo de pago" />
+        </Link>
+
       </div>
     </div>
   );
