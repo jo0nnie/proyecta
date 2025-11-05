@@ -7,15 +7,14 @@ import { useSelector } from "react-redux";
 import { useEmprendimientosUsuario } from "../hooks/useEmprendimientosUsuario";
 
 const PerfilUsuario = ({ usuario }) => {
-  const {
-    id,
+  const { 
     nombre = "",
     apellido = "",
     email,
     fechaNacimiento,
     estado,
   } = usuario;
-  console.log(usuario)
+  // console.log(usuario)
   const nombreCompleto =
     [nombre, apellido].filter(Boolean).join(" ") || "Usuario";
   const descripcion = "";

@@ -93,7 +93,6 @@ export default function SelectorMetodoPago({ token, onSelect }) {
           </option>
         ))}
       </select>
-      <Button onClick={handleConfirmarPago} text={"Hola"} />
     </div>
   );
 }
