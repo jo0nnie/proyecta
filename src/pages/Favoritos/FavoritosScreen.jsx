@@ -25,6 +25,7 @@ export default function FavoritosScreen() {
                   descripcion={emp.descripcion}
                   categoria={emp.categorias}
                   imagen={emp.imagen}
+                  estaBoosted={emp.estaBoosted}
                 />
               );
             })}

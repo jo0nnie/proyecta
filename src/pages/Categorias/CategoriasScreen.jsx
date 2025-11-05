@@ -61,6 +61,7 @@ export default function CategoriasScreen() {
                     descripcion={item.descripcion}
                     categoria={categoria.nombre}
                     imagen={item.imagen}
+                    estaBoosted={item.estaBoosted}
                   />
                 ))
               ) : (

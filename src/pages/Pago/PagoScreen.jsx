@@ -21,7 +21,8 @@ export default function PagoScreen() {
   if (token) setAuthToken(token);
   const usuario = useSelector((state) => state.auth.usuario);
   const usuarioId = usuario?.id;
-
+  //para pagar con metodo de pagos
+  const [metodoPagoId, setMetodoPagoId] = useState(null);
   const { emprendimientos, loading, error } = useEmprendimientosUsuario(token);
   const { planes, loading: loadingPlanes, error: errorPlanes } = usePlanes();
 
@@ -222,8 +223,8 @@ export default function PagoScreen() {
               />
             </ul>
           </nav>
-          <DetallePago onPagoExitoso={recargarCarrito} />       
-           </div>
+          <DetallePago onPagoExitoso={recargarCarrito} />
+        </div>
       </div>
     </div>
   );

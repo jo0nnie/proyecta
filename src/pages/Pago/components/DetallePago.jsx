@@ -4,12 +4,7 @@ import { api } from '../../../api/api';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { limpiarCarrito } from '../../../store/slice/carritoSlice';
-import { useCarritoItems } from '../../../hooks/useCarritoItems';
-import { toast } from 'react-toastify';
 export default function DetallePago({ onPagoExitoso }) {
-  const usuario = useSelector((state) => state.auth.usuario);
-  const carritosId = usuario?.carrito?.id;
-  const { refresh: recargarCarrito } = useCarritoItems(carritosId);
   const dispatch = useDispatch();
   const [titular, setTitular] = useState('');
   const [numero, setNumero] = useState('');
@@ -39,7 +34,7 @@ export default function DetallePago({ onPagoExitoso }) {
         throw new Error("Mes o año inválido");
       }
 
-      const vencimiento = `${mesValido}/${anioValido.slice(-2)}`;
+      const vencimiento = `${mes.padStart(2, '0')}/${String(anio).slice(-2)}`;
       const payload = {
         tarjetaTemporal: {
           nombreDelTitular: titular,
@@ -54,22 +49,21 @@ export default function DetallePago({ onPagoExitoso }) {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      toast.success('¡Pago realizado con éxito!');
+   
+
+      alert('¡Pago realizado con éxito!');
       setTitular('');
       setNumero('');
       setTipoTarjeta('');
       setMes('');
       setAnio('');
       setCvc('');
-
-      await recargarCarrito();
+      await onPagoExitoso(); 
       dispatch(limpiarCarrito());
-      await onPagoExitoso();
-
     } catch (err) {
       const msg = err.response?.data?.msg || err.message;
       console.error('Error al procesar el pago:', msg);
-      toast.error(`Error al procesar el pago: ${msg}`);
+      alert(`Error al procesar el pago: ${msg}`);
     } finally {
       setLoading(false);
     }
@@ -155,7 +149,6 @@ export default function DetallePago({ onPagoExitoso }) {
           disabled={!formularioCompleto || loading}
         />
       </div>
-     
     </nav>
   );
 }
