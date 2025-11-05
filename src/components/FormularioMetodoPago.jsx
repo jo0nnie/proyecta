@@ -79,7 +79,7 @@ export default function FormularioMetodoPago({
     const convertirVencimiento = (mmYy) => {
         const [mm, yy] = mmYy.split("/");
         if (!mm || !yy || mm.length !== 2 || yy.length !== 2) return null;
-        return `20${yy}-${mm}`;
+        return `20${yy}-${mm}-01`;
     };
 
     const handleSubmit = async () => {

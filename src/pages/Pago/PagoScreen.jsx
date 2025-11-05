@@ -217,13 +217,15 @@ export default function PagoScreen() {
             <ul className="flex flex-col m-5 items-center">
               <SelectorMetodoPago
                 token={token}
-                onSelect={(idMetodo) =>
-                  console.log("Seleccionaste método:", idMetodo)
-                }
+                value={metodoPagoId}
+                onSelect={(idMetodo) => setMetodoPagoId(idMetodo || null)}
               />
             </ul>
           </nav>
-          <DetallePago onPagoExitoso={recargarCarrito} />
+          <DetallePago
+            metodoPagoId={metodoPagoId}
+            onPagoExitoso={recargarCarrito}
+          />
         </div>
       </div>
     </div>

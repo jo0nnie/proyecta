@@ -73,6 +73,7 @@ const PerfilUsuario = ({ usuario }) => {
                   descripcion={emp.descripcion || "Sin descripción"}
                   categoria={emp.Categorias?.nombre || "Sin categoría"}
                   imagen={emp.imagen}
+                  estaBoosted={emp.estaBoosted}
                 />
                 {emp.id === 998 && (
                   <div className="absolute top-3 left-3">

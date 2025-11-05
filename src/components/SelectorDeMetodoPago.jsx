@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { api } from "../api/api";
-import Button from "./Button";
-export default function SelectorMetodoPago({ token, onSelect }) {
+
+export default function SelectorMetodoPago({ token, value, onSelect }) {
   const [metodos, setMetodos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [seleccionado, setSeleccionado] = useState("");
 
   useEffect(() => {
     const cargarMetodos = async () => {
@@ -22,44 +21,9 @@ export default function SelectorMetodoPago({ token, onSelect }) {
     cargarMetodos();
   }, [token]);
 
-  //FUNCION DUPLICADA, CREAR HOOK
-  const handleConfirmarPago = async () => {
-
-    const confirmar = window.confirm('¿Deseás confirmar el pago?');
-    if (!confirmar) return;
-
-    setLoading(true);
-
-    try {
-      const payload = {
-        token,
-        titular,
-        numero,
-        mes,
-        anio,
-        cvc,
-      };
-
-      const res = await api.post('/pagos', payload);
-      console.log('Pago confirmado:', res.data);
-
-      alert('¡Pago realizado con éxito!');
-      setTitular('');
-      setNumero('');
-      setMes('');
-      setAnio('');
-      setCvc('');
-    } catch (err) {
-      console.error('Error al procesar el pago:', err.response?.data || err.message);
-      alert('Error al procesar el pago. Intenta nuevamente.');
-    } finally {
-      setLoading(false);
-    }
-  };
   const handleChange = (e) => {
     const id = e.target.value;
-    setSeleccionado(id);
-    if (onSelect) onSelect(id);
+    onSelect(id || null); 
   };
 
   if (loading) return <p>Cargando métodos de pago...</p>;
@@ -80,13 +44,11 @@ export default function SelectorMetodoPago({ token, onSelect }) {
       </label>
       <select
         id="metodoPago"
-        value={seleccionado}
+        value={value || ""}
         onChange={handleChange}
         className="border border-[#2B4590] rounded-lg p-2 w-64"
       >
-        <option value="" disabled hidden>
-          -- Elegí una tarjeta --
-        </option>
+        <option value="">-- Sin método seleccionado --</option> {/* ✅ opción para limpiar */}
         {metodos.map((m) => (
           <option key={m.id} value={m.id}>
             {m.tipoTarjeta} terminada en {m.numero.slice(-4)}
