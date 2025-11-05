@@ -174,7 +174,7 @@ export default function FormularioMetodoPago({
                 name="numero"
                 value={formData.numero}
                 onChange={handleInputChange}
-                maxLength={19}
+                maxLength={16}
                 className="border p-2 mb-2 block w-full"
             />
 

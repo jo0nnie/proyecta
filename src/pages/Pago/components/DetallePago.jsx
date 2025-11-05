@@ -4,7 +4,7 @@ import { api } from '../../../api/api';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { limpiarCarrito } from '../../../store/slice/carritoSlice';
-
+import { toast } from 'react-toastify';
 export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
   const dispatch = useDispatch();
   const [titular, setTitular] = useState('');
@@ -20,7 +20,8 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
   const puedePagar = metodoPagoId || formularioCompleto;
 
   const vencimientoValido = (mmYy) => {
-    if (!/^\d{2}\/\d{2}$/.test(mmYy)) return false;
+    const regex = /^\d{2}\/\d{2}$/;
+    if (!regex.test(mmYy)) return false;
 
     const [mm, yy] = mmYy.split('/');
     const mes = parseInt(mm, 10);
@@ -32,22 +33,26 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
     const anioActual = parseInt(String(ahora.getFullYear()).slice(-2), 10);
     const mesActual = ahora.getMonth() + 1;
 
-    if (anio < anioActual || (anio === anioActual && mes < mesActual)) return false;
-
-    return true;
+    return anio > anioActual || (anio === anioActual && mes >= mesActual);
   };
+
 
   const convertirVencimiento = (mmYy) => {
-    if (!/^\d{2}\/\d{2}$/.test(mmYy)) return null;
+    const regex = /^\d{2}\/\d{2}$/;
+    if (!regex.test(mmYy)) return null;
+
     const [mm, yy] = mmYy.split('/');
-    return `20${yy}-${mm}-01`;
+    const mes = mm.padStart(2, '0');
+    const anio = `20${yy}`;
+    return `${anio}-${mes}-01`;
   };
+
 
   const handleConfirmarPago = async () => {
     if (!puedePagar) return;
 
-    const confirmar = window.confirm('¿Deseás confirmar el pago?');
-    if (!confirmar) return;
+    // const confirmar = window.confirm('¿Deseás confirmar el pago?');
+    // if (!confirmar) return;
 
     setLoading(true);
 
@@ -57,9 +62,10 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
       }
 
       const vencimientoISO = convertirVencimiento(vencimiento);
-      if (!metodoPagoId && !vencimientoISO) {
-        throw new Error("Formato de fecha de vencimiento inválido");
-      }
+      // if (!metodoPagoId && !vencimientoISO) {
+      //   throw new Error('Formato de fecha de vencimiento inválido');
+      // }
+      console.log(vencimientoISO);
 
 
       const payload = metodoPagoId
@@ -69,7 +75,7 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
             nombreDelTitular: titular,
             numero: numero.replace(/\s/g, ''),
             tipoTarjeta,
-            vencimiento: vencimientoISO,
+            vencimiento: vencimiento,
             cvc,
           },
         };
@@ -78,7 +84,7 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      alert('¡Pago realizado con éxito!');
+      toast.success('¡Pago realizado con éxito!');
       setTitular('');
       setNumero('');
       setTipoTarjeta('');
@@ -89,7 +95,7 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
     } catch (err) {
       const msg = err.response?.data?.msg || err.message;
       console.error('Error al procesar el pago:', msg);
-      alert(`Error al procesar el pago: ${msg}`);
+      toast.error(`Error al procesar el pago: ${msg}`);
     } finally {
       setLoading(false);
     }
@@ -98,7 +104,9 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
   return (
     <nav className="border rounded-xl border-[#2B4590] w-full">
       <div className="border-b border-[#2B4590] p-5">
-        <h1 className="flex text-[#2C4692] text-xl justify-center font-bold">Detalles de Pago</h1>
+        <h1 className="flex text-[#2C4692] text-xl justify-center font-bold">
+          Detalles de Pago
+        </h1>
       </div>
 
       <ul className="m-5">
@@ -125,10 +133,11 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
           placeholder="0000 0000 0000 0000"
           value={numero}
           onChange={(e) => {
-            const soloDigitos = e.target.value.replace(/\D/g, '');
+            const soloDigitos = e.target.value.replace(/\D/g, '').slice(0, 16);
             const conEspacios = soloDigitos.replace(/(\d{4})(?=\d)/g, '$1 ');
             setNumero(conEspacios);
           }}
+          maxLength={19}
         />
 
         <p>Fecha de Expiración</p>
