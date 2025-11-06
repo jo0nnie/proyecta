@@ -81,11 +81,11 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
         }
       }
 
-      const vencimientoISO = convertirVencimiento(vencimiento);
+      // const vencimientoISO = convertirVencimiento(vencimiento);
       // if (!metodoPagoId && !vencimientoISO) {
       //   throw new Error('Formato de fecha de vencimiento inválido');
       // }
-      console.log(vencimientoISO);
+      // console.log("vencimiento",vencimientoISO);
 
 
       const payload = metodoPagoId
@@ -99,10 +99,11 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
             cvc,
           },
         };
-      console.log(payload)
+      console.log("payload",payload)
       await api.post('/pagos', payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
+
 
       toast.success('¡Pago realizado con éxito!');
       setTitular('');
