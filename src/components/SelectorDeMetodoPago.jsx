@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { api } from "../api/api";
 
-export default function SelectorMetodoPago({ token, onSelect }) {
+export default function SelectorMetodoPago({ token, value, onSelect }) {
   const [metodos, setMetodos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [seleccionado, setSeleccionado] = useState("");
 
   useEffect(() => {
     const cargarMetodos = async () => {
@@ -24,8 +23,7 @@ export default function SelectorMetodoPago({ token, onSelect }) {
 
   const handleChange = (e) => {
     const id = e.target.value;
-    setSeleccionado(id);
-    if (onSelect) onSelect(id);
+    onSelect(id || null); 
   };
 
   if (loading) return <p>Cargando métodos de pago...</p>;
@@ -46,13 +44,11 @@ export default function SelectorMetodoPago({ token, onSelect }) {
       </label>
       <select
         id="metodoPago"
-        value={seleccionado}
+        value={value || ""}
         onChange={handleChange}
         className="border border-[#2B4590] rounded-lg p-2 w-64"
       >
-        <option value="" disabled hidden>
-          -- Elegí una tarjeta --
-        </option>
+        <option value="">-- Sin método seleccionado --</option> {/* ✅ opción para limpiar */}
         {metodos.map((m) => (
           <option key={m.id} value={m.id}>
             {m.tipoTarjeta} terminada en {m.numero.slice(-4)}

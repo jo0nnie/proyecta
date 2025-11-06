@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/slice/authSlice";
 import { ROLES } from '../../constants/roles'
 import { api } from "../../api/api";
+import { clearFavoritos } from "../../store/slice/favoritosSlice";
 export default function SideBar({ isOpen, onClose }) {
   const sidebarRef = useRef();
   const navigate = useNavigate();
@@ -21,8 +22,6 @@ export default function SideBar({ isOpen, onClose }) {
   }
 
 
-
-
   const handleLogout = async () => {
     try {
       await api.post("/usuarios/logout", {}, {
@@ -31,12 +30,15 @@ export default function SideBar({ isOpen, onClose }) {
         },
       });
 
-      dispatch(logout());
-      navigate("/");
+      dispatch(logout());          
+      dispatch(clearFavoritos());   
+      navigate("/");                
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
     }
   };
+
+
 
 
   useEffect(() => {

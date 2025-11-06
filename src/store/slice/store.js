@@ -1,7 +1,11 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import carritoReducer from "./carritoSlice";
 import favoritosReducer from "./favoritosSlice";
 import historialReducer from "./historialSlice";
 import authReducer from "./authSlice";
+
+
+
 import {
   persistStore,
   persistReducer,
@@ -17,13 +21,14 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "favoritos", "historial"],
+  whitelist: ["auth", "favoritos", "historial", 'carrito'],
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
   favoritos: favoritosReducer,
-  historial: historialReducer
+  historial: historialReducer,
+  carrito: carritoReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

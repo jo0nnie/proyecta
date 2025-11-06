@@ -1,4 +1,5 @@
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
+import { MdRocketLaunch } from "react-icons/md";
 import { Badge } from "./Badge";
 import { useNavigate } from "react-router";
 import { api } from "../api/api";
@@ -6,12 +7,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { toggleFavorito } from "../store/slice/favoritosSlice";
 import { useHistorial } from "../hooks/useHistorial";
+import { BoostBadge } from "./BoostBadge";
 export default function CardEmprendimiento({
   nombre,
   descripcion,
   categoria,
   imagen,
   id,
+  estaBoosted,
 }) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -58,22 +61,22 @@ export default function CardEmprendimiento({
     if (token) await registrarVisita(id);
     navigate(`/emprendimientos/${id}`);
   };
-  const toggleHistorial = async () => {
-    if (!token) return;
-    try {
-      await api.post(
-        "/historial",
-        { emprendimientoId: id },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-    } catch (err) {
-      console.error("Error al registrar historial:", err);
-    }
-  };
+  // const toggleHistorial = async () => {
+  //   if (!token) return;
+  //   try {
+  //     await api.post(
+  //       "/historial",
+  //       { emprendimientoId: id },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //   } catch (err) {
+  //     console.error("Error al registrar historial:", err);
+  //   }
+  // };
 
   return (
     <div
@@ -88,13 +91,24 @@ export default function CardEmprendimiento({
             alt={nombre}
             className="object-cover h-full w-full"
           />
-          <button
-            onClick={handleToggleFavorito}
-            className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
-            aria-label={guardado ? "Quitar de favoritos" : "Añadir a favoritos"}
-          >
-            {guardado ? <FaBookmark /> : <FaRegBookmark />}
-          </button>
+          {estaBoosted && (
+            <div
+              className="absolute top-2 left-2 px-3 py-1 rounded-full text-white text-xs font-semibold shadow-md bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-500 flex items-center gap-1"
+              title="Boost activo"
+            >
+              <MdRocketLaunch className="text-white text-base" />
+              Boosted
+            </div>
+          )}
+          {token && (
+            <button
+              onClick={handleToggleFavorito}
+              className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
+              aria-label={guardado ? "Quitar de favoritos" : "Añadir a favoritos"}
+            >
+              {guardado ? <FaBookmark /> : <FaRegBookmark />}
+            </button>
+          )}
         </div>
 
         {/* Contenido */}
@@ -103,7 +117,7 @@ export default function CardEmprendimiento({
             <h3 className="text-xl font-semibold mb-1">{nombre}</h3>
             <p className="text-sm text-gray-700 line-clamp-3">{descripcion}</p>
           </div>
-          <div className="mt-auto">
+          <div className="mt-auto flex flex-wrap gap-2 items-center">
             <Badge text={categoria} />
           </div>
         </div>

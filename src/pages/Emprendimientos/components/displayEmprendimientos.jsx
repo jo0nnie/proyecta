@@ -26,6 +26,7 @@ export default function DisplayEmprendimientos() {
               descripcion={item.descripcion}
               categoria={item.Categorias?.nombre || "Sin categoría"}
               imagen={item.imagen}
+              estaBoosted={item.estaBoosted}
             />
           ))
         )}

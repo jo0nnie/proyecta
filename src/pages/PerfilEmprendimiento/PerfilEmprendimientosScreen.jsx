@@ -13,6 +13,7 @@ const PerfilEmprendimientosScreen = () => {
       .then((res) => {
         const datos = res.data.emprendimiento;
         const datosEmprendimiento = {
+          id: datos.id,
           nombre: datos.nombre,
           imagen: datos.imagen,
           descripcion: datos.descripcion,

@@ -1,80 +1,199 @@
 import { useState } from 'react';
 import { TextField, Button } from '../../../components';
-
-export default function DetallePago() {
+import { api } from '../../../api/api';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { limpiarCarrito } from '../../../store/slice/carritoSlice';
+import { toast } from 'react-toastify';
+export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
+  const dispatch = useDispatch();
   const [titular, setTitular] = useState('');
   const [numero, setNumero] = useState('');
-  const [mes, setMes] = useState('');
-  const [anio, setAnio] = useState('');
+  const [tipoTarjeta, setTipoTarjeta] = useState('');
+  const [vencimiento, setVencimiento] = useState('');
   const [cvc, setCvc] = useState('');
+  const [loading, setLoading] = useState(false);
+  const token = useSelector((state) => state.auth.token);
 
-  const formularioCompleto = titular && numero && mes && anio && cvc;
+  const formularioCompleto =
+    titular && numero && tipoTarjeta && vencimiento && cvc;
+  const puedePagar = metodoPagoId || formularioCompleto;
 
-  const handleConfirmarPago = () => {
-    if (!formularioCompleto) return;
-    const confirmar = window.confirm('¿Deseás confirmar el pago?');
-    if (confirmar) {
-      alert('¡Pago realizado!');
-      setTitular('');
-      setNumero('');
-      setMes('');
-      setAnio('');
-      setCvc('');
-    }
+  const vencimientoValido = (mmYy) => {
+    const regex = /^\d{2}\/\d{2}$/;
+    if (!regex.test(mmYy)) return false;
+
+    const [mm, yy] = mmYy.split('/');
+    const mes = parseInt(mm, 10);
+    const anio = parseInt(yy, 10);
+
+    if (mes < 1 || mes > 12) return false;
+
+    const ahora = new Date();
+    const anioActual = parseInt(String(ahora.getFullYear()).slice(-2), 10);
+    const mesActual = ahora.getMonth() + 1;
+
+    return anio > anioActual || (anio === anioActual && mes >= mesActual);
   };
 
 
+  const convertirVencimiento = (mmYy) => {
+    const regex = /^\d{2}\/\d{2}$/;
+    if (!regex.test(mmYy)) return null;
+
+    const [mm, yy] = mmYy.split('/');
+    const mes = mm.padStart(2, '0');
+    const anio = `20${yy}`;
+    return `${anio}-${mes}-01`;
+  };
+
+
+  const handleConfirmarPago = async () => {
+    if (!puedePagar) return;
+
+    // const confirmar = window.confirm('¿Deseás confirmar el pago?');
+    // if (!confirmar) return;
+
+    setLoading(true);
+
+    try {
+      if (!metodoPagoId && !formularioCompleto) return;
+
+      if (!metodoPagoId) {
+        if (!titular || !numero || !tipoTarjeta || !vencimiento || !cvc) {
+          toast.error("Todos los campos son obligatorios.");
+          return;
+        }
+
+        if (/\d/.test(titular)) {
+          toast.error("El nombre del titular no puede contener números.");
+          return;
+        }
+
+        if (!vencimientoValido(vencimiento)) {
+          toast.error("Fecha de vencimiento inválida.");
+          return;
+        }
+
+        if (!/^\d{3}$/.test(cvc)) {
+          toast.error("El CVC debe tener exactamente 3 dígitos.");
+          return;
+        }
+      }
+
+      const vencimientoISO = convertirVencimiento(vencimiento);
+      // if (!metodoPagoId && !vencimientoISO) {
+      //   throw new Error('Formato de fecha de vencimiento inválido');
+      // }
+      console.log(vencimientoISO);
+
+
+      const payload = metodoPagoId
+        ? { metodoPagoId }
+        : {
+          tarjetaTemporal: {
+            nombreDelTitular: titular,
+            numero: numero.replace(/\s/g, ''),
+            tipoTarjeta,
+            vencimiento: vencimiento,
+            cvc,
+          },
+        };
+      console.log(payload)
+      await api.post('/pagos', payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      toast.success('¡Pago realizado con éxito!');
+      setTitular('');
+      setNumero('');
+      setTipoTarjeta('');
+      setVencimiento('');
+      setCvc('');
+      await onPagoExitoso();
+      dispatch(limpiarCarrito());
+    } catch (err) {
+      const msg = err.response?.data?.msg || err.message;
+      console.error('Error al procesar el pago:', msg);
+      toast.error(`Error al procesar el pago: ${msg}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <nav className='border rounded-xl border-[#2B4590] w-full'>
-      <p className='border-b border-[#2B4590] p-5'>
-        <h1 className='flex justify-center font-bold'>Detalles de Pago</h1>
-      </p>
-      <ul className='m-5'>
+    <nav className="border rounded-xl border-[#2B4590] w-full">
+      <div className="border-b border-[#2B4590] p-5">
+        <h1 className="flex text-[#2C4692] text-xl justify-center font-bold">
+          Detalles de Pago
+        </h1>
+      </div>
+
+      <ul className="m-5">
         <p>Titular de Tarjeta</p>
         <TextField
           placeholder="Nombre en el frente de la tarjeta"
           value={titular}
           onChange={(e) => setTitular(e.target.value)}
         />
+
+        <p>Tipo de tarjeta</p>
+        <select
+          className="border rounded p-2 mb-2 w-full"
+          value={tipoTarjeta}
+          onChange={(e) => setTipoTarjeta(e.target.value)}
+        >
+          <option value="">Selecciona una tarjeta</option>
+          <option value="Visa">Visa</option>
+          <option value="MasterCard">MasterCard</option>
+        </select>
+
         <p>Numero de Tarjeta</p>
         <TextField
           placeholder="0000 0000 0000 0000"
           value={numero}
-          onChange={(e) => setNumero(e.target.value)}
+          onChange={(e) => {
+            const soloDigitos = e.target.value.replace(/\D/g, '').slice(0, 16);
+            const conEspacios = soloDigitos.replace(/(\d{4})(?=\d)/g, '$1 ');
+            setNumero(conEspacios);
+          }}
+          maxLength={19}
         />
+
         <p>Fecha de Expiración</p>
-        <nav className='flex gap-10'>
-          <select
-            className="w-1/2 border rounded p-2 text-sm text-gray-600"
-            value={mes}
-            onChange={(e) => setMes(e.target.value)}
-          >
-            <option value="">Mes</option>
-            {[...Array(12)].map((_, i) => (
-              <option key={i} value={i + 1}>{String(i + 1).padStart(2, '0')}</option>
-            ))}
-          </select>
-          <select
-            className="w-1/2 border rounded p-2 text-sm text-gray-600"
-            value={anio}
-            onChange={(e) => setAnio(e.target.value)}
-          >
-            <option value="">Año</option>
-            {[...Array(10)].map((_, i) => {
-              const year = new Date().getFullYear() + i;
-              return <option key={i} value={year}>{year}</option>;
-            })}
-          </select>
-        </nav>
+        <TextField
+          placeholder="MM/YY"
+          value={vencimiento}
+          onChange={(e) => {
+            const cleaned = e.target.value.replace(/\D/g, '').slice(0, 4);
+            const formatted =
+              cleaned.length >= 3
+                ? `${cleaned.slice(0, 2)}/${cleaned.slice(2)}`
+                : cleaned;
+            setVencimiento(formatted);
+          }}
+          maxLength={5}
+          className="border p-2 mb-2 block w-full"
+        />
+
         <p>Codigo de Seguridad</p>
         <TextField
           placeholder="CVC"
+          type="password"
           value={cvc}
-          onChange={(e) => setCvc(e.target.value)}
+          onChange={(e) =>
+            setCvc(e.target.value.replace(/\D/g, '').slice(0, 3))
+          }
+          maxLength={3}
         />
       </ul>
+
       <div className="px-5 pb-5">
-        <Button text="Confirmar y Pagar" onClick={handleConfirmarPago} disabled={!formularioCompleto} />
+        <Button
+          text={loading ? 'Procesando...' : 'Confirmar y Pagar'}
+          onClick={handleConfirmarPago}
+          disabled={!puedePagar || loading}
+        />
       </div>
     </nav>
   );

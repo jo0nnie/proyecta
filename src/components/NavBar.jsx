@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import SideBar from "./SideBar/SideBar";
-import { PiUserCircleFill } from "react-icons/pi";
+import { PiUserCircleFill, PiShoppingCartSimpleBold } from "react-icons/pi";
+
 
 export default function NavBar() {
   const token = useSelector((state) => state.auth.token);
   const usuario = useSelector((state) => state.auth.usuario);
   const fotoUsuario = usuario?.foto;
-  console.log(token, usuario)
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
@@ -39,8 +39,10 @@ export default function NavBar() {
             </>
           ) : (
             <>
-              <a href="/perfil/miemprendimiento" className="text-white hover:text-[#E9E2EF]">Crear emprendimiento</a>
-              <a href="/perfil" className="text-white hover:text-[#E9E2EF]">
+              <a href="/carrito" className="text-white hover:text-[#E9E2EF] flex items-center gap-2">
+                <PiShoppingCartSimpleBold className="text-4xl" />
+              </a>
+              <a href="/perfil/miemprendimiento" className="text-white hover:text-[#E9E2EF]">Crear emprendimiento</a>              <a href="/perfil" className="text-white hover:text-[#E9E2EF]">
                 {fotoUsuario ? (
                   <img src={fotoUsuario} alt="Usuario" className="w-12 h-12 rounded-full object-cover" />
                 ) : (

@@ -4,154 +4,159 @@ import {
   CarritoResumen,
   SelectorMetodoPago,
   DetallePago,
+  SelectorEmprendimiento,
 } from "../../components";
-import planes from "../../utils/planesMock";
-import { api } from "../../api/api";
+import { api, setAuthToken } from "../../api/api";
+import { useSelector, useDispatch } from "react-redux";
+import { usePlanes } from "../../hooks/usePlanes";
+import { useEmprendimientosUsuario } from "../../hooks/useEmprendimientosUsuario";
+import { toast } from "react-toastify";
+import { useCarritoItems } from "../../hooks/useCarritoItems";
+import { setUsuario } from "../../store/slice/authSlice";
+import { vaciarCarritoItems } from "../../hooks/vaciarCarritoItems";
 
 export default function PagoScreen() {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    return <div className="text-center p-8">No estás autenticado.</div>;
-  }
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  if (token) setAuthToken(token);
+  const usuario = useSelector((state) => state.auth.usuario);
+  const usuarioId = usuario?.id;
+  //para pagar con metodo de pagos
+  const [metodoPagoId, setMetodoPagoId] = useState(null);
+  const { emprendimientos, loading, error } = useEmprendimientosUsuario(token);
+  const { planes, loading: loadingPlanes, error: errorPlanes } = usePlanes();
 
-  const [usuario, setUsuario] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [emprendimientoActivoId, setEmprendimientoActivoId] = useState(null);
+  const carritosId = usuario?.carrito?.id;
+  const carritoActivo = useCarritoItems(carritosId);
+  const {
+    items: carritoItems,
+    loading: loadingCarrito,
+    refresh: recargarCarrito,
+  } = carritoActivo;
+
+  const emprendimientosDelPerfil = emprendimientos || [];
+  const [emprendimientoActivoIds, setEmprendimientoActivoIds] = useState([]);
   const [boostearTodos, setBoostearTodos] = useState(false);
 
-  const emprendimientosDelPerfil = usuario?.emprendimiento || [];
-  const carritoItems = usuario?.carrito?.idCarritosItems || [];
-  const carritosId = usuario?.carrito?.id;
+  // useEffect(() => {
+  //   if (emprendimientosDelPerfil.length > 0 && emprendimientoActivoIds.length === 0) {
+  //     setEmprendimientoActivoIds([emprendimientosDelPerfil[0].id]);
+  //   }
+  // }, [emprendimientosDelPerfil]);
 
-  const recargarUsuario = async () => {
+  useEffect(() => {
+    if (!usuario?.carrito?.id && usuario?.id) {
+      crearCarritoSiNoExiste();
+    }
+  }, [usuario?.carrito?.id, usuario?.id]);
+
+  const crearCarritoSiNoExiste = async () => {
+    if (!usuarioId) return null;
+
     try {
-      const res = await api.get("/usuarios/me", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setUsuario(res.data.usuario || res.data);
+      const res = await api.post("/carritos", { usuarioId });
+      dispatch(setUsuario({ ...usuario, carrito: res.data }));
+      await recargarCarrito();
+      return res.data.id;
     } catch (err) {
+      const yaExiste =
+        err.response?.data?.detalle === "El usuario ya tiene un carrito";
+      if (yaExiste) {
+        return err.response?.data?.carritoId || usuario?.carrito?.id || null;
+      }
       console.error(
-        "Error al recargar usuario:",
+        "Error al crear carrito:",
         err.response?.data || err.message
       );
-      alert("Error al actualizar el carrito. Por favor, recarga la página.");
+      return null;
     }
   };
-
-  useEffect(() => {
-    recargarUsuario();
-  }, [token]);
-
-  useEffect(() => {
-    if (usuario && !emprendimientoActivoId) {
-      const emps = usuario.emprendimiento || [];
-      if (emps.length > 0) {
-        setEmprendimientoActivoId(String(emps[0].id));
-      }
-    }
-  }, [usuario, emprendimientoActivoId]);
-
-  useEffect(() => {
-    if (usuario) {
-      setLoading(false);
-    }
-  }, [usuario]);
-
-  const emprendimientoActivo = emprendimientosDelPerfil.find(
-    (e) => String(e.id) === String(emprendimientoActivoId)
-  );
 
   const agregarAlCarrito = async (plan) => {
-    if (!carritosId) {
-      alert("Carrito no disponible. Por favor, recarga la página.");
+    let carritoIdFinal = usuario?.carrito?.id;
+    if (!carritoIdFinal) {
+      carritoIdFinal = await crearCarritoSiNoExiste();
+      if (!carritoIdFinal) return;
+    }
+
+    const emprendimientosIds = boostearTodos
+      ? emprendimientosDelPerfil.map((e) => e.id)
+      : emprendimientoActivoIds;
+
+    if (emprendimientosIds.length === 0) {
+      toast.info("Seleccioná al menos un emprendimiento.");
       return;
     }
 
-    const empsParaBoostear = boostearTodos
-      ? emprendimientosDelPerfil.map((e) => e.id)
-      : emprendimientoActivo
-      ? [emprendimientoActivo.id]
-      : [];
+    const yaExistenIds = carritoItems
+      .filter((item) => item.planesId === plan.id)
+      .flatMap((item) => item.emprendimientos?.map((e) => e.id) || []);
 
-    if (empsParaBoostear.length === 0) {
-      alert("Selecciona un emprendimiento primero.");
+    const nuevosIds = emprendimientosIds.filter(
+      (id) => !yaExistenIds.includes(id)
+    );
+    if (nuevosIds.length === 0) {
+      toast.info(
+        "Ese plan ya fue agregado a los emprendimientos seleccionados."
+      );
       return;
     }
 
     try {
-      for (const empId of empsParaBoostear) {
-        const yaExiste = carritoItems.some(
-          (item) =>
-            item.planesId === plan.id &&
-            item.emprendimientos.some((e) => e.id === empId)
-        );
+      await api.post("/items", {
+        carritosId: carritoIdFinal,
+        planesId: plan.id,
+        emprendimientosIds: nuevosIds,
+      });
 
-        if (!yaExiste) {
-          await api.post("/items", {
-            carritosId,
-            planesId: plan.id,
-            emprendimientosIds: [empId],
-          });
-        }
-      }
-
-      await recargarUsuario();
+      await recargarCarrito();
+      toast.success("Plan agregado correctamente.");
+      setEmprendimientoActivoIds([]);
+      setBoostearTodos(false);
     } catch (err) {
-      console.error(
-        "Error al agregar al carrito:",
-        err.response?.data || err.message
-      );
-      alert(
-        "Error al agregar al carrito: " +
-          (err.response?.data?.detalle || "intenta nuevamente")
-      );
+      toast.error("Error al agregar al carrito.");
+      console.error("POST /items falló:", err.response?.data || err.message);
     }
   };
 
-  const eliminarDelCarrito = async (index) => {
-    const item = carritoItems[index];
-    if (!item) return;
-
+  const eliminarDelCarrito = async (idCarritoItem) => {
     try {
-      await api.delete(`/items/${item.id}`);
-      await recargarUsuario();
+      await api.delete(`/items/${idCarritoItem}`);
+      await recargarCarrito();
+      toast.success("Item eliminado del carrito.");
     } catch (err) {
       console.error("Error al eliminar:", err.response?.data || err.message);
-      alert(
-        "Error al eliminar del carrito: " +
-          (err.response?.data?.detalle || "intenta nuevamente")
-      );
+      toast.error("Error al eliminar del carrito.");
     }
   };
 
   const vaciarCarrito = async () => {
     if (carritoItems.length === 0) return;
-    if (!window.confirm("¿Seguro que deseas vaciar todo el carrito?")) return;
+    //dejo comentado este window.confirm por si no le gusta al profe.
+    // if (!window.confirm("¿Seguro que deseas vaciar todo el carrito?")) return;
 
     try {
-      await Promise.all(
-        carritoItems.map((item) => api.delete(`/carritos-items/${item.id}`))
-      );
-      await recargarUsuario();
+      await vaciarCarritoItems(carritosId);
+      await recargarCarrito();
+      toast.success("Carrito vaciado correctamente.");
     } catch (err) {
-      console.error(
-        "Error al vaciar carrito:",
-        err.response?.data || err.message
-      );
-      alert(
-        "Error al vaciar el carrito. Algunos items pueden haberse eliminado."
-      );
+      toast.error("Error al vaciar el carrito.");
     }
   };
 
-  if (loading) {
+  if (!token)
+    return <div className="text-center p-8">No estás autenticado.</div>;
+  if (loadingPlanes || loading)
     return <div className="text-center p-8">Cargando tu carrito...</div>;
-  }
+  if (errorPlanes || error)
+    return (
+      <div className="text-center p-8 text-red-500">{errorPlanes || error}</div>
+    );
 
   return (
     <div>
       <nav className="p-5 border-b border-[#2B4590]">
-        <h1 className="flex justify-center text-xl font-bold">
+        <h1 className="text-3xl md:text-4xl font-bold text-[#2C4692] m-1 -mt-2 p-2 text-center">
           Boosteo de Emprendimientos
         </h1>
         <h2 className="flex justify-center">
@@ -164,12 +169,12 @@ export default function PagoScreen() {
           <div key={plan.id} className="flex-shrink-0">
             <PlanCard
               plan={plan}
-              onObtener={() => agregarAlCarrito(plan)}
+              onObtener={agregarAlCarrito}
               isSeleccionado={carritoItems.some(
                 (item) =>
                   item.planesId === plan.id &&
-                  item.emprendimientos.some(
-                    (e) => String(e.id) === String(emprendimientoActivo?.id)
+                  item.emprendimientos.some((e) =>
+                    emprendimientoActivoIds.includes(e.id)
                   )
               )}
             />
@@ -182,52 +187,45 @@ export default function PagoScreen() {
           {emprendimientosDelPerfil.length > 0 && (
             <SelectorEmprendimiento
               emprendimientos={emprendimientosDelPerfil}
-              selectedId={emprendimientoActivoId}
-              onSelect={setEmprendimientoActivoId}
+              selectedIds={emprendimientoActivoIds}
+              onSelect={setEmprendimientoActivoIds}
               boostearTodos={boostearTodos}
               setBoostearTodos={setBoostearTodos}
             />
           )}
         </div>
 
-        <div className="flex justify-center items-start">
+        <div className="flex flex-col items-center gap-4">
           {carritoItems.length > 0 && (
-            <CarritoResumen
-              carrito={carritoItems.map((item) => ({
-                ...item.planes,
-                emprendimientoId: item.emprendimientos[0]?.id,
-                nombreEmprendimiento:
-                  item.emprendimientos[0]?.nombre || "Sin nombre",
-                imagen: item.emprendimientos[0]?.imagen || "",
-                idCarritoItem: item.id,
-              }))}
-              onVaciar={vaciarCarrito}
-              onEliminar={eliminarDelCarrito}
-            />
+            <>
+              <CarritoResumen
+                carrito={carritoItems}
+                onVaciar={vaciarCarrito}
+                onEliminar={eliminarDelCarrito}
+              />
+            </>
           )}
         </div>
 
-        <div
-          className={`flex flex-col items-center gap-10 border-l border-[#2B4590] pl-10 ${
-            carritoItems.length === 0 ? "opacity-30 pointer-events-none" : ""
-          }`}
-        >
+        <div className={`flex flex-col items-center gap-10 border-l border-[#2B4590] pl-10 ${carritoItems.length === 0 ? "opacity-30 pointer-events-none" : ""}`}>
           <nav className="border rounded-xl border-[#2B4590] w-full">
             <div className="border-b border-[#2B4590] p-5">
-              <h1 className="flex justify-center font-bold">
+              <h1 className="flex text-[#2C4692] text-xl justify-center font-bold">
                 Escoge tu Medio de Pago
               </h1>
             </div>
             <ul className="flex flex-col m-5 items-center">
               <SelectorMetodoPago
                 token={token}
-                onSelect={(idMetodo) =>
-                  console.log("Seleccionaste método:", idMetodo)
-                }
+                value={metodoPagoId}
+                onSelect={(idMetodo) => setMetodoPagoId(idMetodo || null)}
               />
             </ul>
           </nav>
-          <DetallePago />
+          <DetallePago
+            metodoPagoId={metodoPagoId}
+            onPagoExitoso={recargarCarrito}
+          />
         </div>
       </div>
     </div>

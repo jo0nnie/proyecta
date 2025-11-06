@@ -1,6 +1,5 @@
 import { FiUsers, FiHome, FiTag, FiDollarSign } from 'react-icons/fi';
-import { MdOutlineRestaurantMenu } from 'react-icons/md';
-import { FaRegCalendarAlt, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import {  FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { useEstadisticas } from '../../../hooks/useEstadisticas';
 import { useSelector } from 'react-redux';
 import { useUsuariosConectados } from '../../../hooks/useUsuariosConectados';
@@ -113,7 +112,7 @@ export default function DashboardScreen() {
                 {usuarios.map((user, index) => (
                   <tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
                     <td className="px-4 py-2 flex items-center gap-2">
-                      <MdOutlineRestaurantMenu style={{ color: '#2C4692' }} />
+                      <FiUsers style={{ color: '#2C4692' }} />
                       {user.nombre}
                     </td>
                     <td className="px-4 py-2">{user.email}</td>

@@ -63,6 +63,7 @@ export default function HistorialScreen() {
                 descripcion={emp.descripcion}
                 categoria={emp.Categorias?.nombre}
                 imagen={emp.imagen}
+                estaBoosted={emp.estaBoosted}
               />
             );
           })

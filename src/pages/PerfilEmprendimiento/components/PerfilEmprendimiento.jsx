@@ -1,77 +1,105 @@
-import { useState, useEffect } from 'react';
-import { Badge } from '../../../components/Badge';
-import { PiUserCircleFill } from "react-icons/pi";
+import { useDispatch, useSelector } from "react-redux";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
+import { PiUserCircleFill } from "react-icons/pi";
+import { Badge } from "../../../components/Badge";
+import { toggleFavorito } from "../../../store/slice/favoritosSlice";
+import { toast } from "react-toastify";
+import { api } from "../../../api/api";
 
 const PerfilEmprendimiento = ({ emprendimiento }) => {
-    const { nombre, categoria, imagen, resumen, correo, descripcion } = emprendimiento;
-    const [guardado, setGuardado] = useState(false);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  const favoritos = useSelector((state) => state.favoritos.lista);
 
-    useEffect(() => {
-        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        setGuardado(favorites.includes(emprendimiento.id));
-    }, [emprendimiento.id]);
+  //objteto para emprendimientos
+  const { id, nombre, categoria, imagen, descripcion } = emprendimiento;
+  const favoritosSeguros = Array.isArray(favoritos) ? favoritos : [];
+  const guardado = favoritosSeguros.some(
+    (item) => item.emprendimientoId === id || item.emprendimiento?.id === id
+  );
 
-    const toggleGuardado = () => {
-        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        if (guardado) {
-            favorites = favorites.filter(favId => favId !== emprendimiento.id);
-        } else {
-            favorites.push(emprendimiento.id);
+  const handleToggleFavorito = async (e) => {
+    // e.stopPropagation();
+
+    if (!token) {
+      toast.error("Debes iniciar sesión para guardar favoritos");
+      return;
+    }
+
+    try {
+      console.log("payload", { emprendimientoId: id });
+      const res = await api.post(
+        "/favoritos/toggle",
+        { emprendimientoId: id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-        setGuardado(!guardado);
-    };
+      );
 
-    return (
-        <div className="p-8 mx-auto mt-8 rounded-lg max-w-4xl bg-white shadow">
+      if (res.data.favorito) {
+        dispatch(toggleFavorito(res.data.favorito));
+      } else {
+        dispatch(toggleFavorito({ emprendimientoId: id }));
+      }
+    } catch (err) {
+      console.error("Error al alternar favorito:", err.response?.data || err);
+      toast.error("No se pudo actualizar el favorito");
+    }
+  };
 
-            {/* Encabezado con imagen circular, nombre y categoría */}
-            <div className='flex justify-between items-start gap-8'>
-                <div className="flex gap-6 items-start">
-                    {imagen
-                        ? <img src={imagen} alt={nombre} className="w-24 h-24 rounded-full object-cover" />
-                        : <PiUserCircleFill className="w-24 h-24 rounded-full p-2" />
-                    }
-                    <div>
-                        <h1 className="text-4xl font-semibold flex items-center gap-2">
-                            {nombre}
-                        </h1>
-                        <div className="mt-2">
-                            <Badge text={categoria} />
-                        </div>
-                        {/* <p className="text-gray-600">{resumen}</p> */}
-                    </div>
-                </div>
-
-                {/* Botón de favoritos */}
-                <div className='text-right'>
-                    <button
-                        onClick={toggleGuardado}
-                        className="bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
-                        aria-label={guardado ? "Quitar de favoritos" : "Añadir a favoritos"}
-                    >
-                        {guardado ? <FaBookmark /> : <FaRegBookmark />}
-                    </button>
-                </div>
+  return (
+    <div className="p-8 mx-auto mt-8 rounded-lg max-w-4xl bg-white shadow">
+      <div className="flex justify-between items-start gap-8">
+        <div className="flex gap-6 items-start">
+          {imagen ? (
+            <img
+              src={imagen}
+              alt={nombre}
+              className="w-24 h-24 rounded-full object-cover"
+            />
+          ) : (
+            <PiUserCircleFill className="w-24 h-24 rounded-full p-2" />
+          )}
+          <div>
+            <h1 className="text-4xl font-semibold flex items-center gap-2">
+              {nombre}
+            </h1>
+            <div className="mt-2">
+              <Badge text={categoria} />
             </div>
-
-            {/* Sección de descripción */}
-            <div className="mt-6 border-t border-[#2B4590] pt-4">
-                <h2 className="text-[#2B4590] font-bold mb-4">Descripción</h2>
-                <p className="text-gray-700 whitespace-pre-line mb-6">{descripcion}</p>
-
-                {/* Imagen debajo de la descripción */}
-                {imagen && (
-                    <img
-                        src={imagen}
-                        alt={`imagen-${nombre}`}
-                        className="w-80 max-w-md mx-auto"
-                    />
-                )}
-            </div>
+          </div>
         </div>
-    );
+
+        {token && (
+          <div className="text-right">
+            <button
+              onClick={handleToggleFavorito}
+              className="bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
+              aria-label={
+                guardado ? "Quitar de favoritos" : "Añadir a favoritos"
+              }
+            >
+              {guardado ? <FaBookmark /> : <FaRegBookmark />}
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div className="mt-6 border-t border-[#2B4590] pt-4">
+        <h2 className="text-[#2B4590] font-bold mb-4">Descripción</h2>
+        <p className="text-gray-700 whitespace-pre-line mb-6">{descripcion}</p>
+        {imagen && (
+          <img
+            src={imagen}
+            alt={`imagen-${nombre}`}
+            className="w-80 max-w-md mx-auto"
+          />
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default PerfilEmprendimiento;

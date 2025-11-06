@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  visitas: [], // array de objetos { id, timestamp }
+  visitas: [], // { id, timestamp }
 };
 
 const historialSlice = createSlice({
