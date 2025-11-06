@@ -21,6 +21,7 @@ const PerfilEmprendimientosScreen = () => {
           resumen: datos.resumen || "", 
           correo: datos.Usuarios?.email || "", 
           fotos: datos.fotos || [], 
+          boostActivo: datos.boostActivo || false,
         };
 
         setEmprendimiento(datosEmprendimiento);
