@@ -9,7 +9,8 @@ import {
 import { api, setAuthToken } from "../../api/api";
 import { useSelector, useDispatch } from "react-redux";
 import { usePlanes } from "../../hooks/usePlanes";
-import { useEmprendimientosUsuario } from "../../hooks/useEmprendimientosUsuario";
+// import { useEmprendimientosUsuario } from "../../hooks/useEmprendimientosUsuario";
+import { useBoosteables } from "../../hooks/useBoosteables";
 import { toast } from "react-toastify";
 import { useCarritoItems } from "../../hooks/useCarritoItems";
 import { setUsuario } from "../../store/slice/authSlice";
@@ -18,12 +19,12 @@ import { vaciarCarritoItems } from "../../hooks/vaciarCarritoItems";
 export default function PagoScreen() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  if (token) setAuthToken(token);
   const usuario = useSelector((state) => state.auth.usuario);
   const usuarioId = usuario?.id;
   //para pagar con metodo de pagos
   const [metodoPagoId, setMetodoPagoId] = useState(null);
-  const { emprendimientos, loading, error } = useEmprendimientosUsuario(token);
+  // const { emprendimientos, loading, error } = useEmprendimientosUsuario(token);
+  const { emprendimientos, loading, error, refetch: refetchBoosteables } = useBoosteables(token);
   const { planes, loading: loadingPlanes, error: errorPlanes } = usePlanes();
 
   const carritosId = usuario?.carrito?.id;
@@ -103,11 +104,21 @@ export default function PagoScreen() {
     }
 
     try {
-      await api.post("/items", {
-        carritosId: carritoIdFinal,
-        planesId: plan.id,
-        emprendimientosIds: nuevosIds,
-      });
+      await api.post(
+        "/items",
+        {
+          carritosId: carritoIdFinal,
+          planesId: plan.id,
+          emprendimientosIds: nuevosIds,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+
 
       await recargarCarrito();
       toast.success("Plan agregado correctamente.");
@@ -224,7 +235,10 @@ export default function PagoScreen() {
           </nav>
           <DetallePago
             metodoPagoId={metodoPagoId}
-            onPagoExitoso={recargarCarrito}
+            onPagoExitoso={async () => {
+              await recargarCarrito();
+              await refetchBoosteables();
+            }}
           />
         </div>
       </div>

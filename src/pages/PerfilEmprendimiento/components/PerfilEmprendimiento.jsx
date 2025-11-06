@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { PiUserCircleFill } from "react-icons/pi";
 import { Badge } from "../../../components/Badge";
+import { BoostBadge } from "../../../components/BoostBadge";
 import { toggleFavorito } from "../../../store/slice/favoritosSlice";
 import { toast } from "react-toastify";
 import { api } from "../../../api/api";
@@ -11,23 +12,27 @@ const PerfilEmprendimiento = ({ emprendimiento }) => {
   const token = useSelector((state) => state.auth.token);
   const favoritos = useSelector((state) => state.favoritos.lista);
 
-  //objteto para emprendimientos
-  const { id, nombre, categoria, imagen, descripcion } = emprendimiento;
+  const {
+    id,
+    nombre,
+    categoria,
+    imagen,
+    descripcion,
+    boostActivo, // ← asegurate que venga desde el backend
+  } = emprendimiento;
+
   const favoritosSeguros = Array.isArray(favoritos) ? favoritos : [];
   const guardado = favoritosSeguros.some(
     (item) => item.emprendimientoId === id || item.emprendimiento?.id === id
   );
 
-  const handleToggleFavorito = async (e) => {
-    // e.stopPropagation();
-
+  const handleToggleFavorito = async () => {
     if (!token) {
       toast.error("Debes iniciar sesión para guardar favoritos");
       return;
     }
 
     try {
-      console.log("payload", { emprendimientoId: id });
       const res = await api.post(
         "/favoritos/toggle",
         { emprendimientoId: id },
@@ -63,11 +68,10 @@ const PerfilEmprendimiento = ({ emprendimiento }) => {
             <PiUserCircleFill className="w-24 h-24 rounded-full p-2" />
           )}
           <div>
-            <h1 className="text-4xl font-semibold flex items-center gap-2">
-              {nombre}
-            </h1>
-            <div className="mt-2">
+            <h1 className="text-4xl font-semibold">{nombre}</h1>
+            <div className="mt-2 flex gap-2 items-center">
               <Badge text={categoria} />
+              {boostActivo && <BoostBadge />}
             </div>
           </div>
         </div>
@@ -77,9 +81,7 @@ const PerfilEmprendimiento = ({ emprendimiento }) => {
             <button
               onClick={handleToggleFavorito}
               className="bg-white p-2 rounded-full shadow-md text-xl text-gray-600 hover:text-blue-600"
-              aria-label={
-                guardado ? "Quitar de favoritos" : "Añadir a favoritos"
-              }
+              aria-label={guardado ? "Quitar de favoritos" : "Añadir a favoritos"}
             >
               {guardado ? <FaBookmark /> : <FaRegBookmark />}
             </button>
