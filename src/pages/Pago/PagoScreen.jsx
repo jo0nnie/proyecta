@@ -150,7 +150,7 @@ export default function PagoScreen() {
       await vaciarCarritoItems(carritosId);
       await recargarCarrito();
       toast.success("Carrito vaciado correctamente.");
-    } catch (err) {
+    } catch (error) {
       toast.error("Error al vaciar el carrito.");
     }
   };
