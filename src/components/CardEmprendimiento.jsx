@@ -61,22 +61,22 @@ export default function CardEmprendimiento({
     if (token) await registrarVisita(id);
     navigate(`/emprendimientos/${id}`);
   };
-  const toggleHistorial = async () => {
-    if (!token) return;
-    try {
-      await api.post(
-        "/historial",
-        { emprendimientoId: id },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-    } catch (err) {
-      console.error("Error al registrar historial:", err);
-    }
-  };
+  // const toggleHistorial = async () => {
+  //   if (!token) return;
+  //   try {
+  //     await api.post(
+  //       "/historial",
+  //       { emprendimientoId: id },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //   } catch (err) {
+  //     console.error("Error al registrar historial:", err);
+  //   }
+  // };
 
   return (
     <div
@@ -119,7 +119,6 @@ export default function CardEmprendimiento({
           </div>
           <div className="mt-auto flex flex-wrap gap-2 items-center">
             <Badge text={categoria} />
-            {estaBoosted && <BoostBadge />}
           </div>
         </div>
       </div>

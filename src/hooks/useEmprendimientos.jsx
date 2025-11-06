@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { api } from "../api/api";
 import { toast } from "react-toastify";
+import { useSelector } from 'react-redux';
+
 
 export const useEmprendimientos = () => {
   const [emprendimientos, setEmprendimientos] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const usuarioId = useSelector((state) => state.auth.usuario?.id);
   useEffect(() => {
     const fetchEmprendimientos = async () => {
       try {
