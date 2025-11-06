@@ -57,8 +57,28 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
     setLoading(true);
 
     try {
-      if (!metodoPagoId && !vencimientoValido(vencimiento)) {
-        throw new Error('Mes o año inválido');
+      if (!metodoPagoId && !formularioCompleto) return;
+
+      if (!metodoPagoId) {
+        if (!titular || !numero || !tipoTarjeta || !vencimiento || !cvc) {
+          toast.error("Todos los campos son obligatorios.");
+          return;
+        }
+
+        if (/\d/.test(titular)) {
+          toast.error("El nombre del titular no puede contener números.");
+          return;
+        }
+
+        if (!vencimientoValido(vencimiento)) {
+          toast.error("Fecha de vencimiento inválida.");
+          return;
+        }
+
+        if (!/^\d{3}$/.test(cvc)) {
+          toast.error("El CVC debe tener exactamente 3 dígitos.");
+          return;
+        }
       }
 
       const vencimientoISO = convertirVencimiento(vencimiento);
@@ -79,7 +99,7 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
             cvc,
           },
         };
-
+      console.log(payload)
       await api.post('/pagos', payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -159,6 +179,7 @@ export default function DetallePago({ metodoPagoId, onPagoExitoso }) {
         <p>Codigo de Seguridad</p>
         <TextField
           placeholder="CVC"
+          type="password"
           value={cvc}
           onChange={(e) =>
             setCvc(e.target.value.replace(/\D/g, '').slice(0, 3))

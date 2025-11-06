@@ -90,6 +90,12 @@ export default function FormularioMetodoPago({
             return;
         }
 
+        if (/\d/.test(nombreDelTitular)) {
+            toast.error("El nombre del titular no puede contener números.");
+            return;
+        }
+
+
         const numeroLimpio = numero.replace(/\s/g, "");
         if (numeroLimpio.length !== 16) {
             toast.error("El número de tarjeta debe tener 16 dígitos.");
@@ -174,7 +180,7 @@ export default function FormularioMetodoPago({
                 name="numero"
                 value={formData.numero}
                 onChange={handleInputChange}
-                maxLength={16}
+                maxLength={19}
                 className="border p-2 mb-2 block w-full"
             />
 
